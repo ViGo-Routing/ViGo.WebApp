@@ -1,0 +1,218 @@
+<!-- <aside
+  class="app-sidebar"
+  [ngClass]="{ 'fixed-header visible-title': scrolled }"
+> -->
+<div class="side-header">
+  <a class="header-brand1" routerLink="/dashboard">
+    <div class="logo-group">
+      <img
+        src="../assets/images/Logo.png"
+        class="header-brand-img desktop-logo"
+        alt="logo VIGO"
+      />
+    </div>
+  </a>
+</div>
+
+<div class="main-sidemenu">
+  <ul class="side-menu">
+    <!-- 1st Level Menu -->
+    <li
+      class="slide"
+      *ngFor="let menuItem of navLinks; let colIndex = index"
+      [ngClass]="{
+        active: menuItem.active,
+        'is-expanded': menuItem.active,
+        'sub-category': menuItem.title
+      }"
+    >
+      <a
+        id="btn{{ menuItem.title }}"
+        *ngIf="menuItem.type == 'link'"
+        routerLinkActive="active"
+        class="side-menu__item"
+        (click)="
+          onItemSelected(menuItem);
+          expandedElement = expandedElement == menuItem ? null : menuItem;
+          $event.stopPropagation()
+        "
+        [routerLink]="!menuItem.type ? null : [menuItem.url]"
+      >
+        <i
+          class="{{ menuItem.icon }} side-menu__icon me-2"
+          style="width: 15px; height: 15px"
+        ></i>
+        <span
+          class="side-menu__label"
+          style="font-size: 15px; font-weight: 500"
+          >{{ menuItem.title }}</span
+        >
+      </a>
+      <a
+        id="btn{{ menuItem.title }}"
+        *ngIf="menuItem.type == 'sub'"
+        class="side-menu__item"
+        [routerLink]="menuItem.url ? [menuItem.url] : null"
+        (click)="
+          onItemSelected(menuItem);
+          expandedElement = expandedElement == menuItem ? null : menuItem;
+          $event.stopPropagation()
+        "
+        [ngClass]="{ active: menuItem.active }"
+      >
+        <i
+          class="{{ menuItem.icon }} side-menu__icon me-2"
+          style="width: 15px; height: 15px"
+        ></i>
+        <span
+          class="side-menu__label"
+          style="font-size: 15px; font-weight: 500"
+          >{{ menuItem.title }}</span
+        >
+        <mat-icon *ngIf="expandedElement != menuItem"
+          >keyboard_arrow_down</mat-icon
+        >
+        <mat-icon *ngIf="expandedElement == menuItem"
+          >keyboard_arrow_up</mat-icon
+        >
+      </a>
+      <div
+        *ngIf="menuItem == expandedElement"
+        [@detailExpand]="menuItem == expandedElement ? 'expanded' : 'collapsed'"
+      >
+        <ul
+          class="side-menu-sub"
+          *ngIf="
+            menuItem.children && menuItem.children[0].type !== 'link-parameter'
+          "
+          [ngClass]="{ expanded: menuItem.active }"
+        >
+          <!-- 2nd Level Menu -->
+          <li
+            *ngFor="let menuItemChild of menuItem.children"
+            [ngClass]="{
+              active: menuItemChild.active,
+              'is-expanded': menuItemChild.active,
+              'sub-category': menuItemChild.title,
+              'sub-slide': menuItemChild.type == 'sub'
+            }"
+          >
+            <a
+              id="btn{{ menuItemChild.title }}"
+              routerLinkActive="active"
+              class="side-menu__item_sub sub"
+              [routerLink]="[menuItemChild.url]"
+              *ngIf="menuItemChild.type === 'link'"
+              (click)="
+                onItemSelected(menuItemChild);
+                expandedChildElement =
+                  expandedChildElement == menuItemChild ? null : menuItemChild;
+                $event.stopPropagation()
+              "
+              [ngClass]="{ active: menuItemChild.active }"
+            >
+              <i
+                class="{{ menuItemChild.icon }} side-menu__icon me-2"
+                style="width: 20px; height: 20px"
+              ></i>
+              <span
+                class="side-menu__label"
+                style="font-size: 15px; font-weight: 500"
+                >{{ menuItemChild.title }}</span
+              >
+            </a>
+            <a
+              id="btn{{ menuItemChild.title }}"
+              routerLinkActive="active"
+              [ngClass]="menuItemChild.children ? 'side-menu__items' : ''"
+              *ngIf="menuItemChild.type == 'sub'"
+              class="side-menu__item_sub sub"
+              [routerLink]="menuItemChild.url ? [menuItemChild.url] : null"
+              (click)="
+                onItemSelected(menuItemChild);
+                expandedChildElement =
+                  expandedChildElement == menuItemChild ? null : menuItemChild;
+                $event.stopPropagation()
+              "
+              [ngClass]="{ active: menuItemChild.active }"
+            >
+              <i
+                class="{{ menuItemChild.icon }} side-menu__icon me-2"
+                style="width: 20px; height: 20px"
+              ></i>
+              <span
+                class="side-menu__label"
+                style="font-size: 15px; font-weight: 500"
+                >{{ menuItemChild.title }}</span
+              >
+              <mat-icon *ngIf="expandedChildElement != menuItemChild"
+                >keyboard_arrow_down</mat-icon
+              >
+              <mat-icon *ngIf="expandedChildElement == menuItemChild"
+                >keyboard_arrow_up</mat-icon
+              >
+            </a>
+            <div
+              *ngIf="menuItemChild == expandedChildElement"
+              [@detailExpandChild]="
+                menuItemChild == expandedChildElement
+                  ? 'expandedChild'
+                  : 'collapsedChild'
+              "
+            >
+              <ul
+                class="sub-slide-menu"
+                *ngIf="menuItemChild.children"
+                [ngClass]="{ open: menuItemChild.active }"
+              >
+                <li
+                  *ngFor="let childrenSubItem of menuItemChild.children"
+                  [ngClass]="{
+                    'is-expanded': childrenSubItem.active,
+                    'sub-slide2': childrenSubItem.type == 'sub'
+                  }"
+                >
+                  <a
+                    id="btn{{ childrenSubItem.title }}"
+                    routerLinkActive="active"
+                    class="side-menu__item sub-link"
+                    [routerLink]="[childrenSubItem.url, '']"
+                    *ngIf="childrenSubItem.type === 'link-parameter'"
+                  >
+                    <i
+                      class="{{ childrenSubItem.icon }} side-menu__icon me-2"
+                      style="width: 20px; height: 20px"
+                    ></i>
+                    <span
+                      class="side-menu__label"
+                      style="font-size: 15px; font-weight: 500"
+                      >{{ childrenSubItem.title }}</span
+                    >
+                  </a>
+                  <a
+                    id="btn{{ childrenSubItem.title }}"
+                    routerLinkActive="active"
+                    class="side-menu__item sub-link"
+                    [routerLink]="[childrenSubItem.url]"
+                    *ngIf="childrenSubItem.type === 'link'"
+                  >
+                    <i
+                      class="{{ childrenSubItem.icon }} side-menu__icon me-2"
+                      style="width: 20px; height: 20px"
+                    ></i>
+                    <span
+                      class="side-menu__label"
+                      style="font-size: 15px; font-weight: 500"
+                      >{{ childrenSubItem.title }}</span
+                    >
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- </aside> -->

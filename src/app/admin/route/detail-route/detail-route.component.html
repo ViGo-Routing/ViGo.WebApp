@@ -1,0 +1,68 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Route Detail</h2>
+    <button
+      (click)="cancel()"
+      aria-label="Close"
+      class="btn-close"
+      data-bs-dismiss="modal"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="">
+        <div class="span-gr">
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên tuyến đường:</span>
+            <span class="col-md-8 detail-value">{{
+              route.name != null ? route.name : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key"> Khoảng thời gian:</span>
+            <span class="col-md-8 detail-value">{{
+              route.duration != null ? route.duration + " minutes" : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Khoảng cách:</span>
+            <span class="col-md-8 detail-value">{{
+              route.distance != null ? route.distance + " Km" : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên trạm đi:</span>
+            <span class="col-md-8 detail-value">{{
+              route.startStation.name != null
+                ? route.startStation.name
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ trạm đi:</span>
+            <span class="col-md-8 detail-value">{{
+              route.startStation.address != null
+                ? route.startStation.address
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên trạm đến:</span>
+            <span class="col-md-8 detail-value">{{
+              route.endStation.name != null ? route.endStation.name : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ trạm đến:</span>
+            <span class="col-md-8 detail-value">{{
+              route.endStation.address != null
+                ? route.endStation.address
+                : "No data"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

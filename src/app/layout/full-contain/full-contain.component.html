@@ -1,0 +1,18 @@
+<mat-drawer-container class="example-container" autosize="true">
+    <mat-drawer #drawer [opened]="!mobileQuery.matches " class="example-sidenav"
+        [mode]="mobileQuery.matches ? 'over' : 'side'">
+        <app-siderbars></app-siderbars>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-notification (toggleSidebarForMe)="snav.toggle()"
+            [class]="drawer.opened && !mobileQuery.matches ? 'header' : 'header1' "></app-notification>
+        <div class="content">
+            <div [class]="drawer.opened ? 'components' : 'components1'">
+                <router-outlet class="contain"></router-outlet>
+            </div>
+            <app-footer [class]="drawer.opened && !mobileQuery.matches ? 'footer' : 'footer1'"></app-footer>
+            <!-- <app-online-status [onlineStatusMessage]="connectionStatusMessage" [onlineStatus]="connectionStatus">
+            </app-online-status> -->
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

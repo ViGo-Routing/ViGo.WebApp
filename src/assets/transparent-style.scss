@@ -1,0 +1,19 @@
+.transparent-mode .wrap-login100 {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 9px 0 rgba(28, 28, 51, 0.15);
+}
+.transparent-mode .login100-form-title {
+    color: #dedefd;
+}
+
+
+.transparent-mode .input100 {
+    color: #dedefd;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.transparent-mode .symbol-input100,
+.transparent-mode .wrap-input100 input::-webkit-input-placeholder {
+    color: #a4a4c5;
+}

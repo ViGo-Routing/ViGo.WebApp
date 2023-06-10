@@ -1,0 +1,131 @@
+<div class="row-sm">
+  <div class="header">
+    <div class="title-header">
+      <h2 class="page-title">Booking List</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Booking</li>
+        <li class="breadcrumb-item">Booking List</li>
+      </ol>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="table-table example-container">
+      <div
+        class="table-container"
+        style="flex: 1 1 1e-9px; box-sizing: border-box"
+      >
+        <table
+          id="tblBookingList"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          [ngClass]="{ 'h-100': !dataSource.data.length }"
+        >
+          <ng-container matColumnDef="createdTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
+            <td mat-cell *matCellDef="let row" data-label="Created Time">
+              {{ row.createdTime | date : "d/M/yyyy, H:mm" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên khách hàng
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Customer Name">
+              {{ row.customer.name }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="phoneUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Số điện thoại
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Customer Phone">
+              {{ row.customer.phone }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="startRouteStation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên trạm đi
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="startRouteStation">
+              {{ row.startRouteStation.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endRouteStation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên trạm đến
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="End Route Station">
+              {{ row.endRouteStation.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="priceAfterDiscount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Giá khuyến mãi
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let row"
+              data-label="Price After Discount"
+            >
+              {{ row.priceAfterDiscount }} VND
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Phương thức thanh toán
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Payment Method">
+              {{ row.paymentMethod }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleName">
+            <th mat-header-cell *matHeaderCellDef>Phương tiện</th>
+            <td mat-cell *matCellDef="let row" data-label="Vehicle Name">
+              {{ row.vehicleName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+            <td mat-cell *matCellDef="let row" data-label="Status">
+              {{ row.status }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Hành động</th>
+            <td mat-cell *matCellDef="let element" data-label="Actions">
+              <button
+                id="btnDetailBooking"
+                class="btn"
+                matTooltip="Detail"
+                matTooltipPosition="above"
+                (click)="detailBooking(element.id)"
+              >
+                <i class="far fa-list-alt"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row mat-row-nodata" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <!-- <app-empty-table></app-empty-table> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+      <mat-paginator
+        class="controls"
+        [pageSizeOptions]="[10, 15, 20]"
+        aria-label="Select page of bookings"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

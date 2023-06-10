@@ -1,0 +1,168 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Update User</h2>
+    <button
+      (click)="cancel()"
+      aria-label="Close"
+      class="btn-close"
+      data-bs-dismiss="modal"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <form
+      id="createUserForm"
+      [formGroup]="createUserForm"
+      class="input-infor mt-1"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          id="txtEmail"
+          matInput
+          placeholder="Email"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="createUserForm.controls['email']"
+          >Email là phần bắt buộc</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mật Khẩu</mat-label>
+        <input
+          id="txtPassword"
+          matInput
+          placeholder="Password"
+          formControlName="password"
+          type="password"
+          required
+        />
+        <mat-error *ngIf="createUserForm.controls['password']"
+          >Mật khẩu là phần bắt buộc</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tên</mat-label>
+        <input
+          id="txtname"
+          matInput
+          placeholder="Name"
+          formControlName="name"
+          required
+        />
+        <mat-error *ngIf="createUserForm.controls['name']"
+          >Tên là phần bắt buộc</mat-error
+        >
+      </mat-form-field>
+      <div class="layout-2-col-item radio-btn pt-1">
+        <label>Giới tính: </label>
+        <mat-radio-group
+          formControlName="gender"
+          aria-label="Skip Certification Verification:"
+        >
+          <mat-radio-button [value]="true" class="ms-0">Nữ</mat-radio-button>
+          <mat-radio-button [value]="false">Nam</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input
+          id="txtDateOfBirth"
+          matInput
+          placeholder="dateOfBirth"
+          formControlName="dateOfBirth"
+          type="text"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Avatar</mat-label>
+        <input
+          id="txtavatarUrl"
+          matInput
+          placeholder="Avatar"
+          formControlName="avatarUrl"
+          type="text"
+        />
+      </mat-form-field> -->
+    </form>
+
+    <div class="modal-footer">
+      <button
+        id="btnSave"
+        class="btn positive"
+        mat-raised-button
+        (click)="update()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+<!-- <mat-step [optional]="isOptional">
+    <ng-template matStepLabel>Assign to Groups, Roles</ng-template>
+    <app-mutiple-filed
+      label="Groups"
+      [deviceGroups]="userGroups"
+      (newItemEvent)="addGroups($event)"
+    ></app-mutiple-filed>
+    <mat-form-field
+      appearance="fill"
+      class="example-form-field mt-2"
+      style="width: 100%; padding: 0px 25px"
+    >
+      <mat-label>Roles of Group</mat-label>
+      <mat-chip-list>
+        <mat-chip disabled *ngFor="let sel of groupRoles">
+          {{ sel }}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
+    <app-mutiple-filed
+      label="Roles User"
+      [deviceGroups]="roleList"
+      (newItemEvent)="addRoles($event)"
+    ></app-mutiple-filed>
+  
+    <div class="next">
+      <div class="group-btn">
+        <button mat-raised-button matStepperPrevious>Back</button>
+      </div>
+    </div>
+  </mat-step> -->
+
+<!-- <mat-step [optional]="isOptional">
+    <ng-template matStepLabel>Assign to Groups, Roles</ng-template>
+    <app-mutiple-filed
+      label="Groups"
+      [deviceGroups]="userGroups"
+      (newItemEvent)="addGroups($event)"
+    ></app-mutiple-filed>
+    <mat-form-field
+      appearance="fill"
+      class="example-form-field mt-2"
+      style="width: 100%; padding: 0px 25px"
+    >
+      <mat-label>Roles of Group</mat-label>
+      <mat-chip-list>
+        <mat-chip disabled *ngFor="let sel of groupRoles">
+          {{ sel }}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
+    <app-mutiple-filed
+      label="Roles User"
+      [deviceGroups]="roleList"
+      (newItemEvent)="addRoles($event)"
+    ></app-mutiple-filed>
+  
+    <div class="next">
+      <div class="group-btn">
+        <button mat-raised-button matStepperPrevious>Back</button>
+      </div>
+    </div>
+  </mat-step> -->

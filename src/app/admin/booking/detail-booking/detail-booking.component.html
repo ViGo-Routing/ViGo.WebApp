@@ -1,0 +1,120 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Booking Detail</h2>
+    <button
+      (click)="cancel()"
+      aria-label="Close"
+      class="btn-close"
+      data-bs-dismiss="modal"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="">
+        <div class="span-gr">
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên khách hàng:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.customer.name != null ? booking.customer.name : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Email khách hàng:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.customer.email != null
+                ? booking.customer.email
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Giới tính:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.customer.gender != false ? "Nữ" : "Nam"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên trạm đi:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.startRouteStation.name != null
+                ? booking.startRouteStation.name
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ trạm đi:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.startRouteStation.address != null
+                ? booking.startRouteStation.address
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tên trạm đến:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.endRouteStation.address != null
+                ? booking.endRouteStation.name
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ trạm đến: </span>
+            <span class="col-md-8 detail-value">{{
+              booking.endRouteStation.address != null
+                ? booking.endRouteStation.address
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Số ngày đi trong tuần:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.daysOfWeek != null ? booking.daysOfWeek : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Total Price:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.totalPrice != null
+                ? booking.totalPrice + " VND"
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Giá khuyến mãi:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.priceAfterDiscount != null
+                ? booking.priceAfterDiscount + " VND"
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Phương thức thanh toán:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.paymentMethod != null ? booking.paymentMethod : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Khoảng thời gian:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.duration != null
+                ? booking.duration + " minutes"
+                : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Khoảng cách:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.distance != null ? booking.distance + " Km" : "No data"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Phương tiện:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.vehicleName != null ? booking.vehicleName : "No data"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

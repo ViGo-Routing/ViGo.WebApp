@@ -1,0 +1,147 @@
+<div class="row-sm">
+  <div class="page-header">
+    <div class="title-header">
+      <h2 class="page-title">Route List</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Route</li>
+        <li class="breadcrumb-item">Route List</li>
+      </ol>
+    </div>
+    <div
+      class="ms-auto pageheader-btn"
+      style="display: inherit; align-items: center"
+    >
+      <a
+        id="btnAddRole"
+        (click)="addRoute()"
+        class="btn btn-icon text-white me-2 px-3"
+        data-swal-template="#my-template"
+        ><span><i class="fas fa-plus mx-1"></i></span>Add New
+      </a>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="table-table example-container">
+      <div
+        class="table-container"
+        style="flex: 1 1 1e-9px; box-sizing: border-box"
+      >
+        <table
+          id="tblRouteList"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          [ngClass]="{ 'h-100': !dataSource.data.length }"
+        >
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"
+              ></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)"
+              ></mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên khách hàng
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="User Name">
+              {{ row.user.name }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="routeName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên tuyến đường
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Route Name">
+              {{ row.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="startStationName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên trạm đi
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Start Station Name">
+              {{ row.startStation.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endStationName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Tên trạm đến
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="End Station Name">
+              {{ row.endStation.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Giới tính</th>
+            <td mat-cell *matCellDef="let row" data-label="Gender">
+              {{ row.user.gender ? "Nữ" : "Nam" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="emailUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let row" data-label="Customer Email">
+              {{ row.user.email }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="phoneUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Số điện thoại
+            </th>
+            <td mat-cell *matCellDef="let row" data-label="Customer Phone">
+              {{ row.user.phone }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+            <td mat-cell *matCellDef="let row" data-label="Status">
+              {{ row.status }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Hành động</th>
+            <td mat-cell *matCellDef="let element" data-label="Actions">
+              <button
+                id="btnDetailRoute"
+                class="btn"
+                matTooltip="Detail"
+                matTooltipPosition="above"
+                (click)="detailRoute(element.id)"
+              >
+                <i class="far fa-list-alt"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row mat-row-nodata" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <!-- <app-empty-table></app-empty-table> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+      <mat-paginator
+        class="controls"
+        [pageSizeOptions]="[10, 15, 20]"
+        aria-label="Select page of otas"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

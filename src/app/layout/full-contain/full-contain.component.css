@@ -1,0 +1,101 @@
+ .components {
+     overflow: auto;
+     width: calc(100%) !important;
+     height: calc(100% - 95px) !important;
+     position: absolute;
+     top: 75px !important;
+     padding: 15px 25px !important;
+ }
+
+ .components1 {
+     overflow: auto;
+     width: calc(100%) !important;
+     height: calc(100% - 95px) !important;
+     position: absolute;
+     top: 75px !important;
+     padding: 10px 25px;
+
+ }
+
+ .content {
+     display: block;
+     width: calc(100%) !important;
+     height: 100vh !important;
+     position: absolute;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+
+ .header {
+     width: calc(100%) !important;
+     height: 75px !important;
+     position: absolute;
+     z-index: 2 !important;
+ }
+
+ .header1 {
+     width: calc(100%) !important;
+     height: 75px !important;
+     position: absolute;
+     z-index: 2 !important;
+ }
+
+ .footer {
+     width: 100%;
+     position: absolute !important;
+     bottom: 0px !important;
+     right: 0px !important;
+     background-color: white;
+ }
+
+ .footer1 {
+     width: 100%;
+     position: absolute !important;
+     bottom: 0px !important;
+     right: 0px !important;
+     background-color: white;
+ }
+
+ ::ng-deep .mat-drawer-inner-container::-webkit-scrollbar {
+     display: none;
+ }
+
+ @media(max-width: 1084px) {
+     .header {
+         width: calc(100%) !important;
+         height: 75px !important;
+         position: absolute;
+         z-index: 2 !important;
+     }
+
+     .components {
+         overflow: auto;
+         width: calc(97%) !important;
+         height: calc(100% - 95px) !important;
+         position: absolute;
+         top: 75px !important;
+         margin: 0px 20px;
+     }
+
+     .footer {
+         width: 100%;
+         position: absolute !important;
+         bottom: 0px !important;
+         right: 0px !important;
+         background-color: white;
+     }
+ }
+
+ .example-container {
+     width: 100%;
+     height: 100vh;
+ }
+
+ .example-sidenav-content {
+     display: flex;
+     height: 100%;
+     align-items: center;
+     justify-content: center;
+     border: none;
+ }

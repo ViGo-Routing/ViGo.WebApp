@@ -1,0 +1,119 @@
+.container-nav {
+    display: flex;
+}
+
+::ng-deep .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+    cursor: pointer;
+    background: none !important;
+}
+
+.header_notif ::ng-deep .mat-form-field-wrapper .mat-form-field-infix {
+    padding: 0px;
+    width: 100px !important;
+}
+
+.header_notif ::ng-deep .mat-form-field-hide-placeholder .mat-select-placeholder {
+    font-weight: 500 !important;
+    font-size: medium !important;
+    color: black !important;
+    text-align: center;
+}
+
+.nav button {
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    margin: 0px 10px;
+    box-shadow: 0 5px 10px rgb(98 89 202 / 30%);
+    padding: 6px;
+
+}
+
+.container-nav button {
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    color: #FFFFFF;
+    margin: 0px 10px;
+    background: linear-gradient(to bottom right, rgb(228 95 39) 0%, rgb(106 42 93) 100%) !important;
+    box-shadow: 0 5px 10px rgb(98 89 202 / 30%);
+    padding: 6px;
+
+}
+
+i {
+    font-size: 1.5em;
+}
+
+a {
+    cursor: pointer;
+    padding: 20px;
+}
+
+.app-header {
+    height: 100% !important;
+    display: flex;
+    border-bottom: 1px solid #eaedf1;
+    background: #ffffff;
+    transition: padding-left 0.3s ease;
+}
+
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.header-right-icons {
+    align-items: center;
+}
+
+.responsive-navbar.navbar {
+    display: initial;
+    flex-basis: inherit;
+    flex-wrap: inherit;
+}
+
+.navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}

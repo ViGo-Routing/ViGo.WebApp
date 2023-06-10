@@ -1,0 +1,131 @@
+<!-- CONTAINER OPEN -->
+<div class="page">
+  <div class="">
+    <div class="login-page">
+      <div class="col col-login mx-auto">
+        <div class="text-center">
+          <img
+            src="../assets/images/Logo.png"
+            class="header-brand-img"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="container-login100">
+        <div class="wrap-login100 p-0">
+          <div class="card-body">
+            <form
+              class="login100-form validate-form"
+              [formGroup]="loginForm"
+              (ngSubmit)="ProceedLogin()"
+            >
+              <span class="login100-form-title"> Login </span>
+              <div
+                class="wrap-input100 validate-input"
+                data-bs-validate="Valid phone is required: ex@abc.xyz"
+              >
+                <input
+                  class="input100"
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  loginForm.controls['email'].invalid &&
+                  (loginForm.controls['email'].dirty ||
+                    loginForm.controls['email'].touched)
+                "
+                class="alert"
+              >
+                <p
+                  *ngIf="loginForm.controls['email'].errors?.['required']"
+                  class="text-danger text-xs italic"
+                >
+                  Email là phần bắt buộc
+                </p>
+              </div>
+              <div
+                class="wrap-input100 validate-input"
+                data-bs-validate="Password is required"
+              >
+                <input
+                  class="input100"
+                  type="password"
+                  name="pass"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  loginForm.controls['password'].invalid &&
+                  (loginForm.controls['password'].dirty ||
+                    loginForm.controls['password'].touched)
+                "
+                class="alert"
+              >
+                <p
+                  *ngIf="loginForm.controls['password'].errors?.['required']"
+                  class="text-danger text-xs italic"
+                >
+                  Email là phần bắt buộc
+                </p>
+              </div>
+              <div class="text-end pt-1">
+                <p class="mb-0">
+                  <a
+                    routerLink="/custom-pages/forget-password"
+                    class="text-primary ms-1"
+                    >Forgot Password?</a
+                  >
+                </p>
+              </div>
+              <div class="container-login100-form-btn">
+                <a
+                  type="submit"
+                  class="login100-form-btn btn-primary"
+                  (click)="ProceedLogin()"
+                >
+                  Login
+                </a>
+              </div>
+              <div class="text-center pt-3">
+                <p class="text-dark mb-0">
+                  Not a member?<a
+                    routerLink="/custom-pages/register"
+                    class="text-primary ms-1"
+                    >Create an Account</a
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-center my-3">
+              <a href="javascript:;" class="social-login text-center me-4">
+                <i class="fa fa-google"></i>
+              </a>
+              <a href="javascript:;" class="social-login text-center me-4">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="javascript:;" class="social-login text-center">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
