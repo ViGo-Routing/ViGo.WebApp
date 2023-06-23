@@ -11,6 +11,8 @@ export class RouteService {
 
   host: string = environment.apiUrl;
   apiUrlRoutes = `${this.host}api/Route`
+  apiUrlRoutine = `${this.host}api/RouteRoutine/Route`
+  apiUrlRouteStation = `${this.host}api/RouteStation/Route`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
   getListRoutes(): Observable<any> {
@@ -24,6 +26,13 @@ export class RouteService {
       catchError(async (error) => this.errorSvc.handleError(error))
     );
   }
+
+  getRouteStationByRouteId(id: string): Observable<any> {
+    let url = `${this.apiUrlRouteStation}/` + id
+    return this.http.get<any>(url).pipe(
+      catchError(async (error) => this.errorSvc.handleError(error))
+    );
+  }
   creatNewRoute(route: any) {
     return this.http.post<any>(this.apiUrlRoutes, route).pipe(
       catchError(async (error) => this.errorSvc.handleError(error))
@@ -32,6 +41,26 @@ export class RouteService {
   updateRouteByID(id: string, device: any) {
     let url = `${this.apiUrlRoutes}/` + id;
     return this.http.put<any>(url, device).pipe(
+      catchError(async (error) => this.errorSvc.handleError(error))
+    );
+  }
+
+  //ROUTINE
+  getRoutineByRouteId(id: string): Observable<any> {
+    let url = `${this.apiUrlRoutine}/` + id
+    return this.http.get<any>(url).pipe(
+      catchError(async (error) => this.errorSvc.handleError(error))
+    );
+  }
+  updateRoutineByID(id: string, routine: any) {
+    let url = `${this.apiUrlRoutine}/` + id;
+    let data = {
+      routeId: id,
+      routeRoutines: [
+        routine
+      ]
+    }
+    return this.http.put<any>(url, data).pipe(
       catchError(async (error) => this.errorSvc.handleError(error))
     );
   }

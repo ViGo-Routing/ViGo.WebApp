@@ -17,8 +17,8 @@ export class BookingComponent {
     'createdTime',
     'customerName',
     'phoneUser',
-    'startRouteStation',
-    'endRouteStation',
+    // 'startRouteStation',
+    // 'endRouteStation',
     'priceAfterDiscount',
     'paymentMethod',
     'vehicleName',
@@ -49,7 +49,7 @@ export class BookingComponent {
 
   getBookingList() {
     this.service.getListBookings().subscribe((list) => {
-      this.dataSource = new MatTableDataSource(list);
+      this.dataSource = new MatTableDataSource(list.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })

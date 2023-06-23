@@ -48,6 +48,16 @@ export const menuV1: MenuNav = {
       name: 'user',
       display: false,
     },
+    {
+      url: 'vehicle',
+      title: 'vehicle',
+      icon: 'fas fa-motorcycle',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'vehicle',
+      display: false,
+    },
 
   ],
 };

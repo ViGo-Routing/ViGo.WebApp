@@ -16,7 +16,9 @@
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Tên khách hàng:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customer.name != null ? booking.customer.name : "No data"
+              booking.customer.name != null
+                ? booking.customer.name
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
@@ -24,7 +26,7 @@
             <span class="col-md-8 detail-value">{{
               booking.customer.email != null
                 ? booking.customer.email
-                : "No data"
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
@@ -36,47 +38,49 @@
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Tên trạm đi:</span>
             <span class="col-md-8 detail-value">{{
-              booking.startRouteStation.name != null
-                ? booking.startRouteStation.name
-                : "No data"
+              booking.customerRoute.startStation.name != null
+                ? booking.customerRoute.startStation.name
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Địa chỉ trạm đi:</span>
             <span class="col-md-8 detail-value">{{
-              booking.startRouteStation.address != null
-                ? booking.startRouteStation.address
-                : "No data"
+              booking.customerRoute.startStation.address != null
+                ? booking.customerRoute.startStation.address
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Tên trạm đến:</span>
             <span class="col-md-8 detail-value">{{
-              booking.endRouteStation.address != null
-                ? booking.endRouteStation.name
-                : "No data"
+              booking.customerRoute.endStation.address != null
+                ? booking.customerRoute.endStation.name
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Địa chỉ trạm đến: </span>
             <span class="col-md-8 detail-value">{{
-              booking.endRouteStation.address != null
-                ? booking.endRouteStation.address
-                : "No data"
+              booking.customerRoute.endStation.address != null
+                ? booking.customerRoute.endStation.address
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Số ngày đi trong tuần:</span>
             <span class="col-md-8 detail-value">{{
-              booking.daysOfWeek != null ? booking.daysOfWeek : "No data"
+              booking.daysOfWeek != null
+                ? booking.daysOfWeek
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
-            <span class="col-md-4 detail-key">Total Price:</span>
+            <span class="col-md-4 detail-key">Tổng giá tiền:</span>
             <span class="col-md-8 detail-value">{{
               booking.totalPrice != null
                 ? booking.totalPrice + " VND"
-                : "No data"
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
@@ -84,13 +88,15 @@
             <span class="col-md-8 detail-value">{{
               booking.priceAfterDiscount != null
                 ? booking.priceAfterDiscount + " VND"
-                : "No data"
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Phương thức thanh toán:</span>
             <span class="col-md-8 detail-value">{{
-              booking.paymentMethod != null ? booking.paymentMethod : "No data"
+              booking.paymentMethod != null
+                ? booking.paymentMethod
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
@@ -98,19 +104,23 @@
             <span class="col-md-8 detail-value">{{
               booking.duration != null
                 ? booking.duration + " minutes"
-                : "No data"
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Khoảng cách:</span>
             <span class="col-md-8 detail-value">{{
-              booking.distance != null ? booking.distance + " Km" : "No data"
+              booking.distance != null
+                ? booking.distance + " Km"
+                : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Phương tiện:</span>
             <span class="col-md-8 detail-value">{{
-              booking.vehicleName != null ? booking.vehicleName : "No data"
+              booking.vehicleName != null
+                ? booking.vehicleName
+                : "Không có dữ liệu"
             }}</span>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { RouteService } from 'src/app/services/route.service';
 import { DetailRouteComponent } from './detail-route/detail-route.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
+import { RoutineComponent } from './routine/routine.component';
 
 interface counterCards {
   icon: string;
@@ -47,8 +48,8 @@ export class RouteComponent {
 
   getRouteList() {
     this.service.getListRoutes().subscribe((list) => {
-      this.routeList = list;
-      this.dataSource = new MatTableDataSource(list);
+      this.routeList = list.data;
+      this.dataSource = new MatTableDataSource(list.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
@@ -73,14 +74,28 @@ export class RouteComponent {
   addRoute() {
 
   }
-  editRoute(dev: any) {
+  openRoutine(routeId: any) {
+    this.matdialog
+      .open(RoutineComponent, {
+        disableClose: true,
+        data: routeId,
+        maxHeight: 'calc(100vh - 30vh)',
+        height: 'auto',
+        width: '1500px',
+
+        position: { top: '3%' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getRouteList();
+      });
   }
 
-  detailRoute(route: any) {
+  detailRoute(routeId: any) {
     this.matdialog
       .open(DetailRouteComponent, {
         disableClose: true,
-        data: route,
+        data: routeId,
         maxHeight: 'calc(100vh - 30vh)',
         height: 'auto',
         width: '1500px',

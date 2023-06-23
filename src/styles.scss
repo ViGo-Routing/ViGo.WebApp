@@ -39,7 +39,7 @@ $adminVIGO-theme: mat.define-light-theme((
 @import './assets/dialog.scss';
 @import "./assets/icons/font-awesome/css/font-awesome.min.css";
 @import "assets/colors/color1.css";
-
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 :root {
     --primary-bg-color: #00A1A1;
     --primary-bg-hover: #233ac5;

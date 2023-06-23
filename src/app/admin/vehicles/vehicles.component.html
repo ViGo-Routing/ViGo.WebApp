@@ -1,10 +1,10 @@
 <div class="row-sm">
   <div class="page-header">
     <div class="title-header">
-      <h2 class="page-title">Route List</h2>
+      <h2 class="page-title">Vehicle List</h2>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Route</li>
-        <li class="breadcrumb-item">Route List</li>
+        <li class="breadcrumb-item active">Vehicle</li>
+        <li class="breadcrumb-item">Vehicle List</li>
       </ol>
     </div>
     <div
@@ -13,7 +13,7 @@
     >
       <a
         id="btnAddRole"
-        (click)="addRoute()"
+        (click)="addVehicle()"
         class="btn btn-icon text-white me-2 px-3"
         data-swal-template="#my-template"
         ><span><i class="fas fa-plus mx-1"></i></span>Add New
@@ -27,7 +27,7 @@
         style="flex: 1 1 1e-9px; box-sizing: border-box"
       >
         <table
-          id="tblRouteList"
+          id="tblVehicleList"
           mat-table
           [dataSource]="dataSource"
           matSort
@@ -50,38 +50,39 @@
               ></mat-checkbox>
             </td>
           </ng-container>
+          <ng-container matColumnDef="vehicleName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên xe</th>
+            <td mat-cell *matCellDef="let row" data-label="Vehicle Name">
+              {{ row.name }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="vehicleLicensePlate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Biển số xe
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let row"
+              data-label="Vehicle License Plate"
+            >
+              {{ row.licensePlate }}
+            </td>
+          </ng-container>
           <ng-container matColumnDef="userName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên khách hàng
+              Tên chủ xe
             </th>
             <td mat-cell *matCellDef="let row" data-label="User Name">
               {{ row.user.name }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="routeName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên tuyến đường
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="Route Name">
-              {{ row.name }}
-            </td>
-          </ng-container>
 
-          <ng-container matColumnDef="startStationName">
+          <ng-container matColumnDef="phoneUser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đi
+              Số điện toại chủ xe
             </th>
-            <td mat-cell *matCellDef="let row" data-label="Start Station Name">
-              {{ row.startStation.name }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="endStationName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đến
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="End Station Name">
-              {{ row.endStation.name }}
+            <td mat-cell *matCellDef="let row" data-label="Phone User">
+              {{ row.user.phone }}
             </td>
           </ng-container>
 
@@ -97,18 +98,11 @@
               {{ row.user.email }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="phoneUser">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Số điện thoại
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="Customer Phone">
-              {{ row.user.phone }}
-            </td>
-          </ng-container>
+
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
             <td mat-cell *matCellDef="let row" data-label="Status">
-              {{ row.status }}
+              {{ row.user.status }}
             </td>
           </ng-container>
 
@@ -116,22 +110,13 @@
             <th mat-header-cell *matHeaderCellDef>Hành động</th>
             <td mat-cell *matCellDef="let element" data-label="Actions">
               <button
-                id="btnDetailRoute"
+                id="btnDetailVehicle"
                 class="btn"
                 matTooltip="Detail"
                 matTooltipPosition="above"
-                (click)="detailRoute(element.id)"
+                (click)="detailVehicle(element.id)"
               >
-                <i class="fas fa-clipboard-list"></i>
-              </button>
-              <button
-                id="btnDetailRoute"
-                class="btn"
-                matTooltip="Detail"
-                matTooltipPosition="above"
-                (click)="openRoutine(element.id)"
-              >
-                <i class="far fa-calendar-alt"></i>
+                <i class="far fa-list-alt"></i>
               </button>
             </td>
           </ng-container>

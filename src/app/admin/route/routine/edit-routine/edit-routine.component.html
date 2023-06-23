@@ -1,0 +1,125 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Edit Routine</h2>
+    <button
+      (click)="cancel()"
+      aria-label="Close"
+      class="btn-close"
+      data-bs-dismiss="modal"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <form
+      id="updateRoutineForm"
+      [formGroup]="updateRoutineForm"
+      class="input-infor mt-1"
+    >
+      <mat-form-field class="example-full-width">
+        <mat-label>Ngày đi</mat-label>
+        <input
+          matInput
+          [matDatepicker]="routineDatePicker"
+          formControlName="routineDate"
+          placeholder="Routine Date"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="routineDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #routineDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Start Time -->
+      <mat-form-field>
+        <mat-label>Thời gian bắt đầu</mat-label>
+        <input
+          matInput
+          type="time"
+          name="week"
+          formControlName="startTime"
+          placeholder="Start Time"
+        />
+      </mat-form-field>
+
+      <!-- End Time -->
+      <mat-form-field>
+        <mat-label>Thời gian kết thúc</mat-label>
+        <input
+          matInput
+          type="time"
+          name="week"
+          formControlName="endTime"
+          placeholder="End Time"
+        />
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Ngày đi</mat-label>
+        <input
+          id="txtRoutineDate"
+          matInput
+          [matDatepicker]="datepicker"
+          placeholder="Ngày đi"
+          formControlName="routineDate"
+          required
+        />
+        <mat-datepicker #datepicker></mat-datepicker>
+
+        <mat-error *ngIf="updateRoutineForm.controls['routineDate']"
+          >Ngày đi là phần bắt buộc</mat-error
+        >
+      </mat-form-field> -->
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Thời gian bắt đầu</mat-label>
+        <input
+          id="txtStartTime"
+          matInput
+          placeholder="Thời gian bắt đầu"
+          formControlName="startTime"
+          required
+        />
+        <mat-error *ngIf="updateRoutineForm.controls['startTime']"
+          >StartTime required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Thời gian kết thúc</mat-label>
+        <input
+          id="txtendtime"
+          matInput
+          placeholder="Thời gian kết thúc"
+          formControlName="endTime"
+          required
+        />
+        <mat-error *ngIf="updateRoutineForm.controls['endTime']"
+          >Thời gian kết thúc là phần bắt buộc</mat-error
+        >
+      </mat-form-field> -->
+      <mat-form-field appearance="outline">
+        <label>Trạng thái: </label>
+        <mat-select formControlName="status">
+          <mat-option value="PENDING">PENDING</mat-option>
+          <mat-option value="ACTIVE">ACTIVE</mat-option>
+          <mat-option value="INACTIVE">INACTIVE</mat-option>
+          <mat-option value="UNVERIFIED">UNVERIFIED</mat-option>
+          <mat-option value="REJECTED">REJECTED</mat-option>
+        </mat-select>
+        <mat-error *ngIf="updateRoutineForm.controls['status']"
+          >Trạng thái là phần bắt buộc</mat-error
+        >
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      id="btnSave"
+      class="btn positive"
+      mat-raised-button
+      (click)="update()"
+    >
+      Save
+    </button>
+  </div>
+</div>

@@ -46,7 +46,7 @@ export class UserComponent {
 
   getUserList() {
     this.service.getListUsers().subscribe((list) => {
-      this.dataSource = new MatTableDataSource(list);
+      this.dataSource = new MatTableDataSource(list.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
