@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 
 import { FullContainComponent } from './full-contain/full-contain.component';
-import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
 import { SiderbarsComponent } from './siderbars/siderbars.component';
 import { NotificationComponent } from './notification/notification.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,7 +27,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     RouterModule,
     MatFormFieldModule,
     MatSelectModule,
-    PerfectScrollbarModule,
+
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,

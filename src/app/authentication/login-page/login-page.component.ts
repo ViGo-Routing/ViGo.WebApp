@@ -47,7 +47,7 @@ export class LoginPageComponent implements OnInit {
       this.authservice.ProceedLogin(this.loginForm.value).subscribe((s: any) => {
         this.setSideBar();
         localStorage.setItem('token', s.token);
-        this.router.navigate(["/admin"]);
+        this.router.navigate(["/admin/route"]);
       });
     } else {
       this.alter = true;

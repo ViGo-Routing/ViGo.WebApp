@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingService } from 'src/app/services/booking.service';
 import { DetailBookingComponent } from './detail-booking/detail-booking.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-booking',
@@ -12,7 +13,7 @@ import { DetailBookingComponent } from './detail-booking/detail-booking.componen
   styleUrls: ['./booking.component.scss']
 })
 export class BookingComponent {
-
+  selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'createdTime',
     'customerName',
@@ -25,7 +26,7 @@ export class BookingComponent {
     'status',
     'action'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-
+  bookingList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -92,4 +93,25 @@ export class BookingComponent {
         this.getBookingList();
       });
   }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = !!this.bookingList && this.bookingList.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.bookingList.forEach((r: any) => this.selection.select(r));
+  }
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
+      }`;
+  }
+
 }

@@ -15,18 +15,18 @@ export class UserService {
   }
   getListUsers(): Observable<any> {
     return this.http.get<any>(this.apiUrlUsers).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
   creatNewUser(user: any) {
     return this.http.post<any>(this.apiUrlUsers, user).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
   updateUserByID(id: string, user: any) {
     let url = `${this.apiUrlUsers}/` + id;
     return this.http.put<any>(url, user).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
 }
