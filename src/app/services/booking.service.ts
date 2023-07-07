@@ -15,13 +15,13 @@ export class BookingService {
   }
   getListBookings(): Observable<any> {
     return this.http.get<any>(this.apiUrlBookings).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
   getBookingsById(id: string): Observable<any> {
     let url = `${this.apiUrlBookings}/` + id
     return this.http.get<any>(url).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
 }

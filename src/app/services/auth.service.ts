@@ -17,7 +17,7 @@ export class AuthService {
 
   ProceedLogin(UserCred: any) {
     return this.http.post(this.apiHost, UserCred).pipe(
-      catchError(async (error) => this.errorSvc.handleError(error))
+      catchError((error) => this.errorSvc.handleError(error))
     );
   }
   IsLoggedIn() {

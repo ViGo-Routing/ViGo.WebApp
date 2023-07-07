@@ -3,116 +3,42 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { throwError } from 'rxjs';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
-
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
 
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   handleError(error: any) {
-    // console.log("error", error);
-    // if (error == undefined) {
-    //   console.log('Undefined error')
-    // }
-    // if (error.status) {
-    //   switch (error.status) {
-    //     case 400:
-    //       if (error.message.includes('RemoveMany')) {
-    //         this.toastr.error(`${error.error.message}`);
-    //       } else if (error.message.includes('DeleteMany')) {
-    //         this.toastr.error(`${error.error.message}`);
-    //       } else {
-    //         this.toastr.error(`${error.error.message}`);
-    //       }
-    //       break;
-    //     case 401:
-    //       this.toastr.error(`Unauthorized `, `${error.statusText}`);
-    //       this.router.navigate(['/login']);
-    //       break;
-    //     case 403:
-    //       this.toastr.error('Forbidden', `${error.message}`);
-    //       break;
-    //     case 404:
-    //       if (error.message.includes('DeviceLog')) {
-    //         console.log('Device Log not found');
-    //       } else if (error.message.includes('Login')) {
-    //         this.toastr.error('Please check your password and account name and try again.');
-    //       } else {
-    //         console.log('Not found');
-    //       }
-    //       break;
-    //     case 405:
-    //       this.toastr.error(`${error.message}`);
-    //       break;
-    //     case 409:
-    //       this.toastr.error(`${error.message}`);
-    //       break;
-    //     case 500:
-    //       this.toastr.error('Internal server error');
-    //       break;
-    //     case 503:
-    //       this.toastr.error('Service Unavailable');
-    //       break;
-    //     default:
-    //       console.log(`Bad request `, `${error.message}`);
-    //       break;
-    //   }
-    // } else if (error.error) {
-    //   switch (error.status) {
-    //     case 400:
-    //       this.toastr.error(`Bad request `, `${error.error.message}`);
-    //       break;
-    //     case 401:
-    //       this.toastr.error(`Unauthorized `, `${error.error.message}`);
-    //       this.router.navigate(['/login']);
-    //       break;
-    //     case 403:
-    //       this.toastr.error('Forbidden', `${error.error.message}`);
-    //       break;
-    //     case 404:
-    //       if (error.message.includes('DeviceLog')) {
-    //         console.log('Device Log not found');
-    //       } else if (error.message.includes('Login')) {
-    //         this.toastr.error('Please check your password and account name and try again.');
-    //       } else {
-    //         console.log('Not found');
-    //       }
-    //       break;
-    //     case 405:
-    //       this.toastr.error(`${error.error.message}`);
-    //       break;
-    //     case 409:
-    //       this.toastr.error(`${error.error.message}`);
-    //       break;
-    //     case 500:
-    //       this.toastr.error('Internal server error');
-    //       break;
-    //     case 503:
-    //       this.toastr.error('Service Unavailable');
-    //       break;
-    //     default:
-    //       console.log(`Bad request `, `${error.error.message}`);
-    //       break;
-    //   }
-    // }
-    // if (error.name.match('TimeoutError')) {
-    //   this.toastr.error('Connection Timeout');
-    // } else {
-    //   console.log('An error occurred:', `${error.message}`);
-    // }
-    // return throwError(
-    //   `Backend returned code ${error.status}, ` +
-    //   `body was: ${(error.error as any).message}`);
+    let errorMessage = '';
+    if (error.error != null) {
+      console.log(error.error)
+      // Client-side error occurred
+      if (error.error.status === 401) {
+        this.router.navigate(["/login"]);
+      }
+      this.snackBar.open(`${error.error}`, "Đóng", {
+        horizontalPosition: this.horizontalPosition, verticalPosition: this.verticalPosition,
+        duration: 1000,
+      })
+    } else {
+      // Backend error occurred
+      errorMessage = `Backend returned code ${error.status}, body was: ${error.error.message}`;
+    }
+    return throwError(errorMessage);
 
   }
 
   handleTimeoutError(error: any) {
-    // this.toastr.error(`Connection timeout!`);
+    // this.snackBar.open(`Connection timeout!`);
     return throwError(
       `Connection timeout!`);
   }

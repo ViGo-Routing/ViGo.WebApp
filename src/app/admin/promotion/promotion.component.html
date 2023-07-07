@@ -1,10 +1,10 @@
 <div class="row-sm">
   <div class="page-header">
     <div class="title-header">
-      <h2 class="page-title">Danh sách tuyến đường</h2>
+      <h2 class="page-title">Danh sách người dùng</h2>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Quản lý tuyến đường</li>
-        <li class="breadcrumb-item">Danh sách tuyến đường</li>
+        <li class="breadcrumb-item active">Quản lý người dùng</li>
+        <li class="breadcrumb-item">Danh sách người dùng</li>
       </ol>
     </div>
     <div
@@ -13,7 +13,7 @@
     >
       <a
         id="btnAddRole"
-        (click)="addRoute()"
+        (click)="addPromotion()"
         class="btn btn-icon text-white me-2 px-3"
         data-swal-template="#my-template"
         ><span><i class="fas fa-plus mx-1"></i></span>Thêm mới
@@ -27,7 +27,7 @@
         style="flex: 1 1 1e-9px; box-sizing: border-box"
       >
         <table
-          id="tblRouteList"
+          id="tblPromotionList"
           mat-table
           [dataSource]="dataSource"
           matSort
@@ -50,67 +50,75 @@
               ></mat-checkbox>
             </td>
           </ng-container>
-          <ng-container matColumnDef="userName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên khách hàng
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="User Name">
-              {{ row.user.name }}
+          <ng-container matColumnDef="createdTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
+            <td mat-cell *matCellDef="let row" data-label="Created Time">
+              {{ row.createdTime | date : "d/M/yyyy, H:mm" }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="routeName">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên tuyến đường
+              Tiêu đề khuyến mãi
             </th>
-            <td mat-cell *matCellDef="let row" data-label="Route Name">
+            <td mat-cell *matCellDef="let row" data-label="Promotion Name">
               {{ row.name }}
             </td>
           </ng-container>
-
-          <ng-container matColumnDef="startStationName">
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả</th>
+            <td mat-cell *matCellDef="let row" data-label="Promotion email">
+              {{ row.description }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="discountAmount">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đi
+              Số tiền chiết khấu
             </th>
-            <td mat-cell *matCellDef="let row" data-label="Start Station Name">
-              {{ row.startStation.name }}
+            <td mat-cell *matCellDef="let row" data-label="Promotion Phone">
+              {{ row.discountAmount }} %
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="endStationName">
+          <ng-container matColumnDef="maxDecrease">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đến
+              Đơn đặt tối đa
             </th>
-            <td mat-cell *matCellDef="let row" data-label="End Station Name">
-              {{ row.endStation.name }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="gender">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Giới tính</th>
             <td mat-cell *matCellDef="let row" data-label="Gender">
-              {{ row.user.gender ? "Nữ" : "Nam" }}
+              {{ row.maxDecrease }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="emailUser">
+
+          <ng-container matColumnDef="startTime">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Thư điện tử
+              Ngày bắt đầu
             </th>
-            <td mat-cell *matCellDef="let row" data-label="Customer Email">
-              {{ row.user.email }}
+            <td mat-cell *matCellDef="let row" data-label="Role">
+              {{ row.startTime | date : "d/M/yyyy" }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="phoneUser">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Số điện thoại
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="Customer Phone">
-              {{ row.user.phone }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+          <!-- 
+            <ng-container matColumnDef="dateOfBirth">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh</th>
+              <td mat-cell *matCellDef="let row" data-label="dateOfBirth">
+                {{ row.dateOfBirth }}
+              </td>
+            </ng-container> -->
+          <ng-container matColumnDef="expireTime">
+            <th mat-header-cell *matHeaderCellDef>Hạn kết thúc</th>
             <td mat-cell *matCellDef="let row" data-label="Status">
-              {{ row.status }}
+              {{ row.expireTime | date : "d/M/yyyy" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="maxTotalUsage">
+            <th mat-header-cell *matHeaderCellDef>Tổng số sử dụng tối đa</th>
+            <td mat-cell *matCellDef="let row" data-label="Status">
+              {{ row.maxTotalUsage }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="totalUsage">
+            <th mat-header-cell *matHeaderCellDef>Tổng số sử dụng</th>
+            <td mat-cell *matCellDef="let row" data-label="Status">
+              {{ row.totalUsage }}
             </td>
           </ng-container>
 
@@ -118,22 +126,22 @@
             <th mat-header-cell *matHeaderCellDef>Hành động</th>
             <td mat-cell *matCellDef="let element" data-label="Actions">
               <button
-                id="btnDetailRoute"
+                id="btnDetailPromotion"
                 class="btn"
                 matTooltip="Detail"
                 matTooltipPosition="above"
-                (click)="detailRoute(element.id)"
+                (click)="detailPromotion(element.id)"
               >
-                <i class="fas fa-clipboard-list"></i>
+                <i class="far fa-list-alt"></i>
               </button>
               <button
-                id="btnDetailRoute"
+                id="btnUpdateDevice"
                 class="btn"
-                matTooltip="Detail"
+                matTooltip="Edit"
                 matTooltipPosition="above"
-                (click)="openRoutine(element.id)"
+                (click)="editPromotion(element.id)"
               >
-                <i class="far fa-calendar-alt"></i>
+                <i class="fas fa-edit"></i>
               </button>
             </td>
           </ng-container>
@@ -150,7 +158,7 @@
       <mat-paginator
         class="controls"
         [pageSizeOptions]="[10, 15, 20]"
-        aria-label="Select page of otas"
+        aria-label="Select page of promotions"
       >
       </mat-paginator>
     </div>

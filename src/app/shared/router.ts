@@ -20,7 +20,7 @@ export const menuV1: MenuNav = {
   child: [
     {
       url: 'route',
-      title: 'Route',
+      title: 'Quản lý tuyến đường',
       icon: 'fas fa-route',
       img: '../assets/img/device_page.png',
       active: false,
@@ -30,7 +30,7 @@ export const menuV1: MenuNav = {
     },
     {
       url: 'booking',
-      title: 'Booking',
+      title: 'Quản lý đặt trước',
       icon: 'fas fa-calendar-alt',
       img: '../assets/img/device_page.png',
       active: false,
@@ -40,7 +40,7 @@ export const menuV1: MenuNav = {
     },
     {
       url: 'user',
-      title: 'user',
+      title: 'Quản lý người dùng',
       icon: 'fas fa-user',
       img: '../assets/img/device_page.png',
       active: false,
@@ -50,12 +50,22 @@ export const menuV1: MenuNav = {
     },
     {
       url: 'vehicle',
-      title: 'vehicle',
+      title: 'Quản lý phương tiện',
       icon: 'fas fa-motorcycle',
       img: '../assets/img/device_page.png',
       active: false,
       type: 'link',
       name: 'vehicle',
+      display: false,
+    },
+    {
+      url: 'promotion',
+      title: 'Quản lý khuyến mãi',
+      icon: 'fas fa-percent',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'promotion',
       display: false,
     },
 

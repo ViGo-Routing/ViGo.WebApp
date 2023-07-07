@@ -1,0 +1,113 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Chi tiết khuyến mãi</h2>
+    <button
+      (click)="cancel()"
+      aria-label="Close"
+      class="btn-close"
+      data-bs-dismiss="modal"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="">
+        <div class="span-gr">
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Ngày tạo:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.createdTime != null
+                ? (promotion.createdTime | date : "d/M/yyyy")
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Mã khuyến mãi:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.code != null ? promotion.code : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tiêu đề:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.name != null ? promotion.name : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Mô tả:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.description != null
+                ? promotion.description
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Số tiền chiết khấu:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.discountAmount != null
+                ? promotion.discountAmount + " %"
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Giảm tối đa</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.maxDecrease != null
+                ? promotion.maxDecrease + " VND"
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Ngày bắt đầu:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.startTime != null
+                ? (promotion.startTime | date : "d/M/yyyy")
+                : ("Không có dữ liệu" | date : "d/M/yyyy")
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Ngày hết hạn:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.expireTime != null
+                ? (promotion.expireTime | date : "d/M/yyyy")
+                : ("Không có dữ liệu" | date : "d/M/yyyy")
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tổng số sử dụng: </span>
+            <span class="col-md-8 detail-value">{{
+              promotion.totalUsage != null
+                ? promotion.totalUsage
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Tổng số sử dụng tối đa:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.maxTotalUsage != null
+                ? promotion.maxTotalUsage
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Với đơn:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.minTotalPrice != null
+                ? promotion.minTotalPrice + " VND"
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <div class="row detail-row">
+            <span class="col-md-4 detail-key">Cho loại xe:</span>
+            <span class="col-md-8 detail-value">{{
+              promotion.vehicleType.name != null
+                ? promotion.vehicleType.name
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
