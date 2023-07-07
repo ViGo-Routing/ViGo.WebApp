@@ -44,6 +44,13 @@ export class RouteService {
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
+  deleteRouteByID(id: string) {
+    let url = `${this.apiUrlRoutes}/` + id;
+    return this.http.delete<any>(url).pipe(
+      catchError((error) => this.errorSvc.handleError(error))
+    );
+  }
+
 
   //ROUTINE
   getRoutineByRouteId(id: string): Observable<any> {
