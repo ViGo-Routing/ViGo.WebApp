@@ -7,7 +7,7 @@ import { da } from 'date-fns/locale';
 import { ErrorService } from 'src/app/services/error.service';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-edit-promotion',
   templateUrl: './edit-promotion.component.html',

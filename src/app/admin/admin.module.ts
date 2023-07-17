@@ -30,7 +30,6 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { PromotionComponent } from './promotion/promotion.component';
 import { DetailPromotionComponent } from './promotion/detail-promotion/detail-promotion.component';
 import { EditPromotionComponent } from './promotion/edit-promotion/edit-promotion.component';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CreatePromotionComponent } from './promotion/create-promotion/create-promotion.component';
 
@@ -71,8 +70,6 @@ import { CreatePromotionComponent } from './promotion/create-promotion/create-pr
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-
-    NgScrollbarModule,
     MatSnackBarModule,
 
   ],

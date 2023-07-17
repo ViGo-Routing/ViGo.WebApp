@@ -22,7 +22,7 @@ const colors: any = {
   },
 };
 @Component({
-  selector: 'app-routine',
+  selector: 'app-routine', 
   templateUrl: './routine.component.html',
   styleUrls: ['./routine.component.scss']
 })
