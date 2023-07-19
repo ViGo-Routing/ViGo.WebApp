@@ -13,8 +13,9 @@ export class UserService {
   apiUrlUsers = `${this.host}api/User`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
-  getListUsers(): Observable<any> {
-    return this.http.get<any>(this.apiUrlUsers).pipe(
+  getListUsers(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlUsers}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }

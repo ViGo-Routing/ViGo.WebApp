@@ -6,6 +6,7 @@ import { BookingComponent } from './booking/booking.component';
 import { UserComponent } from './user/user.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { AuthGuard } from '../shared/auth.guard';
+import { ReportComponent } from './report/report.component';
 import { PromotionComponent } from './promotion/promotion.component';
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'vehicle', component: VehiclesComponent, canActivate: [AuthGuard] },
+  { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
   { path: 'promotion', component: PromotionComponent, canActivate: [AuthGuard] },
 
 ];

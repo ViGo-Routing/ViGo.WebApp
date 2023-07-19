@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingService } from 'src/app/services/booking.service';
@@ -29,34 +29,42 @@ export class BookingComponent {
   bookingList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalItems: number;
 
   length = 500;
-  pageSize = 10;
-  pageIndex = 1;
   pageSizeOptions = [5, 10, 25];
   showFirstLastButtons = true;
 
   constructor(
     private service: BookingService,
     public matdialog: MatDialog,
+
+    private paginatorIntl: MatPaginatorIntl
     //private dataService: DataService,
     // public isLoading: LoaderService,
   ) {
-    this.getBookingPage(this.pageIndex, this.pageSize);
+    this.paginatorIntl.itemsPerPageLabel = 'Items per page:';
+    this.paginatorIntl.nextPageLabel = 'Next page';
+    this.paginatorIntl.previousPageLabel = 'Previous page';
+    this.getBookingPage(this.pageNumber, this.pageSize);
     this.getBookingList()
   }
 
 
   getBookingList() {
-    this.service.getListBookings().subscribe((list) => {
+    this.service.getListBookings(this.pageNumber, this.pageSize).subscribe((list) => {
       this.dataSource = new MatTableDataSource(list.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.totalItems = list.totalCount;
     })
   }
 
-
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getBookingList();
+  }
   getBookingPage(pageIndex: number, pageSize: number,) {
     // this.service.getListBookingPage(pageIndex, pageSize).subscribe((list) => {
 

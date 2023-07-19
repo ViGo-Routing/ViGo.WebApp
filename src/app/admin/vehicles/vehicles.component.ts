@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription, interval } from 'rxjs';
@@ -33,12 +33,9 @@ export class VehiclesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
-  length = 500;
-  pageSize = 10;
-  pageIndex = 1;
-  pageSizeOptions = [5, 10, 25];
-  showFirstLastButtons = true;
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalItems: number;
 
   constructor(
     private service: VehicleService,
@@ -46,18 +43,21 @@ export class VehiclesComponent {
     //private dataService: DataService,
     // public isLoading: LoaderService,
   ) {
-    this.getVehiclePage(this.pageIndex, this.pageSize);
     this.getVehicleList()
   }
 
 
   getVehicleList() {
-    this.service.getListVehicles().subscribe((list) => {
+    this.service.getListVehicles(this.pageNumber, this.pageSize).subscribe((list) => {
       this.vehicleList = list.data;
       this.dataSource = new MatTableDataSource(list.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.totalItems = list.totalCount;
     })
+  }
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getVehicleList();
   }
   getVehiclePage(pageIndex: number, pageSize: number,) {
     // this.service.getListVehiclePage(pageIndex, pageSize).subscribe((list) => {

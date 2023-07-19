@@ -68,6 +68,16 @@ export const menuV1: MenuNav = {
       name: 'promotion',
       display: false,
     },
+    {
+      url: 'report',
+      title: 'Quản lý báo cáo',
+      icon: 'fas fa-flag',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'report',
+      display: false,
+    },
 
   ],
 };

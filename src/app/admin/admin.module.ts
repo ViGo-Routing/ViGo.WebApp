@@ -32,6 +32,10 @@ import { DetailPromotionComponent } from './promotion/detail-promotion/detail-pr
 import { EditPromotionComponent } from './promotion/edit-promotion/edit-promotion.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CreatePromotionComponent } from './promotion/create-promotion/create-promotion.component';
+import { ReportComponent } from './report/report.component';
+import { CreateReportComponent } from './report/create-report/create-report.component';
+import { EditReportComponent } from './report/edit-report/edit-report.component';
+import { DetailReportComponent } from './report/detail-report/detail-report.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { CreatePromotionComponent } from './promotion/create-promotion/create-pr
     PromotionComponent,
     DetailPromotionComponent,
     EditPromotionComponent,
-    CreatePromotionComponent
+    CreatePromotionComponent,
+    ReportComponent,
+    CreateReportComponent,
+    EditReportComponent,
+    DetailReportComponent
   ],
   imports: [
     CommonModule,

@@ -6,21 +6,10 @@ import { FullContainComponent } from './layout/full-contain/full-contain.compone
 import { RouteComponent } from './admin/route/route.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginPageComponent,
-  },
-  {
-    path: '',
-    component: FullContainComponent,
-    children: [
-      {
-        path: 'route',
-        component: RouteComponent,
-      },
-
-    ],
   },
   {
     path: 'admin',

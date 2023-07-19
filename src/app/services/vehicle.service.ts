@@ -15,8 +15,9 @@ export class VehicleService {
   apiUrlVehicleTypes = `${this.host}api/VehicleType`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
-  getListVehicles(): Observable<any> {
-    return this.http.get<any>(this.apiUrlVehicles).pipe(
+  getListVehicles(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlVehicles}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }

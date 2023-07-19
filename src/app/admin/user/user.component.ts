@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user.service';
@@ -25,13 +25,9 @@ export class UserComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-
-  length = 500;
-  pageSize = 10;
-  pageIndex = 1;
-  pageSizeOptions = [5, 10, 25];
-  showFirstLastButtons = true;
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalItems: number;
 
   constructor(
     private service: UserService,
@@ -39,17 +35,20 @@ export class UserComponent {
     //private dataService: DataService,
     // public isLoading: LoaderService,
   ) {
-    this.getUserPage(this.pageIndex, this.pageSize);
     this.getUserList()
   }
 
 
   getUserList() {
-    this.service.getListUsers().subscribe((list) => {
+    this.service.getListUsers(this.pageNumber, this.pageSize).subscribe((list) => {
       this.dataSource = new MatTableDataSource(list.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.totalItems = list.totalCount;
     })
+  }
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getUserList();
   }
   getUserPage(pageIndex: number, pageSize: number,) {
     // this.service.getListUserPage(pageIndex, pageSize).subscribe((list) => {

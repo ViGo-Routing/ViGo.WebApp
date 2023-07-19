@@ -15,8 +15,9 @@ export class RouteService {
   apiUrlRouteStation = `${this.host}api/RouteStation/Route`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
-  getListRoutes(): Observable<any> {
-    return this.http.get<any>(this.apiUrlRoutes).pipe(
+  getListRoutes(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlRoutes}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }

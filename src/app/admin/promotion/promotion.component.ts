@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PromotionService } from 'src/app/services/promotion.service';
@@ -36,12 +36,9 @@ export class PromotionComponent {
   @ViewChild(MatSort) sort!: MatSort;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-  length = 500;
-  pageSize = 10;
-  pageIndex = 1;
-  pageSizeOptions = [5, 10, 25];
-  showFirstLastButtons = true;
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalItems: number;
 
   constructor(
     private service: PromotionService,
@@ -50,18 +47,22 @@ export class PromotionComponent {
     // public isLoading: LoaderService,
     private snackBar: MatSnackBar
   ) {
-    this.getPromotionPage(this.pageIndex, this.pageSize);
+
     this.getPromotionList()
   }
 
 
   getPromotionList() {
-    this.service.getListPromotions().subscribe((list) => {
+    this.service.getListPromotions(this.pageNumber, this.pageSize).subscribe((list) => {
       this.promotionList = list.data
       this.dataSource = new MatTableDataSource(list.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.totalItems = list.totalCount;
     })
+  }
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getPromotionList();
   }
   getPromotionPage(pageIndex: number, pageSize: number,) {
     // this.service.getListPromotionPage(pageIndex, pageSize).subscribe((list) => {

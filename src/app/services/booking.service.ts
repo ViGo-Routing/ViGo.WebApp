@@ -13,8 +13,9 @@ export class BookingService {
   apiUrlBookings = `${this.host}api/Booking`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
-  getListBookings(): Observable<any> {
-    return this.http.get<any>(this.apiUrlBookings).pipe(
+  getListBookings(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlBookings}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }

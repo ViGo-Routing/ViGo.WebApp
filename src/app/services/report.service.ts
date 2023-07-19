@@ -7,37 +7,38 @@ import { Observable, catchError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PromotionService {
+export class ReportService {
+
   host: string = environment.apiUrl;
-  apiUrlPromotions = `${this.host}api/Promotion`
+  apiUrlReports = `${this.host}api/Report`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
-  getListPromotions(pageNumber: number, pageSize: number): Observable<any> {
-    let url = `${this.apiUrlPromotions}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+  getListReports(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlReports}/Admin?PageNumber=${pageNumber}&PageSize=${pageSize}`
     return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
-  creatNewPromotion(promotion: any) {
-    let url = `${this.apiUrlPromotions}`;
-    return this.http.post<any>(url, promotion).pipe(
+  creatNewReport(Report: any) {
+    let url = `${this.apiUrlReports}`;
+    return this.http.post<any>(url, Report).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
-  updatePromotionByID(id: string, promotion: any) {
-    let url = `${this.apiUrlPromotions}/` + id;
-    return this.http.put<any>(url, promotion).pipe(
+  updateReportByID(id: string, Report: any) {
+    let url = `${this.apiUrlReports}/` + id;
+    return this.http.put<any>(url, Report).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
-  getPromotionsById(id: string): Observable<any> {
-    let url = `${this.apiUrlPromotions}/` + id
+  getReportsById(id: string): Observable<any> {
+    let url = `${this.apiUrlReports}/` + id
     return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
-  deletePromotionById(id: string): Observable<any> {
-    let url = `${this.apiUrlPromotions}/` + id
+  deleteReportById(id: string): Observable<any> {
+    let url = `${this.apiUrlReports}/` + id
     return this.http.delete<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription, interval } from 'rxjs';
@@ -27,11 +27,11 @@ export class RouteComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalItems: number;
 
   length = 500;
-  pageSize = 10;
-  pageIndex = 1;
   pageSizeOptions = [5, 10, 25];
   showFirstLastButtons = true;
 
@@ -41,18 +41,21 @@ export class RouteComponent {
     //private dataService: DataService,
     // public isLoading: LoaderService,
   ) {
-    this.getRoutePage(this.pageIndex, this.pageSize);
     this.getRouteList()
   }
 
 
   getRouteList() {
-    this.service.getListRoutes().subscribe((list) => {
+    this.service.getListRoutes(this.pageNumber, this.pageSize).subscribe((list) => {
       this.routeList = list.data;
       this.dataSource = new MatTableDataSource(list.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.totalItems = list.totalCount;
     })
+  }
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getRouteList();
   }
   getRoutePage(pageIndex: number, pageSize: number,) {
     // this.service.getListRoutePage(pageIndex, pageSize).subscribe((list) => {
