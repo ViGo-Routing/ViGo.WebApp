@@ -24,14 +24,11 @@ export class ReportComponent {
   displayedColumns: string[] = [
     // 'select',
     'createdTime',
+    'title',
+    'content',
     'name',
-    'description',
-    'discountAmount',
-    'maxDecrease',
-    'startTime',
-    'expireTime',
-    'maxTotalUsage',
-    'totalUsage',
+    'feedback',
+    'type',
     'action'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   ReportList: any;
@@ -108,7 +105,7 @@ export class ReportComponent {
         data: Report,
         maxHeight: 'calc(100vh - 50px)',
         height: 'auto',
-        width: '1500px',
+        width: '500px',
         position: { top: '3%' },
       })
       .afterClosed()

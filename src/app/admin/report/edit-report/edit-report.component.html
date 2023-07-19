@@ -1,1 +1,71 @@
-<p>edit-report works!</p>
+<div class="modal-header">
+  <h2 class="modal-title">Xác nhận báo cáo</h2>
+  <i
+    (click)="cancel()"
+    aria-label="Close"
+    class="btn-close"
+    data-bs-dismiss="modal"
+  ></i>
+</div>
+<div class="modal-body">
+  <form
+    [formGroup]="editForm"
+    class="input-infor mt-1"
+    #myForm="ngForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Người đánh giá lưu ý</mat-label>
+      <textarea
+        matInput
+        type="text"
+        formControlName="reviewerNote"
+        required
+      ></textarea>
+      <mat-error
+        *ngIf="
+          editForm.controls['reviewerNote'].invalid &&
+          editForm.controls['reviewerNote'].touched
+        "
+      >
+        Người đánh giá lưu ý là phần bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Trạng thái</mat-label>
+      <mat-select formControlName="status" required>
+        <mat-option value="PROCESSED ">PROCESSED</mat-option>
+        <mat-option value="DENIED ">DENIED</mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="
+          editForm.controls['status'].invalid &&
+          editForm.controls['status'].touched
+        "
+      >
+        Trạng thái là phần bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <div class="modal-footer">
+      <button
+        id="btnCancel"
+        mat-raised-button
+        class="btn negative"
+        (click)="cancel()"
+      >
+        Hủy
+      </button>
+      <button
+        id="btnSave"
+        class="btn positive"
+        mat-raised-button
+        (click)="update()"
+        [disabled]="!editForm.valid"
+      >
+        Lưu
+      </button>
+    </div>
+  </form>
+</div>

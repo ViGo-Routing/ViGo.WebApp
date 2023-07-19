@@ -26,7 +26,7 @@ export class ReportService {
     );
   }
   updateReportByID(id: string, Report: any) {
-    let url = `${this.apiUrlReports}/` + id;
+    let url = `${this.apiUrlReports}/Status&Note/` + id;
     return this.http.put<any>(url, Report).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
