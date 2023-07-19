@@ -104,9 +104,12 @@
         </table>
       </div>
       <mat-paginator
-        class="controls"
-        [pageSizeOptions]="[10, 15, 20]"
-        aria-label="Select page of users"
+        [length]="totalItems"
+        [pageIndex]="pageNumber"
+        [pageSize]="pageSize"
+        [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="onPageChange($event)"
       >
       </mat-paginator>
     </div>

@@ -29,7 +29,7 @@ export class BookingComponent {
   bookingList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
   totalItems: number;
 
@@ -54,7 +54,8 @@ export class BookingComponent {
 
 
   getBookingList() {
-    this.service.getListBookings(this.pageNumber, this.pageSize).subscribe((list) => {
+    let apiPageNumber = this.pageNumber + 1
+    this.service.getListBookings(apiPageNumber, this.pageSize).subscribe((list) => {
       this.dataSource = new MatTableDataSource(list.data);
       this.totalItems = list.totalCount;
     })

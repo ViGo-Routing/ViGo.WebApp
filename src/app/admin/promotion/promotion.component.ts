@@ -36,8 +36,10 @@ export class PromotionComponent {
   @ViewChild(MatSort) sort!: MatSort;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
   totalItems: number;
 
   constructor(
@@ -53,7 +55,8 @@ export class PromotionComponent {
 
 
   getPromotionList() {
-    this.service.getListPromotions(this.pageNumber, this.pageSize).subscribe((list) => {
+    let apiPageNumber = this.pageNumber + 1
+    this.service.getListPromotions(apiPageNumber, this.pageSize).subscribe((list) => {
       this.promotionList = list.data
       this.dataSource = new MatTableDataSource(list.data);
       this.totalItems = list.totalCount;

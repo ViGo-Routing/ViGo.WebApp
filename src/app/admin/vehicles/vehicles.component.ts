@@ -32,11 +32,11 @@ export class VehiclesComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
   totalItems: number;
-
   constructor(
     private service: VehicleService,
     public matdialog: MatDialog,
@@ -48,7 +48,8 @@ export class VehiclesComponent {
 
 
   getVehicleList() {
-    this.service.getListVehicles(this.pageNumber, this.pageSize).subscribe((list) => {
+    let apiPageNumber = this.pageNumber + 1
+    this.service.getListVehicles(apiPageNumber, this.pageSize).subscribe((list) => {
       this.vehicleList = list.data;
       this.dataSource = new MatTableDataSource(list.data);
       this.totalItems = list.totalCount;

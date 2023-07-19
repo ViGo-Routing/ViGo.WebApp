@@ -27,13 +27,12 @@ export class RouteComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
   totalItems: number;
 
-  length = 500;
-  pageSizeOptions = [5, 10, 25];
-  showFirstLastButtons = true;
 
   constructor(
     private service: RouteService,
@@ -46,7 +45,8 @@ export class RouteComponent {
 
 
   getRouteList() {
-    this.service.getListRoutes(this.pageNumber, this.pageSize).subscribe((list) => {
+    let apiPageNumber = this.pageNumber + 1
+    this.service.getListRoutes(apiPageNumber, this.pageSize).subscribe((list) => {
       this.routeList = list.data;
       this.dataSource = new MatTableDataSource(list.data);
       this.totalItems = list.totalCount;

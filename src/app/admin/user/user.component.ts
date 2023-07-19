@@ -25,8 +25,10 @@ export class UserComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
   totalItems: number;
 
   constructor(
@@ -40,7 +42,8 @@ export class UserComponent {
 
 
   getUserList() {
-    this.service.getListUsers(this.pageNumber, this.pageSize).subscribe((list) => {
+    let apiPageNumber = this.pageNumber + 1
+    this.service.getListUsers(apiPageNumber, this.pageSize).subscribe((list) => {
       this.dataSource = new MatTableDataSource(list.data);
       this.totalItems = list.totalCount;
     })
