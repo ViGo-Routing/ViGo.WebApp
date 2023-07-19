@@ -78,6 +78,25 @@ export const menuV1: MenuNav = {
       name: 'report',
       display: false,
     },
-
+    {
+      url: 'wallet',
+      title: 'Quản lý ví',
+      icon: 'fas fa-wallet',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'wallet',
+      display: false,
+    },
+    {
+      url: 'user-license',
+      title: 'Quản lý giấy phép lái xe',
+      icon: 'fas fa-id-badge',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'user-license',
+      display: false,
+    },
   ],
 };

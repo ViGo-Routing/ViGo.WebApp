@@ -7,7 +7,10 @@ import { UserComponent } from './user/user.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { AuthGuard } from '../shared/auth.guard';
 import { ReportComponent } from './report/report.component';
+
 import { PromotionComponent } from './promotion/promotion.component';
+import { UserLicenseComponent } from './user-license/user-license.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 
 const routes: Routes = [
@@ -16,7 +19,10 @@ const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'vehicle', component: VehiclesComponent, canActivate: [AuthGuard] },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
+  { path: 'user-license', component: UserLicenseComponent, canActivate: [AuthGuard] },
   { path: 'promotion', component: PromotionComponent, canActivate: [AuthGuard] },
+  { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
+
 
 ];
 

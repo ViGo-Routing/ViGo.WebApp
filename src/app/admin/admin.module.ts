@@ -36,7 +36,11 @@ import { ReportComponent } from './report/report.component';
 import { CreateReportComponent } from './report/create-report/create-report.component';
 import { EditReportComponent } from './report/edit-report/edit-report.component';
 import { DetailReportComponent } from './report/detail-report/detail-report.component';
-
+import { WalletComponent } from './wallet/wallet.component';
+import { EditWalletComponent } from './wallet/edit-wallet/edit-wallet.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UserLicenseComponent } from './user-license/user-license.component';
+import { CreateUserLicenseComponent } from './user-license/create-user-license/create-user-license.component';
 @NgModule({
   declarations: [
     RouteComponent,
@@ -55,7 +59,11 @@ import { DetailReportComponent } from './report/detail-report/detail-report.comp
     ReportComponent,
     CreateReportComponent,
     EditReportComponent,
-    DetailReportComponent
+    DetailReportComponent,
+    WalletComponent,
+    EditWalletComponent,
+    UserLicenseComponent,
+    CreateUserLicenseComponent
   ],
   imports: [
     CommonModule,
@@ -74,6 +82,7 @@ import { DetailReportComponent } from './report/detail-report/detail-report.comp
     MatNativeDateModule,
     MatMomentDateModule,
     MatSelectModule,
+    MatSlideToggleModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
