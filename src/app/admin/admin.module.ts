@@ -41,6 +41,9 @@ import { EditWalletComponent } from './wallet/edit-wallet/edit-wallet.component'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserLicenseComponent } from './user-license/user-license.component';
 import { CreateUserLicenseComponent } from './user-license/create-user-license/create-user-license.component';
+import { StorageModule } from '@angular/fire/storage';
+import { SharedFireModule } from '../shared/shared-fired.module';
+
 @NgModule({
   declarations: [
     RouteComponent,
@@ -88,7 +91,7 @@ import { CreateUserLicenseComponent } from './user-license/create-user-license/c
       useFactory: adapterFactory,
     }),
     MatSnackBarModule,
-
+    SharedFireModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: '	en-US' },

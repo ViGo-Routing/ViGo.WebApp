@@ -1,0 +1,22 @@
+::ng-deep .intermediate .mat-checkbox-background {
+    background-color: #b5b5b5 !important;
+  }
+   ::ng-deep.mat-checkbox-active .mat-checkbox-background {
+    background-color: green;
+  }
+  
+  ::ng-deep.mat-checkbox-banned .mat-checkbox-background {
+    background-color: red;
+  }
+  ::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border-color: black !important;
+    background-color: transparent !important;
+ }
+ ::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not([data-indeterminate=true])~.mdc-checkbox__background {
+  border-color: red;
+  background-color: red !important;
+}
+ ::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+  border-color: green;
+  background-color: green !important;
+}

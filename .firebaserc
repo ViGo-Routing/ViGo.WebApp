@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "vigo-a7754": {
+      "hosting": {
+        "adminVIGO": [
+          "vigo-a7754"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "vigo-a7754"
+  }
+}

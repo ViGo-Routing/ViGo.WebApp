@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavLink, menuV1 } from 'src/app/shared/router';
-
+import { Auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-login-page',
@@ -24,7 +24,20 @@ export class LoginPageComponent implements OnInit {
   editData: any;
   responseData: any;
   navLinks: NavLink[] = menuV1.child;
-  constructor(private router: Router, private fb: FormBuilder, private authservice: AuthService) { this.ngForm() }
+  UserData: any;
+  constructor(private auth: Auth, private router: Router, private fb: FormBuilder, private authservice: AuthService) {
+    this.ngForm();
+    onAuthStateChanged(this.auth, (user: any) => {
+      if (user) {
+        this.UserData = user;
+        localStorage.setItem('user', JSON.stringify(this.UserData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    })
+  }
 
   ngOnInit(): void {
     // this.loginForm = this.formBuilder.group({
@@ -40,15 +53,33 @@ export class LoginPageComponent implements OnInit {
     })
   }
 
+  getFirebaseUser(): any {
+    return this.auth.currentUser;
+  }
 
   ProceedLogin() {
+
+    console.log(this.auth)
     this.alter = false;
     if (this.loginForm.valid) {
-      this.authservice.ProceedLogin(this.loginForm.value).subscribe((s: any) => {
-        this.setSideBar();
-        localStorage.setItem('token', s.token);
-        this.router.navigate(["/admin/route"]);
-      });
+      signInWithEmailAndPassword(this.auth, this.loginForm.get('email')?.value, 'admin123')
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log('ssss', this.auth)
+          this.authservice.ProceedLogin(this.loginForm.value).subscribe((s: any) => {
+            this.setSideBar();
+            localStorage.setItem('token', s.token);
+            this.router.navigate(["/admin/route"]);
+          });
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("Loggin Fire Error", errorMessage)
+          // ..
+        });
     } else {
       this.alter = true;
       this.message_valid = 'Password or User Name is required';

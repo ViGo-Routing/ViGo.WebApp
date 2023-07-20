@@ -122,6 +122,8 @@ export class WalletComponent {
         verticalPosition: this.verticalPosition,
         duration: 1000
       });
+
+      this.getWalletList();
     })
 
   }

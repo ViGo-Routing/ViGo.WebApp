@@ -107,6 +107,7 @@
               <mat-checkbox
                 class="example-margin"
                 [checked]="row.status == 'ACTIVE'"
+                [indeterminate]="row.status === 'INACTIVE'"
                 (change)="updatWallet(row.id, row.status)"
                 >{{ row.status }}</mat-checkbox
               >

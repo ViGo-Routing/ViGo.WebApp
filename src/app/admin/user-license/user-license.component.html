@@ -119,6 +119,7 @@
               <mat-checkbox
                 class="example-margin"
                 [checked]="row.status == 'APPROVED'"
+                [indeterminate]="row.status === 'REJECTED'"
                 (change)="updatUserLicense(row.id, row.status)"
                 >{{ row.status }}</mat-checkbox
               >

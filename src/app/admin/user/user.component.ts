@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user.service';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user',
@@ -31,9 +32,13 @@ export class UserComponent {
   showFirstLastButtons = true;
   totalItems: number;
 
+  statusUpdate: string;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
     private service: UserService,
     public matdialog: MatDialog,
+    private snackBar: MatSnackBar
     //private dataService: DataService,
     // public isLoading: LoaderService,
   ) {
@@ -52,6 +57,20 @@ export class UserComponent {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getUserList();
+  }
+  updatUserStatus(id: string, status: string) {
+    this.statusUpdate = status === "APPROVED" ? "REJECTED" : "APPROVED"
+    const edit = {
+      status: this.statusUpdate
+    }
+    this.service.updateUserByID(id, edit).subscribe((s: any) => {
+      this.snackBar.open("Cập nhật trạng thái thành công", "Đóng", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 1000
+      });
+    })
+
   }
   getUserPage(pageIndex: number, pageSize: number,) {
     // this.service.getListUserPage(pageIndex, pageSize).subscribe((list) => {

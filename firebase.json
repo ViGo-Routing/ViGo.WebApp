@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "adminVIGO",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { UserLicenseService } from 'src/app/services/user-license.service';
+import { CreateUserLicenseComponent } from './create-user-license/create-user-license.component';
 
 @Component({
   selector: 'app-user-license',
@@ -81,18 +82,18 @@ export class UserLicenseComponent {
     // return this.UserLicense;
   }
   addUserLicense() {
-    // this.matdialog
-    //   .open(CreateUserLicenseComponent, {
-    //     disableClose: true,
-    //     maxHeight: 'calc(100vh - 50px)',
-    //     height: 'auto',
-    //     width: '1500px',
-    //     position: { top: '3%' },
-    //   })
-    //   .afterClosed()
-    //   .subscribe(() => {
-    //     this.getUserLicenseList();
-    //   });
+    this.matdialog
+      .open(CreateUserLicenseComponent, {
+        disableClose: true,
+        maxHeight: 'calc(100vh - 50px)',
+        height: 'auto',
+        width: '500px',
+        position: { top: '3%' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getUserLicenseList();
+      });
   }
 
   updatUserLicense(id: string, status: string) {
@@ -106,6 +107,7 @@ export class UserLicenseComponent {
         verticalPosition: this.verticalPosition,
         duration: 1000
       });
+      this.getUserLicenseList()
     })
 
   }

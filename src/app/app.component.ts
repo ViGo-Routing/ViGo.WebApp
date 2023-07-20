@@ -8,5 +8,7 @@ import { LoaderService } from './services/loader.service';
 })
 export class AppComponent {
   title = 'adminVIGO';
-  constructor(public isLoading: LoaderService,) { }
+  constructor(public isLoading: LoaderService,) {
+
+  }
 }
