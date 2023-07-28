@@ -4,16 +4,20 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { UserLicenseService } from 'src/app/services/user-license.service';
 import { CreateUserLicenseComponent } from './create-user-license/create-user-license.component';
+import { ImageDialogComponent } from '../dialog/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-user-license',
   templateUrl: './user-license.component.html',
-  styleUrls: ['./user-license.component.scss']
+  styleUrls: ['./user-license.component.scss'],
 })
 export class UserLicenseComponent {
   selection = new SelectionModel<any>(true, []);
@@ -25,7 +29,8 @@ export class UserLicenseComponent {
     'licenseType',
     'frontSideFile',
     'backSideFile',
-    'action'];
+    'action',
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   UserLicenseList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,48 +42,48 @@ export class UserLicenseComponent {
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   totalItems: number;
-  statusUpdate: string
+  statusUpdate: string;
+
+  imageUrl: string = '';
+
   constructor(
     private service: UserLicenseService,
     public matdialog: MatDialog,
     //private dataService: DataService,
     // public isLoading: LoaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
-
-    this.getUserLicenseList()
+    this.getUserLicenseList();
   }
 
-
   getUserLicenseList() {
-    let apiPageNumber = this.pageNumber + 1
-    this.service.getListUserLicenses(apiPageNumber, this.pageSize).subscribe((list) => {
-      this.UserLicenseList = list.data
-      this.dataSource = new MatTableDataSource(list.data);
-      this.totalItems = list.totalCount;
-
-    })
+    let apiPageNumber = this.pageNumber + 1;
+    this.service
+      .getListUserLicenses(apiPageNumber, this.pageSize)
+      .subscribe((list) => {
+        this.UserLicenseList = list.data;
+        this.dataSource = new MatTableDataSource(list.data);
+        this.totalItems = list.totalCount;
+      });
   }
   onPageChange(event: PageEvent) {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getUserLicenseList();
   }
-  getUserLicensePage(pageIndex: number, pageSize: number,) {
+  getUserLicensePage(pageIndex: number, pageSize: number) {
     // this.service.getListUserLicensePage(pageIndex, pageSize).subscribe((list) => {
-
     //   this.dataSource = new MatTableDataSource(list.result.result.doc);
     //   console.log(this.dataSource,'lít')
     //   this.dataSource.paginator = this.paginator;
     //   this.dataSource.sort = this.sort;
-
     // })
   }
   getUserLicenseById(id: string) {
     // this.service.findUserLicenseById(id).subscribe((s) => {
     //   this.UserLicense = s.result;
     // });
-
     // return this.UserLicense;
   }
   addUserLicense() {
@@ -97,18 +102,29 @@ export class UserLicenseComponent {
   }
 
   updatUserLicense(id: string, status: string) {
-    this.statusUpdate = status === "APPROVED" ? "REJECTED" : "APPROVED"
+    this.statusUpdate = status === 'APPROVED' ? 'REJECTED' : 'APPROVED';
     const edit = {
-      status: this.statusUpdate
-    }
+      status: this.statusUpdate,
+    };
     this.service.updateUserLicenseByID(id, edit).subscribe((s: any) => {
-      this.snackBar.open("Cập nhật trạng thái thành công", "Đóng", {
+      this.snackBar.open('Cập nhật trạng thái thành công', 'Đóng', {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
-        duration: 1000
+        duration: 1000,
       });
-      this.getUserLicenseList()
-    })
+      this.getUserLicenseList();
+    });
+  }
 
+  showImage(image: string) {
+    this.imageUrl = image;
+    console.log(image);
+
+    const dialogRef = this.dialog.open(ImageDialogComponent, {
+      data: {
+        imageUrl: image,
+      },
+      width: '50vw',
+    });
   }
 }

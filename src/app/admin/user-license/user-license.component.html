@@ -88,13 +88,27 @@
           <ng-container matColumnDef="frontSideFile">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mặt trước</th>
             <td mat-cell *matCellDef="let row" data-label="Mặt trước">
-              {{ row.frontSideFile }}
+              <!-- {{ row.frontSideFile }} -->
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="showImage(row.frontSideFile)"
+              >
+                Xem ảnh
+              </button>
             </td>
           </ng-container>
           <ng-container matColumnDef="backSideFile">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mặt sau</th>
             <td mat-cell *matCellDef="let row" data-label="Mặt sau">
-              {{ row.backSideFile }}
+              <!-- {{ row.backSideFile }} -->
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="showImage(row.backSideFile)"
+              >
+                Xem ảnh
+              </button>
             </td>
           </ng-container>
           <!-- <ng-container matColumnDef="status">

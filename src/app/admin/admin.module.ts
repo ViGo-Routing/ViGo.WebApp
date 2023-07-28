@@ -25,7 +25,10 @@ import { EditRoutineComponent } from './route/routine/edit-routine/edit-routine.
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateModule,
+} from '@angular/material-moment-adapter';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { PromotionComponent } from './promotion/promotion.component';
 import { DetailPromotionComponent } from './promotion/detail-promotion/detail-promotion.component';
@@ -43,6 +46,7 @@ import { UserLicenseComponent } from './user-license/user-license.component';
 import { CreateUserLicenseComponent } from './user-license/create-user-license/create-user-license.component';
 import { StorageModule } from '@angular/fire/storage';
 import { SharedFireModule } from '../shared/shared-fired.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,7 @@ import { SharedFireModule } from '../shared/shared-fired.module';
     WalletComponent,
     EditWalletComponent,
     UserLicenseComponent,
-    CreateUserLicenseComponent
+    CreateUserLicenseComponent,
   ],
   imports: [
     CommonModule,
@@ -91,11 +95,12 @@ import { SharedFireModule } from '../shared/shared-fired.module';
       useFactory: adapterFactory,
     }),
     MatSnackBarModule,
-    SharedFireModule
+    SharedFireModule,
+    MatButtonModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: '	en-US' },
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
-  ]
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}
