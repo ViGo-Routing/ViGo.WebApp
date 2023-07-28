@@ -59,16 +59,17 @@ export class UserComponent {
     this.getUserList();
   }
   updatUserStatus(id: string, status: string) {
-    this.statusUpdate = status === "APPROVED" ? "REJECTED" : "APPROVED"
+    this.statusUpdate = status === "ACTIVE" ? "BANNED" : "ACTIVE"
     const edit = {
       status: this.statusUpdate
     }
-    this.service.updateUserByID(id, edit).subscribe((s: any) => {
+    this.service.updateStatusUserByID(id, edit).subscribe((s: any) => {
       this.snackBar.open("Cập nhật trạng thái thành công", "Đóng", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         duration: 1000
       });
+      this.getUserList()
     })
 
   }

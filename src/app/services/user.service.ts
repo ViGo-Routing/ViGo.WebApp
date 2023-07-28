@@ -31,7 +31,7 @@ export class UserService {
     );
   }
   updateStatusUserByID(id: string, user: any) {
-    let url = `${this.apiUrlUsers}/UpdateStatus` + id;
+    let url = `${this.apiUrlUsers}/UpdateStatus/` + id;
     return this.http.put<any>(url, user).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
