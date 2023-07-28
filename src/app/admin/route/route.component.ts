@@ -130,12 +130,12 @@ export class RouteComponent {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
       }`;
   }
-  deleteALl() {
+  deleteAll() {
     const listId: string[] = this.selection.selected.map((x) => x.id);
     listId.forEach(item => {
       this.service.deleteRouteByID(item).subscribe(() => {
         this.selection.clear()
-      });
+      }); this.getRouteList()
     })
   }
 }

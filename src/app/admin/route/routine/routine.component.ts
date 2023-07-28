@@ -22,7 +22,7 @@ const colors: any = {
   },
 };
 @Component({
-  selector: 'app-routine', 
+  selector: 'app-routine',
   templateUrl: './routine.component.html',
   styleUrls: ['./routine.component.scss']
 })
@@ -41,7 +41,7 @@ export class RoutineComponent {
 
   getRoutineByRouteId(id: string) {
 
-    this.service.getRouteStationByRouteId(id).subscribe((result) => {
+    this.service.getRoutesById(id).subscribe((result) => {
       this.routeStation = result;
       this.service.getRoutineByRouteId(id).subscribe((result) => {
         this.routine = result.data;
@@ -60,33 +60,31 @@ export class RoutineComponent {
   }
 
 
-  createCalendarEvents(stations: any[], routines: any[]): CalendarEvent[] {
+  createCalendarEvents(stations: any, routines: any[]): CalendarEvent[] {
     console.log("routines", routines)
-    console.log("stations", stations)
+    console.log("stations", stations.startStation.name)
     const events: CalendarEvent[] = [];
     if (routines) {
       routines.forEach(routine => {
-        stations.forEach((station, index) => {
-          const startDateTime = moment(`${routine.routineDate} ${routine.startTime}`).toDate();
-          const endDateTime = moment(`${routine.routineDate} ${routine.endTime}`).toDate();
-          const event: CalendarEvent = {
-            start: startDateTime,
-            end: endDateTime,
-            title: index === 0 ? `Trạm đi: ${station.name}` : `Trạm về: ${station.name}`,
-            color: {
-              primary: routine.status === 'ACTIVE' ? '#009292' : '#ad2121',
-              secondary: routine.status === 'ACTIVE' ? '#00A1A11F' : '#FAE3E3',
+        console.log("routinesaaaaaaaaaaa", routine.startTime)
+        const startDateTime = moment(`${routine.routineDate} ${routine.pickupTime}`).toDate();
+        const event: CalendarEvent = {
+          start: startDateTime,
+          title: `Trạm đi: ${stations.startStation.name} Trạm về: ${stations.endStation.name}`,
+          color: {
+            primary: routine.status === 'ACTIVE' ? '#009292' : '#ad2121',
+            secondary: routine.status === 'ACTIVE' ? '#00A1A11F' : '#FAE3E3',
 
-            },
-            meta: {
-              name: station.name,
-              address: station.address,
-              status: routine.status,
-              id: this.data
-            }
-          };
-          events.push(event);
-        });
+          },
+          meta: {
+            name: stations.name,
+            address: stations.address,
+            status: routine.status,
+            id: this.data
+          }
+        };
+        events.push(event);
+
       });
     }
     console.log(events)
