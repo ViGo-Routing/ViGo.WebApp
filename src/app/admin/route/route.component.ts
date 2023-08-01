@@ -137,5 +137,6 @@ export class RouteComponent {
         this.selection.clear()
       }); this.getRouteList()
     })
+    this.selection.clear()
   }
 }
