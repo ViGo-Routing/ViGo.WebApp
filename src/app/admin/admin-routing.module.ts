@@ -11,9 +11,11 @@ import { ReportComponent } from './report/report.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { UserLicenseComponent } from './user-license/user-license.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'route', component: RouteComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },

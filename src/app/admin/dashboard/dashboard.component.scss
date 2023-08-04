@@ -1,0 +1,73 @@
+::ng-deep{
+    .dark-mode .apex-charts text {
+        fill: #fff !important;
+    }
+    .ht-180{
+        max-height: 180px;
+    }
+}
+
+.statistics-info .counter-icon {
+    margin-bottom: 1rem;
+    display: inline-flex;
+    width: 4rem;
+    height: 4rem;
+    padding: 1.3rem 1.4rem;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.statistics-info .counter-icon i {
+    font-size: 1.2rem;
+}
+
+.counter-icon {
+    margin-bottom: 1rem;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    font-size: 24px;
+}
+.bg-primary-gradient {
+    background: linear-gradient(to bottom right, #FFFF 0%, #e70707 100%) !important;
+}
+
+a.bg-primary-gradient:hover,
+a.bg-primary-gradient:focus {
+    background-color: #FFFF !important;
+}
+
+button.bg-primary-gradient:hover,
+button.bg-primary-gradient:focus {
+    background-color: #FFFF !important;
+}
+.bg-primary-gradient {
+	background: #FFFF !important;
+}
+a.bg-primary-gradient {
+	&:hover, &:focus {
+		background-color: #FFFF !important;
+	}
+}
+button.bg-primary-gradient {
+	&:hover, &:focus {
+		background-color: #FFFF !important;
+	}
+}
+
+.box-shadow-primary {
+    box-shadow: 0 5px 10px#ffc800;
+}
+.brround {
+    border-radius: 50% !important;
+}
+.box-shadow-danger {
+    box-shadow: 0 5px 10px #efc2c9;
+}
+.box-shadow-secondary {
+    box-shadow: 0 5px 10px #00ff1e;
+}
+.box-shadow-success {
+    box-shadow: 0 5px 10px #99daea;
+}

@@ -18,6 +18,17 @@ export interface NavLink {
 export const menuV1: MenuNav = {
   version: 'admin',
   child: [
+
+    {
+      url: 'dashboard',
+      title: 'Bảng điều khiển',
+      icon: 'fas fa-home',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'dashboard',
+      display: false,
+    },
     {
       url: 'route',
       title: 'Quản lý tuyến đường',

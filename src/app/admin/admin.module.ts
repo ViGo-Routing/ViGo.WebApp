@@ -47,6 +47,7 @@ import { CreateUserLicenseComponent } from './user-license/create-user-license/c
 import { StorageModule } from '@angular/fire/storage';
 import { SharedFireModule } from '../shared/shared-fired.module';
 import { MatButtonModule } from '@angular/material/button';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { MatButtonModule } from '@angular/material/button';
     EditWalletComponent,
     UserLicenseComponent,
     CreateUserLicenseComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
