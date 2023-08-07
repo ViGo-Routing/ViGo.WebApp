@@ -12,13 +12,12 @@ export interface NavLink {
   active?: boolean;
   name: string;
   display: boolean;
-  type?: string
+  type?: string;
   children?: any[];
 }
 export const menuV1: MenuNav = {
   version: 'admin',
   child: [
-
     {
       url: 'dashboard',
       title: 'Bảng điều khiển',
@@ -107,6 +106,16 @@ export const menuV1: MenuNav = {
       active: false,
       type: 'link',
       name: 'user-license',
+      display: false,
+    },
+    {
+      url: 'setting',
+      title: 'Quản lý cấu hình',
+      icon: 'fas fa-gears',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'setting',
       display: false,
     },
   ],

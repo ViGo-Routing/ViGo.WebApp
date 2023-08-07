@@ -1,0 +1,99 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Cập nhật cấu hình</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
+  </div>
+
+  <div class="modal-body">
+    <form
+      id="editSettingForm"
+      [formGroup]="editSettingForm"
+      class="input-infor mt-1"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Cấu hình</mat-label>
+        <input
+          id="txtDescription"
+          matInput
+          placeholder="Cấu hình"
+          formControlName="description"
+          required
+        />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field appearance="outline">
+        <mat-label>Giá trị</mat-label>
+        <input
+          id="txtValue"
+          matInput
+          placeholder="Giá trị"
+          formControlName="value"
+          type="text"
+          required
+        />
+        <mat-error *ngIf="editSettingForm.controls['value']"
+          >Giá trị là phần bắt buộc</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+      <mat-form-field appearance="outline">
+        <mat-label>Loại cấu hình</mat-label>
+        <input
+          id="txtType"
+          matInput
+          placeholder="Loại cấu hình"
+          formControlName="type"
+          required
+        />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field appearance="outline">
+        <mat-label>Loại dữ liệu</mat-label>
+        <input
+          id="txtDataType"
+          matInput
+          placeholder="Loại dữ liệu"
+          formControlName="dataType"
+          required
+        />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field appearance="outline">
+        <mat-label>Đơn vị tính</mat-label>
+        <input
+          id="txtDataUnit"
+          matInput
+          placeholder="Đơn vị tính"
+          formControlName="dataUnit"
+          required
+        />
+      </mat-form-field>
+      <br />
+    </form>
+
+    <div class="modal-footer">
+      <button
+        id="btnCancel"
+        mat-raised-button
+        color="secondary"
+        class="btn negative"
+        (click)="cancel()"
+      >
+        Hủy
+      </button>
+      <button
+        id="btnSave"
+        class="btn positive"
+        mat-raised-button
+        color="primary"
+        (click)="update()"
+      >
+        Cập nhật
+      </button>
+    </div>
+  </div>
+</div>

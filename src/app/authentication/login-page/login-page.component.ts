@@ -3,18 +3,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavLink, menuV1 } from 'src/app/shared/router';
-import { Auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "@angular/fire/auth";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
   active: any;
   loginForm!: FormGroup;
   hide: boolean = false;
-  eyeShow: string = 'fas fa-lock'
+  eyeShow: string = 'fas fa-lock';
   alter: boolean = false;
   error = { isValid: false, token: null, exp: null };
   messageClass = '';
@@ -25,7 +30,12 @@ export class LoginPageComponent implements OnInit {
   responseData: any;
   navLinks: NavLink[] = menuV1.child;
   UserData: any;
-  constructor(private auth: Auth, private router: Router, private fb: FormBuilder, private authservice: AuthService) {
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private fb: FormBuilder,
+    private authservice: AuthService
+  ) {
     this.ngForm();
     onAuthStateChanged(this.auth, (user: any) => {
       if (user) {
@@ -36,7 +46,7 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -49,8 +59,8 @@ export class LoginPageComponent implements OnInit {
   ngForm() {
     this.loginForm = this.fb.group({
       email: ['admin@gmail.com', Validators.required],
-      password: ['admin', Validators.required]
-    })
+      password: ['admin', Validators.required],
+    });
   }
 
   getFirebaseUser(): any {
@@ -58,26 +68,31 @@ export class LoginPageComponent implements OnInit {
   }
 
   ProceedLogin() {
-
-    console.log(this.auth)
+    console.log(this.auth);
     this.alter = false;
     if (this.loginForm.valid) {
-      signInWithEmailAndPassword(this.auth, this.loginForm.get('email')?.value, 'admin123')
+      signInWithEmailAndPassword(
+        this.auth,
+        this.loginForm.get('email')?.value,
+        'admin123'
+      )
         .then((userCredential) => {
-          // Signed in 
+          // Signed in
           const user = userCredential.user;
-          console.log('ssss', this.auth)
-          this.authservice.ProceedLogin(this.loginForm.value).subscribe((s: any) => {
-            this.setSideBar();
-            localStorage.setItem('token', s.token);
-            this.router.navigate(["/admin/route"]);
-          });
+          console.log('ssss', this.auth);
+          this.authservice
+            .ProceedLogin(this.loginForm.value)
+            .subscribe((s: any) => {
+              this.setSideBar();
+              localStorage.setItem('token', s.token);
+              this.router.navigate(['/admin/dashboard']);
+            });
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("Loggin Fire Error", errorMessage)
+          console.log('Loggin Fire Error', errorMessage);
           // ..
         });
     } else {
@@ -109,7 +124,7 @@ export class LoginPageComponent implements OnInit {
   }
   hidePass() {
     console.log('hidePass: ', this.hide);
-    this.eyeShow = this.hide ? 'fas fa-lock' : 'fas fa-eye'
-    this.hide = !this.hide
+    this.eyeShow = this.hide ? 'fas fa-lock' : 'fas fa-eye';
+    this.hide = !this.hide;
   }
 }

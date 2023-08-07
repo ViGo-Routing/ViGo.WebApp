@@ -1,10 +1,10 @@
 <div class="row-sm">
   <div class="page-header">
     <div class="title-header">
-      <h2 class="page-title">Danh sách giấy phép lái xe</h2>
+      <h2 class="page-title">Danh sách giấy tờ</h2>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Quản lý giấy phép lái xe</li>
-        <li class="breadcrumb-item">Danh sách giấy phép lái xe</li>
+        <li class="breadcrumb-item active">Quản lý giấy tờ</li>
+        <li class="breadcrumb-item">Danh sách giấy tờ</li>
       </ol>
     </div>
     <div
@@ -58,7 +58,7 @@
           </ng-container>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Giấy phép lái xe người dùng
+              Người dùng
             </th>
             <td
               mat-cell
@@ -70,7 +70,7 @@
           </ng-container>
           <ng-container matColumnDef="licenseType">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Loại giấy phép
+              Loại giấy tờ
             </th>
             <td mat-cell *matCellDef="let row" data-label="Loại giấy phép">
               {{ row.licenseType }}

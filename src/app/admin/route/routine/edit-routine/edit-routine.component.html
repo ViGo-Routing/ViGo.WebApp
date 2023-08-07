@@ -1,12 +1,7 @@
 <div>
   <div class="modal-header">
-    <h2 class="modal-title">Edit Routine</h2>
-    <button
-      (click)="cancel()"
-      aria-label="Close"
-      class="btn-close"
-      data-bs-dismiss="modal"
-    ></button>
+    <h2 class="modal-title">Chỉnh sửa lịch trình</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
   </div>
 
   <div class="modal-body">
@@ -117,9 +112,10 @@
       id="btnSave"
       class="btn positive"
       mat-raised-button
+      color="primary"
       (click)="update()"
     >
-      Save
+      Lưu
     </button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,8 @@ import { DetailRouteComponent } from './detail-route/detail-route.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
 import { RoutineComponent } from './routine/routine.component';
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 interface counterCards {
   icon: string;
@@ -17,11 +19,22 @@ interface counterCards {
 @Component({
   selector: 'app-route',
   templateUrl: './route.component.html',
-  styleUrls: ['./route.component.scss']
+  styleUrls: ['./route.component.scss'],
 })
-export class RouteComponent {
+export class RouteComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
-  displayedColumns: string[] = ['select', 'userName', 'routeName', 'startStationName', 'endStationName', 'emailUser', 'phoneUser', 'gender', 'status', 'action'];
+  displayedColumns: string[] = [
+    'select',
+    'userName',
+    'routeName',
+    'startStationName',
+    'endStationName',
+    'emailUser',
+    'phoneUser',
+    'gender',
+    'status',
+    'action',
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   routeList: any;
 
@@ -33,50 +46,55 @@ export class RouteComponent {
   showFirstLastButtons = true;
   totalItems: number;
 
-
   constructor(
     private service: RouteService,
     public matdialog: MatDialog,
     //private dataService: DataService,
     // public isLoading: LoaderService,
+    private title: Title,
+    private meta: Meta
   ) {
-    this.getRouteList()
+    this.getRouteList();
   }
 
+  ngOnInit(): void {
+    this.title.setTitle('Danh sách tuyến đường | ' + environment.siteName);
+    this.meta.addTag({
+      name: 'description',
+      content: 'Danh sách tuyến đường - ' + environment.siteName,
+    });
+  }
 
   getRouteList() {
-    let apiPageNumber = this.pageNumber + 1
-    this.service.getListRoutes(apiPageNumber, this.pageSize).subscribe((list) => {
-      this.routeList = list.data;
-      this.dataSource = new MatTableDataSource(list.data);
-      this.totalItems = list.totalCount;
-    })
+    let apiPageNumber = this.pageNumber + 1;
+    this.service
+      .getListRoutes(apiPageNumber, this.pageSize)
+      .subscribe((list) => {
+        this.routeList = list.data;
+        this.dataSource = new MatTableDataSource(list.data);
+        this.totalItems = list.totalCount;
+      });
   }
   onPageChange(event: PageEvent) {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getRouteList();
   }
-  getRoutePage(pageIndex: number, pageSize: number,) {
+  getRoutePage(pageIndex: number, pageSize: number) {
     // this.service.getListRoutePage(pageIndex, pageSize).subscribe((list) => {
-
     //   this.dataSource = new MatTableDataSource(list.result.result.doc);
     //   console.log(this.dataSource,'lít')
     //   this.dataSource.paginator = this.paginator;
     //   this.dataSource.sort = this.sort;
-
     // })
   }
   getRouteById(id: string) {
     // this.service.findRouteById(id).subscribe((s) => {
     //   this.route = s.result;
     // });
-
     // return this.route;
   }
-  addRoute() {
-
-  }
+  addRoute() {}
   openRoutine(routeId: any) {
     this.matdialog
       .open(RoutineComponent, {
@@ -112,8 +130,7 @@ export class RouteComponent {
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows =
-      !!this.routeList && this.routeList.length;
+    const numRows = !!this.routeList && this.routeList.length;
     return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -127,16 +144,18 @@ export class RouteComponent {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
-      }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.name + 1
+    }`;
   }
   deleteAll() {
     const listId: string[] = this.selection.selected.map((x) => x.id);
-    listId.forEach(item => {
+    listId.forEach((item) => {
       this.service.deleteRouteByID(item).subscribe(() => {
-        this.selection.clear()
-      }); this.getRouteList()
-    })
-    this.selection.clear()
+        this.selection.clear();
+      });
+      this.getRouteList();
+    });
+    this.selection.clear();
   }
 }

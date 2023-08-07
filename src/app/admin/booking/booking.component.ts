@@ -1,18 +1,24 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingService } from 'src/app/services/booking.service';
 import { DetailBookingComponent } from './detail-booking/detail-booking.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss']
+  styleUrls: ['./booking.component.scss'],
 })
-export class BookingComponent {
+export class BookingComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'createdTime',
@@ -24,7 +30,8 @@ export class BookingComponent {
     'paymentMethod',
     'vehicleName',
     'status',
-    'action'];
+    'action',
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   bookingList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -41,24 +48,35 @@ export class BookingComponent {
     private service: BookingService,
     public matdialog: MatDialog,
 
-    private paginatorIntl: MatPaginatorIntl
+    private paginatorIntl: MatPaginatorIntl,
     //private dataService: DataService,
     // public isLoading: LoaderService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.paginatorIntl.itemsPerPageLabel = 'Items per page:';
     this.paginatorIntl.nextPageLabel = 'Next page';
     this.paginatorIntl.previousPageLabel = 'Previous page';
     this.getBookingPage(this.pageNumber, this.pageSize);
-    this.getBookingList()
+    this.getBookingList();
   }
 
+  ngOnInit(): void {
+    this.title.setTitle('Danh sách đặt trước | ' + environment.siteName);
+    this.meta.addTag({
+      name: 'description',
+      content: 'Danh sách đặt trước - ' + environment.siteName,
+    });
+  }
 
   getBookingList() {
-    let apiPageNumber = this.pageNumber + 1
-    this.service.getListBookings(apiPageNumber, this.pageSize).subscribe((list) => {
-      this.dataSource = new MatTableDataSource(list.data);
-      this.totalItems = list.totalCount;
-    })
+    let apiPageNumber = this.pageNumber + 1;
+    this.service
+      .getListBookings(apiPageNumber, this.pageSize)
+      .subscribe((list) => {
+        this.dataSource = new MatTableDataSource(list.data);
+        this.totalItems = list.totalCount;
+      });
   }
 
   onPageChange(event: PageEvent) {
@@ -66,26 +84,22 @@ export class BookingComponent {
     this.pageSize = event.pageSize;
     this.getBookingList();
   }
-  getBookingPage(pageIndex: number, pageSize: number,) {
+  getBookingPage(pageIndex: number, pageSize: number) {
     // this.service.getListBookingPage(pageIndex, pageSize).subscribe((list) => {
-
     //   this.dataSource = new MatTableDataSource(list.result.result.doc);
     //   console.log(this.dataSource,'lít')
     //   this.dataSource.paginator = this.paginator;
     //   this.dataSource.sort = this.sort;
-
     // })
   }
   getBookingById(id: string) {
     // this.service.findBookingById(id).subscribe((s) => {
     //   this.booking = s.result;
     // });
-
     // return this.booking;
   }
 
-  editBooking(dev: any) {
-  }
+  editBooking(dev: any) {}
 
   detailBooking(booking: any) {
     this.matdialog
@@ -119,8 +133,8 @@ export class BookingComponent {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
-      }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.name + 1
+    }`;
   }
-
 }
