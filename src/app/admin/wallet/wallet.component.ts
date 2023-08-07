@@ -1,21 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { EditWalletComponent } from './edit-wallet/edit-wallet.component';
 import { WalletService } from 'src/app/services/wallet.service';
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.scss']
+  styleUrls: ['./wallet.component.scss'],
 })
-export class WalletComponent {
+export class WalletComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
@@ -25,7 +30,8 @@ export class WalletComponent {
     'balance',
     'type',
     //'status',
-    'action'];
+    'action',
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   WalletList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,48 +43,54 @@ export class WalletComponent {
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   totalItems: number;
-  statusUpdate: string
+  statusUpdate: string;
   constructor(
     private service: WalletService,
     public matdialog: MatDialog,
     //private dataService: DataService,
     // public isLoading: LoaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private title: Title,
+    private meta: Meta
   ) {
-
-    this.getWalletList()
+    this.getWalletList();
   }
 
+  ngOnInit(): void {
+    this.title.setTitle('Danh sách ví | ' + environment.siteName);
+    this.meta.addTag({
+      name: 'description',
+      content: 'Danh sách ví - ' + environment.siteName,
+    });
+  }
 
   getWalletList() {
-    let apiPageNumber = this.pageNumber + 1
-    this.service.getListWallets(apiPageNumber, this.pageSize).subscribe((list) => {
-      this.WalletList = list.data
-      this.dataSource = new MatTableDataSource(list.data);
-      this.totalItems = list.totalCount;
-
-    })
+    let apiPageNumber = this.pageNumber + 1;
+    this.service
+      .getListWallets(apiPageNumber, this.pageSize)
+      .subscribe((list) => {
+        this.WalletList = list.data;
+        this.dataSource = new MatTableDataSource(list.data);
+        this.totalItems = list.totalCount;
+      });
   }
   onPageChange(event: PageEvent) {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getWalletList();
   }
-  getWalletPage(pageIndex: number, pageSize: number,) {
+  getWalletPage(pageIndex: number, pageSize: number) {
     // this.service.getListWalletPage(pageIndex, pageSize).subscribe((list) => {
-
     //   this.dataSource = new MatTableDataSource(list.result.result.doc);
     //   console.log(this.dataSource,'lít')
     //   this.dataSource.paginator = this.paginator;
     //   this.dataSource.sort = this.sort;
-
     // })
   }
   getWalletById(id: string) {
     // this.service.findWalletById(id).subscribe((s) => {
     //   this.Wallet = s.result;
     // });
-
     // return this.Wallet;
   }
   addWallet() {
@@ -112,19 +124,18 @@ export class WalletComponent {
   }
 
   updatWallet(id: string, status: string) {
-    this.statusUpdate = status === "ACTIVE" ? "INACTIVE" : "ACTIVE"
+    this.statusUpdate = status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
     const edit = {
-      status: this.statusUpdate
-    }
+      status: this.statusUpdate,
+    };
     this.service.updateWalletByID(id, edit).subscribe((s) => {
-      this.snackBar.open("Cập nhật trạng thái thành công", "Đóng", {
+      this.snackBar.open('Cập nhật trạng thái thành công', 'Đóng', {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
-        duration: 1000
+        duration: 1000,
       });
 
       this.getWalletList();
-    })
-
+    });
   }
 }

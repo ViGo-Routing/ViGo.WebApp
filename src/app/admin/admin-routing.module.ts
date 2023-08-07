@@ -12,24 +12,35 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { UserLicenseComponent } from './user-license/user-license.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'route', component: RouteComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'vehicle', component: VehiclesComponent, canActivate: [AuthGuard] },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
-  { path: 'user-license', component: UserLicenseComponent, canActivate: [AuthGuard] },
-  { path: 'promotion', component: PromotionComponent, canActivate: [AuthGuard] },
+  {
+    path: 'user-license',
+    component: UserLicenseComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'promotion',
+    component: PromotionComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
-
-
+  { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

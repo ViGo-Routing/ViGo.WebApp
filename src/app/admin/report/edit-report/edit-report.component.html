@@ -1,11 +1,6 @@
 <div class="modal-header">
   <h2 class="modal-title">Xác nhận báo cáo</h2>
-  <i
-    (click)="cancel()"
-    aria-label="Close"
-    class="btn-close"
-    data-bs-dismiss="modal"
-  ></i>
+  <i (click)="cancel()" aria-label="Close" class="btn-close"></i>
 </div>
 <div class="modal-body">
   <form
@@ -52,6 +47,7 @@
       <button
         id="btnCancel"
         mat-raised-button
+        color="secondary"
         class="btn negative"
         (click)="cancel()"
       >
@@ -61,6 +57,7 @@
         id="btnSave"
         class="btn positive"
         mat-raised-button
+        color="primary"
         (click)="update()"
         [disabled]="!editForm.valid"
       >

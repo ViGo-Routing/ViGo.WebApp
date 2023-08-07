@@ -1,4 +1,3 @@
-
 import {
   animate,
   state,
@@ -46,7 +45,6 @@ export class SiderbarsComponent implements OnInit {
   expandedChildElement: NavLink | null | undefined;
   listCategories: any;
   constructor(private route: ActivatedRoute, private router: Router) {
-
     const url: string = this.router.url;
     const navs: MenuNav = menuV1;
     this.navLinks = navs.child;
@@ -68,13 +66,13 @@ export class SiderbarsComponent implements OnInit {
       }
     });
     console.log('navLinks: ' + this.navLinks);
-
+    // console.log(this.navLinks);
   }
   isActive(currentRoute: any[], exact = true): boolean {
     return this.router.isActive(this.router.createUrlTree(currentRoute), exact);
   }
   onItemSelected(item: any) {
-    console.log(item)
+    console.log(item);
     if (!item.active) {
       this.navLinks.forEach((a: any) => {
         if (this.navLinks.includes(item)) {
@@ -107,10 +105,9 @@ export class SiderbarsComponent implements OnInit {
     item.active = !item.active;
   }
   drop(value: any) {
-    console.log("drop sidebar: ", value);
-
+    console.log('drop sidebar: ', value);
   }
   checkDrop(value: any) {
-    console.log("drop sidebar: ", value);
+    console.log('drop sidebar: ', value);
   }
 }

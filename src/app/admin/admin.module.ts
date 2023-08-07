@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouteComponent } from './route/route.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { UserComponent } from './user/user.component';
 import { BookingComponent } from './booking/booking.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
@@ -48,6 +52,9 @@ import { StorageModule } from '@angular/fire/storage';
 import { SharedFireModule } from '../shared/shared-fired.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SettingComponent } from './setting/setting.component';
+import { EditSettingComponent } from './setting/edit-setting/edit-setting.component';
+import { CustomPaginationIntl } from '../shared/CustomPaginatorIntl';
 
 @NgModule({
   declarations: [
@@ -73,6 +80,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UserLicenseComponent,
     CreateUserLicenseComponent,
     DashboardComponent,
+    SettingComponent,
+    EditSettingComponent,
   ],
   imports: [
     CommonModule,
@@ -103,6 +112,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: '	en-US' },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide: MatPaginatorIntl, useClass: CustomPaginationIntl },
   ],
 })
 export class AdminModule {}

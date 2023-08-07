@@ -14,8 +14,8 @@ export const environment = {
     measurementId: 'G-TK6RXTT4LV',
   },
   production: true,
-  apiUrl: "https://vigo-api.azurewebsites.net/",
-
+  apiUrl: 'https://vigo-api.azurewebsites.net/',
+  siteName: 'ViGo Admin',
 };
 
 /*

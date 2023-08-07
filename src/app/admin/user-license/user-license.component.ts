@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,13 +13,15 @@ import {
 import { UserLicenseService } from 'src/app/services/user-license.service';
 import { CreateUserLicenseComponent } from './create-user-license/create-user-license.component';
 import { ImageDialogComponent } from '../dialog/image-dialog/image-dialog.component';
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-license',
   templateUrl: './user-license.component.html',
   styleUrls: ['./user-license.component.scss'],
 })
-export class UserLicenseComponent {
+export class UserLicenseComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
@@ -52,9 +54,19 @@ export class UserLicenseComponent {
     //private dataService: DataService,
     // public isLoading: LoaderService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private title: Title,
+    private meta: Meta
   ) {
     this.getUserLicenseList();
+  }
+
+  ngOnInit(): void {
+    this.title.setTitle('Danh sách giấy tờ | ' + environment.siteName);
+    this.meta.addTag({
+      name: 'description',
+      content: 'Danh sách giấy tờ - ' + environment.siteName,
+    });
   }
 
   getUserLicenseList() {

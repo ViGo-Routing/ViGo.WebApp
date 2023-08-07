@@ -3,25 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { ErrorService } from './error.service';
 import { environment } from 'src/environments/environment.prod';
+import { isValidToken } from '../shared/jwtUtils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   host: string = environment.apiUrl;
-  apiHost = `${this.host}api/Authenticate/Web/Login`
-  constructor(private http: HttpClient, private errorSvc: ErrorService) {
-
-  }
-
+  apiHost = `${this.host}api/Authenticate/Web/Login`;
+  constructor(private http: HttpClient, private errorSvc: ErrorService) {}
 
   ProceedLogin(UserCred: any) {
-    return this.http.post(this.apiHost, UserCred).pipe(
-      catchError((error) => this.errorSvc.handleError(error))
-    );
+    return this.http
+      .post(this.apiHost, UserCred)
+      .pipe(catchError((error) => this.errorSvc.handleError(error)));
   }
   IsLoggedIn() {
-    return localStorage.getItem('token') != null;
+    return isValidToken();
   }
   IsNotLogin() {
     return localStorage.getItem('is_login') != 'invalid';
