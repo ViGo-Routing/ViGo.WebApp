@@ -79,7 +79,7 @@
                 [checked]="row.status === 'ACTIVE'"
                 [indeterminate]="row.status === 'BANNED'"
                 (change)="updatUserStatus(row.id, row.status)"
-                >{{ row.status }}</mat-checkbox
+                >{{ getUserStatus(row.status) }}</mat-checkbox
               >
             </td>
           </ng-container>

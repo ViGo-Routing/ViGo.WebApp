@@ -50,7 +50,7 @@ const colors: any = {
   templateUrl: './routine.component.html',
   styleUrls: ['./routine.component.scss'],
 })
-export class RoutineComponent {
+export class RoutineComponent implements OnInit {
   routine: any;
   routeStation: any;
   viewDate: Date = new Date();
@@ -87,7 +87,7 @@ export class RoutineComponent {
   createCalendarEvents(stations: any, routines: any[]): CalendarEvent[] {
     console.log('routines', routines);
     console.log('stations', stations.startStation.name);
-    const events: CalendarEvent[] = [];
+    let events: CalendarEvent[] = [];
     if (routines) {
       routines.forEach((routine) => {
         // console.log('routinesaaaaaaaaaaa', routine.startTime);
@@ -96,14 +96,14 @@ export class RoutineComponent {
         ).toDate();
         const event: CalendarEvent = {
           start: startDateTime,
-          title: `Trạm đi: ${stations.startStation.name} Trạm về: ${stations.endStation.name}`,
+          title: `${stations.startStation.name} - ${stations.endStation.name}`,
           color: {
             primary: routine.status === 'ACTIVE' ? '#009292' : '#ad2121',
             secondary: routine.status === 'ACTIVE' ? '#00A1A11F' : '#FAE3E3',
           },
           meta: {
-            name: stations.name,
-            address: stations.address,
+            // name: stations.name,
+            // address: stations.address,
             status: routine.status,
             id: this.data,
           },

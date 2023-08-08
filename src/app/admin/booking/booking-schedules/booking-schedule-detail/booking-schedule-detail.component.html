@@ -1,0 +1,86 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Chi tiết chuyến đi</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row" *ngIf="bookingDetail">
+      <div class="span-gr">
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Điểm đi:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.startStation != null
+              ? bookingDetail.startStation.name +
+                ", " +
+                bookingDetail.startStation.address
+              : "Không có dữ liệu"
+          }}</span>
+        </div>
+        <!-- <div class="row detail-row">
+                <span class="col-md-4 detail-key">Địa chỉ điểm đi:</span>
+                <span class="col-md-8 detail-value">{{
+                  booking.customerRoute?.startStation.address != null
+                    ? booking.customerRoute.startStation.address
+                    : "Không có dữ liệu"
+                }}</span>
+              </div> -->
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Điểm đến:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.endStation != null
+              ? bookingDetail.endStation.name +
+                ", " +
+                bookingDetail.endStation.address
+              : "Không có dữ liệu"
+          }}</span>
+        </div>
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Ngày đi:</span>
+          <span class="col-md-8 detail-value">{{ bookingDetail.date }}</span>
+        </div>
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Giờ đón:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.customerDesiredPickupTime
+          }}</span>
+        </div>
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Tài xế:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.driver != null
+              ? bookingDetail.driver.name
+              : "Chưa có tài xế"
+          }}</span>
+        </div>
+
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Tổng giá tiền:</span>
+          <span class="col-md-8 detail-value">{{
+            vndFormat(bookingDetail.price)
+          }}</span>
+        </div>
+
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Điểm đánh giá:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.rate ?? "Chưa có dữ liệu"
+          }}</span>
+        </div>
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Đánh giá chi tiết:</span>
+          <span class="col-md-8 detail-value">{{
+            bookingDetail.feedback ?? "Chưa có dữ liệu"
+          }}</span>
+        </div>
+
+        <div class="row detail-row">
+          <span class="col-md-4 detail-key">Trạng thái:</span>
+          <span class="col-md-8 detail-value">{{
+            getBookingDetailStatus(bookingDetail.status)
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

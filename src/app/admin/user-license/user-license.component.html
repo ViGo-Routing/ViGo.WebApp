@@ -73,7 +73,7 @@
               Loại giấy tờ
             </th>
             <td mat-cell *matCellDef="let row" data-label="Loại giấy phép">
-              {{ row.licenseType }}
+              {{ getUserLicenseType(row.licenseType) }}
             </td>
           </ng-container>
           <ng-container matColumnDef="phone">
@@ -135,7 +135,7 @@
                 [checked]="row.status == 'APPROVED'"
                 [indeterminate]="row.status === 'REJECTED'"
                 (change)="updatUserLicense(row.id, row.status)"
-                >{{ row.status }}</mat-checkbox
+                >{{ getUserLicenseStatus(row.status) }}</mat-checkbox
               >
             </td>
           </ng-container>

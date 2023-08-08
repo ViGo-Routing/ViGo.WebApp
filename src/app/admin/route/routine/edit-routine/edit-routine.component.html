@@ -31,14 +31,14 @@
         <input
           matInput
           type="time"
-          name="week"
-          formControlName="startTime"
-          placeholder="Start Time"
+          name="pickupTime"
+          formControlName="pickupTime"
+          placeholder="Pickup Time"
         />
       </mat-form-field>
 
       <!-- End Time -->
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Thời gian kết thúc</mat-label>
         <input
           matInput
@@ -47,7 +47,7 @@
           formControlName="endTime"
           placeholder="End Time"
         />
-      </mat-form-field>
+      </mat-form-field> -->
       <!-- <mat-form-field appearance="outline">
         <mat-label>Ngày đi</mat-label>
         <input
@@ -95,11 +95,8 @@
       <mat-form-field appearance="outline">
         <label>Trạng thái: </label>
         <mat-select formControlName="status">
-          <mat-option value="PENDING">PENDING</mat-option>
-          <mat-option value="ACTIVE">ACTIVE</mat-option>
-          <mat-option value="INACTIVE">INACTIVE</mat-option>
-          <mat-option value="UNVERIFIED">UNVERIFIED</mat-option>
-          <mat-option value="REJECTED">REJECTED</mat-option>
+          <mat-option value="ACTIVE">Đang hoạt động</mat-option>
+          <mat-option value="INACTIVE">Không hoạt động</mat-option>
         </mat-select>
         <mat-error *ngIf="updateRoutineForm.controls['status']"
           >Trạng thái là phần bắt buộc</mat-error

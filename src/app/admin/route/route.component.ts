@@ -29,9 +29,9 @@ export class RouteComponent implements OnInit {
     'routeName',
     'startStationName',
     'endStationName',
-    'emailUser',
+    // 'emailUser',
     'phoneUser',
-    'gender',
+    // 'gender',
     'status',
     'action',
   ];
@@ -157,5 +157,14 @@ export class RouteComponent implements OnInit {
       this.getRouteList();
     });
     this.selection.clear();
+  }
+
+  getRouteStatus(status: 'ACTIVE' | 'INACTIVE') {
+    switch (status) {
+      case 'ACTIVE':
+        return 'Đang hoạt động';
+      case 'INACTIVE':
+        return 'Không hoạt động';
+    }
   }
 }

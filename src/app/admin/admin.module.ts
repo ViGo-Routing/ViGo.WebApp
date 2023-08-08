@@ -60,6 +60,8 @@ import { DetailFareComponent } from './fare/detail-fare/detail-fare.component';
 import { MatListModule } from '@angular/material/list';
 import { UpdateFareComponent } from './fare/update-fare/update-fare.component';
 import { MatIconModule } from '@angular/material/icon';
+import { BookingSchedulesComponent } from './booking/booking-schedules/booking-schedules.component';
+import { BookingScheduleDetailComponent } from './booking/booking-schedules/booking-schedule-detail/booking-schedule-detail.component';
 @NgModule({
   declarations: [
     RouteComponent,
@@ -89,6 +91,8 @@ import { MatIconModule } from '@angular/material/icon';
     FareComponent,
     DetailFareComponent,
     UpdateFareComponent,
+    BookingSchedulesComponent,
+    BookingScheduleDetailComponent,
   ],
   imports: [
     CommonModule,

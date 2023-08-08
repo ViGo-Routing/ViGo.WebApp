@@ -142,4 +142,22 @@ export class WalletComponent implements OnInit {
       this.getWalletList();
     });
   }
+
+  getWalletType(type: 'PERSONAL' | 'SYSTEM') {
+    switch (type) {
+      case 'PERSONAL':
+        return 'Ví cá nhân';
+      case 'SYSTEM':
+        return 'Ví hệ thống';
+    }
+  }
+
+  getWalletStatus(status: 'ACTIVE' | 'INACTIVE') {
+    switch (status) {
+      case 'ACTIVE':
+        return 'Đang hoạt động';
+      case 'INACTIVE':
+        return 'Không hoạt động';
+    }
+  }
 }

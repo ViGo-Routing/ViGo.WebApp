@@ -38,7 +38,7 @@
               Loại cấu hình
             </th>
             <td mat-cell *matCellDef="let row" data-label="Type">
-              {{ row.type }}
+              {{ getSettingType(row.type) }}
             </td>
           </ng-container>
           <ng-container matColumnDef="data-type">
@@ -46,7 +46,7 @@
               Loại dữ liệu
             </th>
             <td mat-cell *matCellDef="let row" data-label="DataType">
-              {{ row.dataType }}
+              {{ getSettingDataType(row.dataType) }}
             </td>
           </ng-container>
 
@@ -55,7 +55,7 @@
               Đơn vị tính
             </th>
             <td mat-cell *matCellDef="let row" data-label="DataUnit">
-              {{ row.dataUnit }}
+              {{ getSettingDataUnit(row.dataUnit) }}
             </td>
           </ng-container>
 

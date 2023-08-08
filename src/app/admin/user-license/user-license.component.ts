@@ -139,4 +139,28 @@ export class UserLicenseComponent implements OnInit {
       width: '50vw',
     });
   }
+
+  getUserLicenseType(
+    type: 'IDENTIFICATION' | 'DRIVER_LICENSE' | 'VEHICLE_REGISTRATION'
+  ) {
+    switch (type) {
+      case 'DRIVER_LICENSE':
+        return 'Giấy phép lái xe';
+      case 'IDENTIFICATION':
+        return 'CCCD / CMND';
+      case 'VEHICLE_REGISTRATION':
+        return 'Giấy đăng ký sử dụng xe';
+    }
+  }
+
+  getUserLicenseStatus(status: 'PENDING' | 'APPROVED' | 'REJECTED') {
+    switch (status) {
+      case 'APPROVED':
+        return 'Đã duyệt';
+      case 'PENDING':
+        return 'Đang chờ duyệt';
+      case 'REJECTED':
+        return 'Bị từ chối';
+    }
+  }
 }

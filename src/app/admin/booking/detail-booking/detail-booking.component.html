@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-    <h2 class="modal-title">Chi tiết chuyến đi</h2>
+    <h2 class="modal-title">Chi tiết hành trình</h2>
     <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
   </div>
 
@@ -11,94 +11,104 @@
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Tên khách hàng:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customer.name != null
+              booking.customer?.name != null
                 ? booking.customer.name
                 : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
-            <span class="col-md-4 detail-key">Email khách hàng:</span>
+            <span class="col-md-4 detail-key">SĐT khách hàng:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customer.email != null
-                ? booking.customer.email
+              booking.customer?.phone != null
+                ? booking.customer.phone
                 : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Giới tính:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customer.gender != false ? "Nữ" : "Nam"
-            }}</span>
-          </div>
-          <div class="row detail-row">
-            <span class="col-md-4 detail-key">Tên trạm đi:</span>
-            <span class="col-md-8 detail-value">{{
-              booking.customerRoute.startStation.name != null
-                ? booking.customerRoute.startStation.name
+              booking.customer?.gender == true
+                ? "Nam"
+                : booking.customer?.gender == false
+                ? "Nữ"
                 : "Không có dữ liệu"
             }}</span>
           </div>
           <div class="row detail-row">
-            <span class="col-md-4 detail-key">Địa chỉ trạm đi:</span>
+            <span class="col-md-4 detail-key">Điểm đi:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customerRoute.startStation.address != null
+              booking.customerRoute != null
+                ? booking.customerRoute.startStation.name +
+                  ", " +
+                  booking.customerRoute.startStation.address
+                : "Không có dữ liệu"
+            }}</span>
+          </div>
+          <!-- <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ điểm đi:</span>
+            <span class="col-md-8 detail-value">{{
+              booking.customerRoute?.startStation.address != null
                 ? booking.customerRoute.startStation.address
                 : "Không có dữ liệu"
             }}</span>
-          </div>
+          </div> -->
           <div class="row detail-row">
-            <span class="col-md-4 detail-key">Tên trạm đến:</span>
+            <span class="col-md-4 detail-key">Điểm đến:</span>
             <span class="col-md-8 detail-value">{{
-              booking.customerRoute.endStation.address != null
-                ? booking.customerRoute.endStation.name
+              booking.customerRoute != null
+                ? booking.customerRoute.endStation.name +
+                  ", " +
+                  booking.customerRoute.endStation.address
                 : "Không có dữ liệu"
             }}</span>
           </div>
-          <div class="row detail-row">
-            <span class="col-md-4 detail-key">Địa chỉ trạm đến: </span>
+          <!-- <div class="row detail-row">
+            <span class="col-md-4 detail-key">Địa chỉ điểm đến: </span>
             <span class="col-md-8 detail-value">{{
-              booking.customerRoute.endStation.address != null
+              booking.customerRoute?.endStation.address != null
                 ? booking.customerRoute.endStation.address
                 : "Không có dữ liệu"
             }}</span>
-          </div>
-          <div class="row detail-row">
+          </div> -->
+          <!-- <div class="row detail-row">
             <span class="col-md-4 detail-key">Số ngày đi trong tuần:</span>
             <span class="col-md-8 detail-value">{{
               booking.daysOfWeek != null
                 ? booking.daysOfWeek
                 : "Không có dữ liệu"
             }}</span>
-          </div>
+          </div> -->
           <div class="row detail-row">
             <span class="col-md-4 detail-key">Tổng giá tiền:</span>
             <span class="col-md-8 detail-value">{{
               booking.totalPrice != null
-                ? booking.totalPrice + " VND"
+                ? vndFormat(booking.totalPrice)
                 : "Không có dữ liệu"
             }}</span>
           </div>
-          <div class="row detail-row">
+          <!-- <div class="row detail-row">
             <span class="col-md-4 detail-key">Giá khuyến mãi:</span>
             <span class="col-md-8 detail-value">{{
               booking.priceAfterDiscount != null
                 ? booking.priceAfterDiscount + " VND"
                 : "Không có dữ liệu"
             }}</span>
-          </div>
-          <div class="row detail-row">
+          </div> -->
+          <!-- <div class="row detail-row">
             <span class="col-md-4 detail-key">Phương thức thanh toán:</span>
             <span class="col-md-8 detail-value">{{
               booking.paymentMethod != null
                 ? booking.paymentMethod
                 : "Không có dữ liệu"
             }}</span>
-          </div>
+          </div> -->
           <div class="row detail-row">
-            <span class="col-md-4 detail-key">Khoảng thời gian:</span>
+            <span class="col-md-4 detail-key"
+              >Thời gian di chuyển dự kiến:</span
+            >
             <span class="col-md-8 detail-value">{{
               booking.duration != null
-                ? booking.duration + " minutes"
+                ? booking.duration + " phút"
                 : "Không có dữ liệu"
             }}</span>
           </div>

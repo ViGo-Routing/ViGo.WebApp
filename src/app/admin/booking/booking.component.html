@@ -45,7 +45,7 @@
           </ng-container>
           <!-- <ng-container matColumnDef="startRouteStation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đi
+              Tên điểm đi
             </th>
             <td mat-cell *matCellDef="let row" data-label="startRouteStation">
               {{ row.startRouteStation.name }}
@@ -54,7 +54,7 @@
 
           <ng-container matColumnDef="endRouteStation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đến
+              Tên điểm đến
             </th>
             <td mat-cell *matCellDef="let row" data-label="End Route Station">
               {{ row.endRouteStation.name }}
@@ -86,7 +86,7 @@
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
             <td mat-cell *matCellDef="let row" data-label="Status">
-              {{ row.status }}
+              {{ getBookingStatus(row.status) }}
             </td>
           </ng-container>
 
@@ -101,6 +101,15 @@
                 (click)="detailBooking(element.id)"
               >
                 <i class="far fa-list-alt"></i>
+              </button>
+              <button
+                id="btnBookingSchedules"
+                class="btn"
+                matTooltip="Xem lịch trình"
+                matTooltipPosition="above"
+                (click)="openBookingSchedules(element)"
+              >
+                <i class="far fa-calendar-alt"></i>
               </button>
             </td>
           </ng-container>
