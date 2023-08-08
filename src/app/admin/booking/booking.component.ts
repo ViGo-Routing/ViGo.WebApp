@@ -12,6 +12,7 @@ import { DetailBookingComponent } from './detail-booking/detail-booking.componen
 import { SelectionModel } from '@angular/cdk/collections';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { vndFormat } from 'src/app/shared/numberUtils';
 
 @Component({
   selector: 'app-booking',
@@ -26,8 +27,8 @@ export class BookingComponent implements OnInit {
     'phoneUser',
     // 'startRouteStation',
     // 'endRouteStation',
-    'priceAfterDiscount',
-    'paymentMethod',
+    'price',
+    // 'paymentMethod',
     'vehicleName',
     'status',
     'action',
@@ -43,6 +44,8 @@ export class BookingComponent implements OnInit {
   length = 500;
   pageSizeOptions = [5, 10, 25];
   showFirstLastButtons = true;
+
+  vndFormat = vndFormat;
 
   constructor(
     private service: BookingService,

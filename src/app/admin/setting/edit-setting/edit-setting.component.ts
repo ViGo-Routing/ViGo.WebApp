@@ -1,6 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { SettingService } from 'src/app/services/setting.service';
 
 @Component({
@@ -11,11 +16,15 @@ import { SettingService } from 'src/app/services/setting.service';
 export class EditSettingComponent implements OnInit {
   editSettingForm!: FormGroup;
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   constructor(
     public dialogRef: MatDialogRef<EditSettingComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private settingService: SettingService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     this.myForm();
   }
@@ -44,7 +53,11 @@ export class EditSettingComponent implements OnInit {
       this.settingService
         .updateSetting(this.data.key, this.editSettingForm.value.value)
         .subscribe((s) => {
-          console.log('Thành công!');
+          this.snackBar.open('Chỉnh sửa thành công', 'Đóng', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 1000,
+          });
           this.dialogRef.close();
         });
     }

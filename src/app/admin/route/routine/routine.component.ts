@@ -1,9 +1,33 @@
-
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { RouteService } from 'src/app/services/route.service';
-import { Component, OnInit, ViewChild, TemplateRef, ViewEncapsulation, Inject, } from '@angular/core';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from 'angular-calendar';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, } from 'date-fns';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ViewEncapsulation,
+  Inject,
+} from '@angular/core';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+} from 'angular-calendar';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+} from 'date-fns';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { EditRoutineComponent } from './edit-routine/edit-routine.component';
@@ -24,84 +48,85 @@ const colors: any = {
 @Component({
   selector: 'app-routine',
   templateUrl: './routine.component.html',
-  styleUrls: ['./routine.component.scss']
+  styleUrls: ['./routine.component.scss'],
 })
 export class RoutineComponent {
   routine: any;
   routeStation: any;
   viewDate: Date = new Date();
-  events: CalendarEvent[] = [
-  ];
+  events: CalendarEvent[] = [];
   constructor(
     public dialogRef: MatDialogRef<RoutineComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private service: RouteService,
-    public matdialog: MatDialog,
-  ) { console.log(data); }
+    public matdialog: MatDialog
+  ) {
+    console.log(data);
+  }
 
   getRoutineByRouteId(id: string) {
-
     this.service.getRoutesById(id).subscribe((result) => {
       this.routeStation = result;
       this.service.getRoutineByRouteId(id).subscribe((result) => {
-        this.routine = result.data;
-        this.events = this.createCalendarEvents(this.routeStation, this.routine);
-      })
-    })
-
-
+        this.routine = result;
+        this.events = this.createCalendarEvents(
+          this.routeStation,
+          this.routine
+        );
+      });
+    });
   }
   cancel() {
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
-    this.getRoutineByRouteId(this.data)
+    this.getRoutineByRouteId(this.data);
   }
 
-
   createCalendarEvents(stations: any, routines: any[]): CalendarEvent[] {
-    console.log("routines", routines)
-    console.log("stations", stations.startStation.name)
+    console.log('routines', routines);
+    console.log('stations', stations.startStation.name);
     const events: CalendarEvent[] = [];
     if (routines) {
-      routines.forEach(routine => {
-        console.log("routinesaaaaaaaaaaa", routine.startTime)
-        const startDateTime = moment(`${routine.routineDate} ${routine.pickupTime}`).toDate();
+      routines.forEach((routine) => {
+        // console.log('routinesaaaaaaaaaaa', routine.startTime);
+        const startDateTime = moment(
+          `${routine.routineDate} ${routine.pickupTime}`
+        ).toDate();
         const event: CalendarEvent = {
           start: startDateTime,
           title: `Trạm đi: ${stations.startStation.name} Trạm về: ${stations.endStation.name}`,
           color: {
             primary: routine.status === 'ACTIVE' ? '#009292' : '#ad2121',
             secondary: routine.status === 'ACTIVE' ? '#00A1A11F' : '#FAE3E3',
-
           },
           meta: {
             name: stations.name,
             address: stations.address,
             status: routine.status,
-            id: this.data
-          }
+            id: this.data,
+          },
         };
         events.push(event);
-
       });
     }
-    console.log(events)
+    console.log(events);
     return events;
   }
 
   @ViewChild('modalContent', { static: true })
-
   modalContent!: TemplateRef<any>;
 
   CalendarView = CalendarView;
   view: CalendarView = CalendarView.Week;
 
-  modalData!: any | {
-    action: string;
-    event: CalendarEvent;
-  };
+  modalData!:
+    | any
+    | {
+        action: string;
+        event: CalendarEvent;
+      };
 
   actions: CalendarEventAction[] = [
     {
@@ -123,10 +148,7 @@ export class RoutineComponent {
 
   refresh: Subject<any> = new Subject();
 
-
   activeDayIsOpen: boolean = false;
-
-
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -171,11 +193,11 @@ export class RoutineComponent {
         width: '500px',
 
         position: { top: '5%' },
-      }).afterClosed()
+      })
+      .afterClosed()
       .subscribe(() => {
-        this.getRoutineByRouteId(this.data)
+        this.getRoutineByRouteId(this.data);
       });
-
   }
   newEvent!: CalendarEvent;
   addEvent(): void {
@@ -186,7 +208,7 @@ export class RoutineComponent {
       color: colors.red,
       draggable: true,
       actions: this.actions,
-    }
+    };
     this.events.push(this.newEvent);
 
     this.handleEvent('Add new event', this.newEvent);
@@ -236,5 +258,4 @@ export class RoutineComponent {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
-
 }
