@@ -30,8 +30,9 @@ export class ReportComponent implements OnInit {
     'title',
     'content',
     'name',
-    'feedback',
+    // 'feedback',
     'type',
+    'status',
     'action',
   ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -172,4 +173,26 @@ export class ReportComponent implements OnInit {
   //     })
   //   })
   // }
+
+  getReportStatus(status: 'PENDING' | 'PROCESSED' | 'DENIED') {
+    switch (status) {
+      case 'DENIED':
+        return 'Bị từ chối';
+      case 'PENDING':
+        return 'Đang chờ xử lý';
+      case 'PROCESSED':
+        return 'Đã xử lý';
+    }
+  }
+
+  getReportType(type: 'DRIVER_NOT_COMING' | 'BOOKER_NOT_COMING' | 'OTHER') {
+    switch (type) {
+      case 'BOOKER_NOT_COMING':
+        return 'Khách hàng không đến';
+      case 'DRIVER_NOT_COMING':
+        return 'Tài xế không đến';
+      case 'OTHER':
+        return 'Khác';
+    }
+  }
 }

@@ -1,0 +1,313 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Cập nhật biểu phí</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
+  </div>
+
+  <div class="modal-body">
+    <form id="editFareForm" class="input-infor mt-1">
+      <div class="row">
+        <div class="col-12 input-infor">
+          <mat-form-field appearance="outline">
+            <mat-label>Loại phương tiện</mat-label>
+            <input
+              id="txtVehicleType"
+              matInput
+              placeholder="Loại phương tiện"
+              required
+              [value]="data.vehicleType.name"
+              [disabled]="true"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 input-infor">
+          <mat-form-field appearance="outline" class="mb-0">
+            <mat-label>Số km đầu tiên</mat-label>
+            <input
+              id="txtBaseDistance"
+              name="baseDistance"
+              min="0"
+              #baseDistance="ngModel"
+              matInput
+              type="number"
+              placeholder="Số km đầu tiên"
+              required
+              [(ngModel)]="data.baseDistance"
+              (ngModelChange)="onBaseDistanceChange($event)"
+            />
+            <mat-error
+              *ngIf="
+                baseDistance.errors &&
+                (baseDistance.dirty || baseDistance.touched)
+              "
+            >
+              Số km phải lớn hơn 0
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-5 input-infor">
+          <mat-form-field appearance="outline" class="mb-0">
+            <mat-label
+              >Giá tiền cho {{ data.baseDistance }} km đầu tiên (đơn vị tính:
+              đồng)</mat-label
+            >
+            <input
+              id="txtBasePrice"
+              name="basePrice"
+              type="number"
+              min="1000"
+              matInput
+              #basePrice="ngModel"
+              type="number"
+              [placeholder]="
+                'Giá tiền cho ' + (data.baseDistance ?? '') + ' km đầu tiên'
+              "
+              required
+              [(ngModel)]="data.basePrice"
+            />
+            <mat-error
+              *ngIf="basePrice.errors && (basePrice.dirty || basePrice.touched)"
+            >
+              Giá tiền phải ít nhất là {{ vndFormat(1000) }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 pt-3">
+          <button mat-stroked-button color="primary" (click)="addPolicy()">
+            Thêm mốc tính phí
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="row mt-3"
+        *ngIf="
+          data.farePolicies.length == 1 &&
+          data.farePolicies[0].maxDistance == null
+        "
+      >
+        <div class="col-lg-2 pt-4 text-end">
+          Từ <strong>{{ data.baseDistance }}</strong> km trở lên:
+        </div>
+
+        <div class="col-lg-4 input-infor">
+          <mat-form-field appearance="outline" class="mb-0">
+            <mat-label>Giá tiền cho mỗi km (đơn vị tính: đồng)</mat-label>
+            <input
+              id="txtPricePerKm_one"
+              name="pricePerKm_one"
+              type="number"
+              min="1000"
+              matInput
+              #pricePerKm_one="ngModel"
+              type="number"
+              [placeholder]="'Giá tiền cho mỗi km'"
+              required
+              [(ngModel)]="data.farePolicies[0].pricePerKm"
+            />
+            <mat-error
+              *ngIf="
+                pricePerKm_one.errors &&
+                (pricePerKm_one.dirty || pricePerKm_one.touched)
+              "
+            >
+              Giá tiền phải ít nhất là {{ vndFormat(1000) }} / km
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div *ngIf="data.farePolicies.length > 1">
+        <div
+          *ngFor="
+            let policy of data.farePolicies;
+            index as policyIndex;
+            trackBy: trackByFn
+          "
+        >
+          <div
+            class="row mt-3"
+            *ngIf="policyIndex < data.farePolicies.length - 1"
+          >
+            <div class="col-lg-2 pt-4 text-end">
+              Từ <strong>{{ policy.minDistance }}</strong> km đến
+            </div>
+
+            <div class="col-lg-4 input-infor">
+              <mat-form-field appearance="outline" class="mb-0">
+                <mat-label>Số km tối đa</mat-label>
+                <input
+                  [id]="'txtMaxDistance_' + policyIndex"
+                  [name]="'maxDistance_' + policyIndex"
+                  [min]="policy.minDistance"
+                  #maxDistance="ngModel"
+                  matInput
+                  type="number"
+                  placeholder="Số km tối đa cho mốc tính phí"
+                  required
+                  [(ngModel)]="policy.maxDistance"
+                  (ngModelChange)="onMaxDistanceChange($event, policyIndex)"
+                />
+                <mat-error
+                  *ngIf="
+                    maxDistance.errors &&
+                    (maxDistance.dirty || maxDistance.touched)
+                  "
+                >
+                  Số km phải lớn hơn 0
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-4 input-infor">
+              <mat-form-field appearance="outline" class="mb-0">
+                <mat-label>Giá tiền cho mỗi km (đơn vị tính: đồng)</mat-label>
+                <input
+                  [id]="'txtPricePerKm_' + policyIndex"
+                  [name]="'pricePerKm_' + policyIndex"
+                  type="number"
+                  min="1000"
+                  matInput
+                  #pricePerKm="ngModel"
+                  type="number"
+                  [placeholder]="'Giá tiền cho mỗi km'"
+                  required
+                  [(ngModel)]="policy.pricePerKm"
+                />
+                <mat-error
+                  *ngIf="
+                    pricePerKm.errors &&
+                    (pricePerKm.dirty || pricePerKm.touched)
+                  "
+                >
+                  Giá tiền phải ít nhất là {{ vndFormat(1000) }} / km
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+              <button
+                mat-icon-button
+                color="warn"
+                aria-label="Xóa mốc tính phí"
+                (click)="deletePolicy(policyIndex)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div
+            class="row mt-3"
+            *ngIf="policyIndex == data.farePolicies.length - 1"
+          >
+            <div class="col-lg-2 pt-4 text-end">
+              Từ <strong>{{ policy.minDistance }}</strong> km trở lên:
+            </div>
+
+            <div class="col-lg-4 input-infor">
+              <mat-form-field appearance="outline" class="mb-0">
+                <mat-label>Giá tiền cho mỗi km (đơn vị tính: đồng)</mat-label>
+                <input
+                  [id]="'pricePerKm_' + policyIndex"
+                  [name]="'pricePerKm_' + policyIndex"
+                  type="number"
+                  min="1000"
+                  matInput
+                  #pricePerKm="ngModel"
+                  type="number"
+                  [placeholder]="'Giá tiền cho mỗi km'"
+                  required
+                  [(ngModel)]="policy.pricePerKm"
+                />
+                <mat-error
+                  *ngIf="
+                    pricePerKm.errors &&
+                    (pricePerKm.dirty || pricePerKm.touched)
+                  "
+                >
+                  Giá tiền phải ít nhất là {{ vndFormat(1000) }} / km
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12">
+          <div style="font-size: large">Thông tin biểu phí sau cập nhật</div>
+          <div>
+            <mat-list-item role="listitem">
+              <strong>{{ data.baseDistance }} km đầu tiên: </strong>
+              {{ vndFormat(data.basePrice) }}
+            </mat-list-item>
+            <mat-list-item
+              role="listitem"
+              *ngFor="let policy of data.farePolicies; index as policyIndex"
+            >
+              <div *ngIf="policyIndex < data.farePolicies.length - 1">
+                Từ <strong>{{ policy.minDistance }} km</strong> đến
+                <strong>{{ policy.maxDistance }} km</strong>:
+                {{ vndFormat(policy.pricePerKm) }} / km
+              </div>
+              <div *ngIf="policyIndex == data.farePolicies.length - 1">
+                Từ <strong>{{ policy.minDistance }} km</strong> trở lên:
+                {{ vndFormat(policy.pricePerKm) }} / km
+              </div>
+            </mat-list-item>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="d-inline">km đầu tiên:</div> -->
+    </form>
+
+    <!-- <mat-list role="list">
+      <mat-list-item role="listitem"
+        >Loại phương tiện:
+        <strong>{{ data.vehicleType.name }}</strong>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <strong>{{ data.baseDistance }} km đầu tiên: </strong>
+        {{ vndFormat(data.basePrice) }}
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngFor="let policy of data.farePolicies">
+        <div *ngIf="policy.maxDistance != null">
+          Từ <strong>{{ policy.minDistance }} km</strong> đến
+          <strong>{{ policy.maxDistance }} km</strong>:
+          {{ vndFormat(policy.pricePerKm) }} / km
+        </div>
+        <div *ngIf="policy.maxDistance == null">
+          Từ <strong>{{ policy.minDistance }} km</strong> trở lên:
+          {{ vndFormat(policy.pricePerKm) }} / km
+        </div>
+      </mat-list-item>
+    </mat-list> -->
+
+    <div class="modal-footer">
+      <div class="text-danger" *ngIf="valueError">
+        {{ errorMessage }}
+      </div>
+      <button
+        id="btnCancel"
+        mat-raised-button
+        color="secondary"
+        class="btn negative"
+        (click)="cancel()"
+      >
+        Đóng
+      </button>
+      <button
+        id="btnSave"
+        class="btn positive"
+        mat-raised-button
+        color="primary"
+        (click)="update()"
+      >
+        Lưu
+      </button>
+    </div>
+  </div>
+</div>

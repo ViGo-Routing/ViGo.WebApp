@@ -1,28 +1,32 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BookingService } from 'src/app/services/booking.service';
+import { vndFormat } from 'src/app/shared/numberUtils';
 
 @Component({
   selector: 'app-detail-booking',
   templateUrl: './detail-booking.component.html',
-  styleUrls: ['./detail-booking.component.scss']
+  styleUrls: ['./detail-booking.component.scss'],
 })
 export class DetailBookingComponent {
+  booking: any = {};
+  vndFormat = vndFormat;
 
-  booking: any;
   constructor(
     public dialogRef: MatDialogRef<DetailBookingComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private service: BookingService
-  ) { console.log(data); this.getBookingByID(data) }
+  ) {
+    console.log(data);
+    this.getBookingByID(data);
+  }
 
   getBookingByID(id: string) {
     this.service.getBookingsById(id).subscribe((result) => {
-      this.booking = result
-    })
+      this.booking = result;
+    });
   }
   cancel() {
     this.dialogRef.close();
   }
-
 }

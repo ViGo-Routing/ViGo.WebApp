@@ -79,19 +79,19 @@
 
           <ng-container matColumnDef="phoneUser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Số điện toại chủ xe
+              Số điện thoại chủ xe
             </th>
             <td mat-cell *matCellDef="let row" data-label="Phone User">
               {{ row.user.phone }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="gender">
+          <!-- <ng-container matColumnDef="gender">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Giới tính</th>
             <td mat-cell *matCellDef="let row" data-label="Gender">
               {{ row.user.gender ? "Nam" : "Nữ" }}
             </td>
-          </ng-container>
+          </ng-container> -->
           <ng-container matColumnDef="emailUser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Thư điện tử
@@ -101,12 +101,12 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="status">
+          <!-- <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
             <td mat-cell *matCellDef="let row" data-label="Status">
               {{ row.user.status }}
             </td>
-          </ng-container>
+          </ng-container> -->
 
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef>Hành động</th>
@@ -114,7 +114,7 @@
               <button
                 id="btnDetailVehicle"
                 class="btn"
-                matTooltip="Detail"
+                matTooltip="Chi tiết"
                 matTooltipPosition="above"
                 (click)="detailVehicle(element.id)"
               >

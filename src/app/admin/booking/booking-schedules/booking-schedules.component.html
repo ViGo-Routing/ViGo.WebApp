@@ -1,8 +1,9 @@
 <div>
   <div class="modal-header">
-    <h2 class="modal-title">Lịch trình cho tuyến đường</h2>
+    <h2 class="modal-title">Lịch trình các chuyến đi</h2>
     <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
   </div>
+
   <div class="row text-center">
     <div class="col-md-4 text-center mb-2">
       <div class="btn-group">
@@ -39,6 +40,14 @@
   </div>
 
   <div class="modal-body">
+    <!-- <div class="row mb-3" *ngIf="startStationName && endStationName">
+      <div class="col-md-6">
+        Điểm đi: <strong>{{ startStationName }}</strong>
+      </div>
+      <div class="col-md-6">
+        Điểm đến: <strong>{{ endStationName }}</strong>
+      </div>
+    </div> -->
     <div class="calendar-container">
       <mwl-calendar-week-view
         [viewDate]="viewDate"
@@ -48,24 +57,20 @@
         [weekStartsOn]="1"
         (eventClicked)="handleEvent('Clicked', $event.event)"
       >
-        <!-- [excludeDays]="[-1, 8]"
-        [hourSegments]="1.5"
-        [dayStartHour]="0"
-        [dayEndHour]="23" -->
         <!-- <ng-template #weekViewEventTemplate let-event="event">
-          <div class="cal-event">
-            <div *ngIf="events.length > 0">
-              Tên điểm
-              <p class="event-name">{{ events[0].meta?.name }}</p>
-              Địa chỉ
-              <p class="event-address">{{ events[0].meta?.address }}</p>
+            <div class="cal-event">
+              <div *ngIf="events.length > 0">
+                Tên điểm
+                <p class="event-name">{{ events[0].meta?.name }}</p>
+                Địa chỉ
+                <p class="event-address">{{ events[0].meta?.address }}</p>
+              </div>
+  
+              <div *ngIf="events.length === 0">
+                <p>No events found.</p>
+              </div>
             </div>
-
-            <div *ngIf="events.length === 0">
-              <p>No events found.</p>
-            </div>
-          </div>
-        </ng-template> -->
+          </ng-template> -->
       </mwl-calendar-week-view>
     </div>
   </div>

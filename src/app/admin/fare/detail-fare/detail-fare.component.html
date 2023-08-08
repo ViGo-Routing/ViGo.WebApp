@@ -1,0 +1,42 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Chi tiết biểu phí</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
+  </div>
+
+  <div class="modal-body">
+    <mat-list role="list">
+      <mat-list-item role="listitem"
+        >Loại phương tiện:
+        <strong>{{ data.vehicleType.name }}</strong>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <strong>{{ data.baseDistance }} km đầu tiên: </strong>
+        {{ vndFormat(data.basePrice) }}
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngFor="let policy of data.farePolicies">
+        <div *ngIf="policy.maxDistance != null">
+          Từ <strong>{{ policy.minDistance }} km</strong> đến
+          <strong>{{ policy.maxDistance }} km</strong>:
+          {{ vndFormat(policy.pricePerKm) }} / km
+        </div>
+        <div *ngIf="policy.maxDistance == null">
+          Từ <strong>{{ policy.minDistance }} km</strong> trở lên:
+          {{ vndFormat(policy.pricePerKm) }} / km
+        </div>
+      </mat-list-item>
+    </mat-list>
+
+    <div class="modal-footer">
+      <button
+        id="btnCancel"
+        mat-raised-button
+        color="secondary"
+        class="btn negative"
+        (click)="cancel()"
+      >
+        Đóng
+      </button>
+    </div>
+  </div>
+</div>

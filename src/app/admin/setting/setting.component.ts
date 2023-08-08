@@ -86,4 +86,71 @@ export class SettingComponent implements OnInit {
         this.getSettingList();
       });
   }
+
+  getSettingType(
+    type: 'DEFAULT' | 'TRIP' | 'PENALTY' | 'ROUTE_ROUTINE' | 'PRICING'
+  ) {
+    switch (type) {
+      case 'DEFAULT':
+        return 'Mặc định';
+      case 'PENALTY':
+        return 'Phạt';
+      case 'PRICING':
+        return 'Biểu phí';
+      case 'ROUTE_ROUTINE':
+        return 'Lịch trình';
+      case 'TRIP':
+        return 'Chuyến đi';
+    }
+  }
+
+  getSettingDataType(dataType: 'DEFAULT' | 'INTEGER' | 'DOUBLE' | 'TIME') {
+    switch (dataType) {
+      case 'DEFAULT':
+        return 'Mặc định';
+      case 'DOUBLE':
+        return 'Số thực';
+      case 'INTEGER':
+        return 'Số nguyên';
+      case 'TIME':
+        return 'Thời gian';
+    }
+  }
+
+  getSettingDataUnit(
+    dataUnit:
+      | 'DEFAULT'
+      | 'PERCENT'
+      | 'MINUTES'
+      | 'HOURS'
+      | 'DAYS'
+      | 'METERS'
+      | 'KILOMETERS'
+      | 'TURN'
+      | 'TIME'
+      | 'MB'
+  ) {
+    switch (dataUnit) {
+      case 'DAYS':
+        return 'Ngày';
+      case 'DEFAULT':
+        return 'Mặc định';
+      case 'HOURS':
+        return 'Giờ';
+      case 'KILOMETERS':
+        return 'Km';
+      case 'MB':
+        return 'MB';
+      case 'METERS':
+        return 'Mét';
+      case 'MINUTES':
+        return 'Phút';
+      case 'PERCENT':
+        return 'Phần trăm';
+      case 'TIME':
+        return 'Thời gian';
+      case 'TURN':
+        return 'Lượt';
+    }
+  }
 }

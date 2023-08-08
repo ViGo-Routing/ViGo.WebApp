@@ -122,4 +122,21 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser(dev: any) {}
+
+  getUserStatus(
+    status: 'PENDING' | 'ACTIVE' | 'INACTIVE' | 'BANNED' | 'REJECTED'
+  ) {
+    switch (status) {
+      case 'PENDING':
+        return 'Đang chờ duyệt';
+      case 'ACTIVE':
+        return 'Đang hoạt động';
+      case 'INACTIVE':
+        return 'Không hoạt động';
+      case 'BANNED':
+        return 'Bị khóa';
+      case 'REJECTED':
+        return 'Bị từ chối';
+    }
+  }
 }

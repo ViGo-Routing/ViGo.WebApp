@@ -14,6 +14,7 @@ import { EditWalletComponent } from './edit-wallet/edit-wallet.component';
 import { WalletService } from 'src/app/services/wallet.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { vndFormat } from 'src/app/shared/numberUtils';
 
 @Component({
   selector: 'app-wallet',
@@ -44,6 +45,9 @@ export class WalletComponent implements OnInit {
   showFirstLastButtons = true;
   totalItems: number;
   statusUpdate: string;
+
+  vndFormat = vndFormat;
+
   constructor(
     private service: WalletService,
     public matdialog: MatDialog,
@@ -137,5 +141,23 @@ export class WalletComponent implements OnInit {
 
       this.getWalletList();
     });
+  }
+
+  getWalletType(type: 'PERSONAL' | 'SYSTEM') {
+    switch (type) {
+      case 'PERSONAL':
+        return 'Ví cá nhân';
+      case 'SYSTEM':
+        return 'Ví hệ thống';
+    }
+  }
+
+  getWalletStatus(status: 'ACTIVE' | 'INACTIVE') {
+    switch (status) {
+      case 'ACTIVE':
+        return 'Đang hoạt động';
+      case 'INACTIVE':
+        return 'Không hoạt động';
+    }
   }
 }

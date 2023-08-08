@@ -78,7 +78,7 @@
 
           <ng-container matColumnDef="startStationName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đi
+              Tên điểm đi
             </th>
             <td mat-cell *matCellDef="let row" data-label="Start Station Name">
               {{ row.startStation.name }}
@@ -87,27 +87,27 @@
 
           <ng-container matColumnDef="endStationName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tên trạm đến
+              Tên điểm đến
             </th>
             <td mat-cell *matCellDef="let row" data-label="End Station Name">
               {{ row.endStation.name }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="gender">
+          <!-- <ng-container matColumnDef="gender">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Giới tính</th>
             <td mat-cell *matCellDef="let row" data-label="Gender">
               {{ row.user.gender ? "Nữ" : "Nam" }}
             </td>
-          </ng-container>
-          <ng-container matColumnDef="emailUser">
+          </ng-container> -->
+          <!-- <ng-container matColumnDef="emailUser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Thư điện tử
             </th>
             <td mat-cell *matCellDef="let row" data-label="Customer Email">
               {{ row.user.email }}
             </td>
-          </ng-container>
+          </ng-container> -->
           <ng-container matColumnDef="phoneUser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Số điện thoại
@@ -119,7 +119,7 @@
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
             <td mat-cell *matCellDef="let row" data-label="Status">
-              {{ row.status }}
+              {{ getRouteStatus(row.status) }}
             </td>
           </ng-container>
 
@@ -129,7 +129,7 @@
               <button
                 id="btnDetailRoute"
                 class="btn"
-                matTooltip="Detail"
+                matTooltip="Chi tiết"
                 matTooltipPosition="above"
                 (click)="detailRoute(element.id)"
               >
@@ -138,7 +138,7 @@
               <button
                 id="btnDetailRoute"
                 class="btn"
-                matTooltip="Detail"
+                matTooltip="Xem lịch trình"
                 matTooltipPosition="above"
                 (click)="openRoutine(element.id)"
               >

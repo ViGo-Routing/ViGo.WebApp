@@ -23,8 +23,8 @@ export class VehiclesComponent implements OnInit {
     'userName',
     'emailUser',
     'phoneUser',
-    'gender',
-    'status',
+    // 'gender',
+    // 'status',
     'action',
   ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);

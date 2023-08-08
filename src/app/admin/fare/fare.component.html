@@ -1,10 +1,10 @@
 <div class="row-sm">
   <div class="header">
     <div class="title-header">
-      <h2 class="page-title">Danh sách cấu hình hệ thống</h2>
+      <h2 class="page-title">Danh sách biểu phí</h2>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Quản lý cấu hình</li>
-        <li class="breadcrumb-item">Danh sách cấu hình</li>
+        <li class="breadcrumb-item active">Quản lý biểu phí</li>
+        <li class="breadcrumb-item">Danh sách biểu phí</li>
       </ol>
     </div>
   </div>
@@ -21,41 +21,18 @@
           matSort
           [ngClass]="{ 'h-100': !dataSource.data.length }"
         >
-          <ng-container matColumnDef="setting-description">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cấu hình</th>
-            <td mat-cell *matCellDef="let row" data-label="Description">
-              {{ row.description }}
+          <ng-container matColumnDef="createdTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
+            <td mat-cell *matCellDef="let row" data-label="Created Time">
+              {{ row.createdTime | date : "dd/MM/yyyy, HH:mm" }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="value">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Giá trị</th>
-            <td mat-cell *matCellDef="let row" data-label="Value">
-              {{ row.value }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="type">
+          <ng-container matColumnDef="vehicleType">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Loại cấu hình
+              Loại phương tiện
             </th>
-            <td mat-cell *matCellDef="let row" data-label="Type">
-              {{ getSettingType(row.type) }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="data-type">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Loại dữ liệu
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="DataType">
-              {{ getSettingDataType(row.dataType) }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="data-unit">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Đơn vị tính
-            </th>
-            <td mat-cell *matCellDef="let row" data-label="DataUnit">
-              {{ getSettingDataUnit(row.dataUnit) }}
+            <td mat-cell *matCellDef="let row" data-label="Vehicle Type">
+              {{ row.vehicleType.name }}
             </td>
           </ng-container>
 
@@ -63,11 +40,21 @@
             <th mat-header-cell *matHeaderCellDef>Hành động</th>
             <td mat-cell *matCellDef="let element" data-label="Actions">
               <button
+                id="btnDetailFare"
+                class="btn"
+                matTooltip="Chi tiết"
+                matTooltipPosition="above"
+                (click)="detailFare(element)"
+              >
+                <i class="far fa-list-alt"></i>
+              </button>
+
+              <button
                 id="btnUpdateDevice"
                 class="btn"
                 matTooltip="Chỉnh sửa"
                 matTooltipPosition="above"
-                (click)="editSetting(element)"
+                (click)="updateFare(element)"
               >
                 <!-- (click)="editSetting(element)" -->
 

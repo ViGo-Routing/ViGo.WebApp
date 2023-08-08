@@ -55,7 +55,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingComponent } from './setting/setting.component';
 import { EditSettingComponent } from './setting/edit-setting/edit-setting.component';
 import { CustomPaginationIntl } from '../shared/CustomPaginatorIntl';
-
+import { FareComponent } from './fare/fare.component';
+import { DetailFareComponent } from './fare/detail-fare/detail-fare.component';
+import { MatListModule } from '@angular/material/list';
+import { UpdateFareComponent } from './fare/update-fare/update-fare.component';
+import { MatIconModule } from '@angular/material/icon';
+import { BookingSchedulesComponent } from './booking/booking-schedules/booking-schedules.component';
+import { BookingScheduleDetailComponent } from './booking/booking-schedules/booking-schedule-detail/booking-schedule-detail.component';
 @NgModule({
   declarations: [
     RouteComponent,
@@ -82,6 +88,11 @@ import { CustomPaginationIntl } from '../shared/CustomPaginatorIntl';
     DashboardComponent,
     SettingComponent,
     EditSettingComponent,
+    FareComponent,
+    DetailFareComponent,
+    UpdateFareComponent,
+    BookingSchedulesComponent,
+    BookingScheduleDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -108,6 +119,8 @@ import { CustomPaginationIntl } from '../shared/CustomPaginatorIntl';
     MatSnackBarModule,
     SharedFireModule,
     MatButtonModule,
+    MatListModule,
+    MatIconModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: '	en-US' },

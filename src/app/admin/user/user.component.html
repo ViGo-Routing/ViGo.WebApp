@@ -24,7 +24,7 @@
           <ng-container matColumnDef="createdTime">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
             <td mat-cell *matCellDef="let row" data-label="Created Time">
-              {{ row.createdTime | date : "d/M/yyyy, H:mm" }}
+              {{ row.createdTime | date : "dd/MM/yyyy, HH:mm" }}
             </td>
           </ng-container>
           <ng-container matColumnDef="name">
@@ -79,7 +79,7 @@
                 [checked]="row.status === 'ACTIVE'"
                 [indeterminate]="row.status === 'BANNED'"
                 (change)="updatUserStatus(row.id, row.status)"
-                >{{ row.status }}</mat-checkbox
+                >{{ getUserStatus(row.status) }}</mat-checkbox
               >
             </td>
           </ng-container>
@@ -90,7 +90,7 @@
               <button
                 id="btnUpdateDevice"
                 class="btn"
-                matTooltip="Edit"
+                matTooltip="Chỉnh sửa"
                 matTooltipPosition="above"
                 (click)="editUser(element)"
               >

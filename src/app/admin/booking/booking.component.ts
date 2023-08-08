@@ -12,6 +12,8 @@ import { DetailBookingComponent } from './detail-booking/detail-booking.componen
 import { SelectionModel } from '@angular/cdk/collections';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { vndFormat } from 'src/app/shared/numberUtils';
+import { BookingSchedulesComponent } from './booking-schedules/booking-schedules.component';
 
 @Component({
   selector: 'app-booking',
@@ -26,8 +28,8 @@ export class BookingComponent implements OnInit {
     'phoneUser',
     // 'startRouteStation',
     // 'endRouteStation',
-    'priceAfterDiscount',
-    'paymentMethod',
+    'price',
+    // 'paymentMethod',
     'vehicleName',
     'status',
     'action',
@@ -43,6 +45,8 @@ export class BookingComponent implements OnInit {
   length = 500;
   pageSizeOptions = [5, 10, 25];
   showFirstLastButtons = true;
+
+  vndFormat = vndFormat;
 
   constructor(
     private service: BookingService,
@@ -117,6 +121,26 @@ export class BookingComponent implements OnInit {
       });
   }
 
+  openBookingSchedules(booking: any) {
+    this.service.getBookingDetails(booking.id, 1, -1).subscribe((details) => {
+      booking.bookingDetails = details.data;
+      this.matdialog
+        .open(BookingSchedulesComponent, {
+          disableClose: true,
+          data: booking,
+          maxHeight: 'calc(100vh - 30vh)',
+          height: 'auto',
+          width: '1500px',
+
+          position: { top: '3%' },
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.getBookingList();
+        });
+    });
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = !!this.bookingList && this.bookingList.length;
@@ -136,5 +160,20 @@ export class BookingComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.name + 1
     }`;
+  }
+
+  getBookingStatus(
+    status: 'DRAFT' | 'CONFIRMED' | 'COMPLETED' | 'CANCELED_BY_BOOKER'
+  ) {
+    switch (status) {
+      case 'DRAFT':
+        return 'Bản nháp';
+      case 'CONFIRMED':
+        return 'Đã xác nhận';
+      case 'COMPLETED':
+        return 'Đã hoàn thành';
+      case 'CANCELED_BY_BOOKER':
+        return 'Bị hủy';
+    }
   }
 }

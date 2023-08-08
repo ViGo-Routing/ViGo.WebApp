@@ -53,7 +53,7 @@
           <ng-container matColumnDef="createdTime">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
             <td mat-cell *matCellDef="let row" data-label="Created Time">
-              {{ row.createdTime | date : "d/M/yyyy, H:mm" }}
+              {{ row.createdTime | date : "dd/MM/yyyy, HH:mm" }}
             </td>
           </ng-container>
           <ng-container matColumnDef="name">
@@ -67,7 +67,7 @@
           <ng-container matColumnDef="balance">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Số dư</th>
             <td mat-cell *matCellDef="let row" data-label="Số dư">
-              {{ row.balance }} đ
+              {{ vndFormat(row.balance) }}
             </td>
           </ng-container>
           <ng-container matColumnDef="phone">
@@ -82,7 +82,7 @@
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại</th>
             <td mat-cell *matCellDef="let row" data-label="Loại">
-              {{ row.type }}
+              {{ getWalletType(row.type) }}
             </td>
           </ng-container>
           <!-- <ng-container matColumnDef="status">
@@ -109,7 +109,7 @@
                 [checked]="row.status == 'ACTIVE'"
                 [indeterminate]="row.status === 'INACTIVE'"
                 (change)="updatWallet(row.id, row.status)"
-                >{{ row.status }}</mat-checkbox
+                >{{ getWalletStatus(row.status) }}</mat-checkbox
               >
             </td>
           </ng-container>
