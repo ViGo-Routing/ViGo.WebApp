@@ -62,7 +62,7 @@
           <ng-container matColumnDef="role">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Vai trò</th>
             <td mat-cell *matCellDef="let row" data-label="Role">
-              {{ row.role }}
+              {{ getUserRole(row.role) }}
             </td>
           </ng-container>
           <!-- 

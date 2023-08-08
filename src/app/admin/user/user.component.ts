@@ -139,4 +139,15 @@ export class UserComponent implements OnInit {
         return 'Bị từ chối';
     }
   }
+
+  getUserRole(role: 'CUSTOMER' | 'DRIVER' | 'ADMIN') {
+    switch (role) {
+      case 'ADMIN':
+        return 'Admin';
+      case 'CUSTOMER':
+        return 'Khách hàng';
+      case 'DRIVER':
+        return 'Tài xế';
+    }
+  }
 }
