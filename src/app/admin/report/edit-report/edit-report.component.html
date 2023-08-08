@@ -10,7 +10,7 @@
     (ngSubmit)="onSubmit()"
   >
     <mat-form-field appearance="outline">
-      <mat-label>Người đánh giá lưu ý</mat-label>
+      <mat-label>Ghi chú</mat-label>
       <textarea
         matInput
         type="text"
@@ -23,15 +23,15 @@
           editForm.controls['reviewerNote'].touched
         "
       >
-        Người đánh giá lưu ý là phần bắt buộc
+        Ghi chú là phần bắt buộc
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Trạng thái</mat-label>
       <mat-select formControlName="status" required>
-        <mat-option value="PROCESSED ">PROCESSED</mat-option>
-        <mat-option value="DENIED ">DENIED</mat-option>
+        <mat-option value="PROCESSED ">Đã xử lý</mat-option>
+        <mat-option value="DENIED ">Từ chối</mat-option>
       </mat-select>
       <mat-error
         *ngIf="
