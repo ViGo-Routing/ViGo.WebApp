@@ -110,7 +110,7 @@ export const menuV1: MenuNav = {
     },
     {
       url: 'user-license',
-      title: 'Quản lý giấy phép lái xe',
+      title: 'Quản lý giấy tờ',
       icon: 'fas fa-id-badge',
       img: '../assets/img/device_page.png',
       active: false,
