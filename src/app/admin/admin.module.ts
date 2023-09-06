@@ -62,6 +62,7 @@ import { UpdateFareComponent } from './fare/update-fare/update-fare.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BookingSchedulesComponent } from './booking/booking-schedules/booking-schedules.component';
 import { BookingScheduleDetailComponent } from './booking/booking-schedules/booking-schedule-detail/booking-schedule-detail.component';
+import { AssignDriverComponent } from './booking/booking-schedules/booking-schedule-detail/assign-driver/assign-driver.component';
 @NgModule({
   declarations: [
     RouteComponent,
@@ -93,6 +94,7 @@ import { BookingScheduleDetailComponent } from './booking/booking-schedules/book
     UpdateFareComponent,
     BookingSchedulesComponent,
     BookingScheduleDetailComponent,
+    AssignDriverComponent,
   ],
   imports: [
     CommonModule,

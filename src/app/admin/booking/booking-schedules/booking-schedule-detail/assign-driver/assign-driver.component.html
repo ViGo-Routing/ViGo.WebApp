@@ -1,0 +1,45 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title">Đăng ký tài xế cho chuyến đi</h2>
+    <button (click)="cancel()" aria-label="Close" class="btn-close"></button>
+  </div>
+
+  <div class="modal-body">
+    <form
+      [formGroup]="editForm"
+      class=""
+      #myForm="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Tài xế</mat-label>
+        <mat-select matInput formControlName="driver" required>
+          <mat-option *ngFor="let type of data.driver" [value]="type.id">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      id="btnCancel"
+      mat-raised-button
+      color="secondary"
+      class="btn negative"
+      (click)="cancel()"
+    >
+      Hủy
+    </button>
+    <button
+      id="btnSave"
+      class="btn positive"
+      mat-raised-butto
+      (click)="assignDriver()"
+      style="background-color: #00a1a1"
+      [disabled]="!editForm.valid"
+    >
+      Lưu
+    </button>
+  </div>
+</div>

@@ -12,7 +12,7 @@ export class BookingService {
   apiUrlBookings = `${this.host}api/Booking`;
   apiUrlBookingDetails = `${this.host}api/BookingDetail`;
 
-  constructor(private http: HttpClient, private errorSvc: ErrorService) {}
+  constructor(private http: HttpClient, private errorSvc: ErrorService) { }
   getListBookings(pageNumber: number, pageSize: number): Observable<any> {
     let url = `${this.apiUrlBookings}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
     return this.http
@@ -41,6 +41,13 @@ export class BookingService {
     let url = `${this.apiUrlBookingDetails}/${bookingDetailId}`;
     return this.http
       .get<any>(url)
+      .pipe(catchError((error) => this.errorSvc.handleError(error)));
+  }
+
+  assignDriver(bookingDetailId: string, requestData: any): Observable<any> {
+    let url = `${this.apiUrlBookingDetails}/Driver/Assign/${bookingDetailId}`;
+    return this.http
+      .post<any>(url, requestData)
       .pipe(catchError((error) => this.errorSvc.handleError(error)));
   }
 }

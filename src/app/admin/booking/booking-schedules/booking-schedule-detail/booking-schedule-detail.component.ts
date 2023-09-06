@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { BookingService } from 'src/app/services/booking.service';
 import { vndFormat } from 'src/app/shared/numberUtils';
+import { AssignDriverComponent } from './assign-driver/assign-driver.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-booking-schedule-detail',
@@ -16,18 +18,23 @@ export class BookingScheduleDetailComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<BookingScheduleDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private bookingService: BookingService // public matdialog: MatDialog,
-  ) {}
+    private bookingService: BookingService,
+    private diverService: UserService,
+    public matdialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
+    this.getBookingDetail()
+  }
+  getBookingDetail() {
     this.bookingService
       .getBookingDetail(this.data.meta.id)
       .subscribe((detail) => {
         detail.date = moment(detail.date).format('DD/MM/yyyy');
         this.bookingDetail = detail;
       });
-  }
 
+  }
   getBookingDetailStatus(
     status:
       | 'ASSIGNED'
@@ -61,7 +68,28 @@ export class BookingScheduleDetailComponent implements OnInit {
         return 'Chờ thanh toán';
     }
   }
+  openAssignDriver(bookingDetailId: string) {
+    this.diverService.getListDriverToAssign(1, -1).subscribe((details) => {
+      const data = {
+        bookingDetailId: bookingDetailId,
+        driver: details.data
+      }
+      this.matdialog
+        .open(AssignDriverComponent, {
+          disableClose: true,
+          data: data,
+          maxHeight: 'calc(100vh - 10vh)',
+          height: 'auto',
+          width: '600px',
 
+          position: { top: '6%' },
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.getBookingDetail();
+        });
+    });
+  }
   cancel() {
     this.dialogRef.close();
   }

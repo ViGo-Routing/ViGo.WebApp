@@ -5,7 +5,7 @@
   </div>
 
   <div class="modal-body">
-    <div class="row" *ngIf="bookingDetail">
+    <div class="row" *ngIf="bookingDetail" style="height: 500px">
       <div class="span-gr">
         <div class="row detail-row">
           <span class="col-md-4 detail-key">Điểm đi:</span>
@@ -76,9 +76,17 @@
 
         <div class="row detail-row">
           <span class="col-md-4 detail-key">Trạng thái:</span>
-          <span class="col-md-8 detail-value">{{
-            getBookingDetailStatus(bookingDetail.status)
-          }}</span>
+          <span class="col-md-8 detail-value"
+            >{{ getBookingDetailStatus(bookingDetail.status) }}
+            <a
+              button
+              *ngIf="bookingDetail.status == 'PENDING_ASSIGN'"
+              class="btn btn-icon text-white float-end"
+              (click)="openAssignDriver(bookingDetail.id)"
+            >
+              Chọn tài xế<i class="fas fa-plus mx-1"></i
+            ></a>
+          </span>
         </div>
       </div>
     </div>

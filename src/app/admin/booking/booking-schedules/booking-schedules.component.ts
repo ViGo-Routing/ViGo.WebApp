@@ -78,10 +78,10 @@ export class BookingSchedulesComponent implements OnInit {
     if (bookingDetails) {
       bookingDetails.forEach((bookingDetail) => {
         const startDateTime = moment(
-          `${bookingDetail.date.split('T')[0]} ${
-            bookingDetail.customerDesiredPickupTime
+          `${bookingDetail.date.split('T')[0]} ${bookingDetail.customerDesiredPickupTime
           }`
         ).toDate();
+        const eventTitle = `${bookingDetail.startStation.name} - ${bookingDetail.endStation.name}`;
         const endDateTime = moment(startDateTime)
           .add(this.data.duration, 'minutes')
           .toDate();
@@ -89,9 +89,7 @@ export class BookingSchedulesComponent implements OnInit {
         const event: CalendarEvent = {
           start: startDateTime,
           end: endDateTime,
-          title: `${bookingDetail.startStation.name} 
-          - 
-          ${bookingDetail.endStation.name}`,
+          title: eventTitle,
           color: {
             primary: this.getCalendarColor(bookingDetail.status, 'primary'),
             secondary: this.getCalendarColor(bookingDetail.status, 'secondary'),
@@ -142,9 +140,9 @@ export class BookingSchedulesComponent implements OnInit {
   modalData!:
     | any
     | {
-        action: string;
-        event: CalendarEvent;
-      };
+      action: string;
+      event: CalendarEvent;
+    };
 
   actions: CalendarEventAction[] = [
     {

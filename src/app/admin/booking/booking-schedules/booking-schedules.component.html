@@ -48,30 +48,32 @@
         Điểm đến: <strong>{{ endStationName }}</strong>
       </div>
     </div> -->
-    <div class="calendar-container">
-      <mwl-calendar-week-view
-        [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
-        [locale]="'en'"
-        [weekStartsOn]="1"
-        (eventClicked)="handleEvent('Clicked', $event.event)"
-      >
-        <!-- <ng-template #weekViewEventTemplate let-event="event">
-            <div class="cal-event">
-              <div *ngIf="events.length > 0">
-                Tên điểm
-                <p class="event-name">{{ events[0].meta?.name }}</p>
-                Địa chỉ
-                <p class="event-address">{{ events[0].meta?.address }}</p>
+    <div>
+      <div class="calendar-container" style="height: 600px !important">
+        <mwl-calendar-week-view
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [locale]="'en'"
+          [weekStartsOn]="1"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+        >
+          <!-- <ng-template #weekViewEventTemplate let-event="event">
+              <div class="cal-event">
+                <div *ngIf="events.length > 0">
+                  Tên điểm
+                  <p class="event-name">{{ events[0].meta?.name }}</p>
+                  Địa chỉ
+                  <p class="event-address">{{ events[0].meta?.address }}</p>
+                </div>
+    
+                <div *ngIf="events.length === 0">
+                  <p>No events found.</p>
+                </div>
               </div>
-  
-              <div *ngIf="events.length === 0">
-                <p>No events found.</p>
-              </div>
-            </div>
-          </ng-template> -->
-      </mwl-calendar-week-view>
+            </ng-template> -->
+        </mwl-calendar-week-view>
+      </div>
     </div>
   </div>
 </div>

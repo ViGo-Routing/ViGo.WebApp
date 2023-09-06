@@ -36,4 +36,10 @@ export class UserService {
       catchError((error) => this.errorSvc.handleError(error))
     );
   }
+  getListDriverToAssign(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlUsers}?PageNumber=${pageNumber}&PageSize=${pageSize}&Role=Driver`
+    return this.http
+      .get<any>(url)
+      .pipe(catchError((error) => this.errorSvc.handleError(error)));
+  }
 }

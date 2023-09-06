@@ -103,14 +103,14 @@ export class BookingComponent implements OnInit {
     // return this.booking;
   }
 
-  editBooking(dev: any) {}
+  editBooking(dev: any) { }
 
   detailBooking(booking: any) {
     this.matdialog
       .open(DetailBookingComponent, {
         disableClose: true,
         data: booking,
-        maxHeight: 'calc(100vh - 30vh)',
+        maxHeight: 'calc(100vh - 20vh)',
         height: 'auto',
         width: '1500px',
         position: { top: '3%' },
@@ -128,9 +128,9 @@ export class BookingComponent implements OnInit {
         .open(BookingSchedulesComponent, {
           disableClose: true,
           data: booking,
-          maxHeight: 'calc(100vh - 30vh)',
+          maxHeight: 'calc(100vh - 10vh)',
           height: 'auto',
-          width: '1500px',
+          width: '1600px',
 
           position: { top: '3%' },
         })
@@ -157,9 +157,8 @@ export class BookingComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.name + 1
-    }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
+      }`;
   }
 
   getBookingStatus(
