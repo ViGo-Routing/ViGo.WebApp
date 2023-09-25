@@ -1,10 +1,10 @@
 <div class="row-sm">
   <div class="page-header">
     <div class="title-header">
-      <h2 class="page-title">Danh sách ví giao dịch</h2>
+      <h2 class="page-title">Danh sách giao dịch hệ thống</h2>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Quản lý ví giao dịch</li>
-        <li class="breadcrumb-item">Danh sách ví giao dịch</li>
+        <li class="breadcrumb-item active">Quản lý giao dịch hệ thống</li>
+        <li class="breadcrumb-item">Danh sách giao dịch hệ thống</li>
       </ol>
     </div>
     <div class="col-xl-8">
@@ -14,9 +14,9 @@
             <div class="card-body" style="padding: 20px !important">
               <div class="row">
                 <div class="col-xl-8">
-                  <h6 class="">Tổng cộng số lượng</h6>
+                  <h6 class="">Số dư ví hệ thống</h6>
                   <h3 class="number-font">
-                    {{ WalletSystemList.totalAmount }}
+                    {{ vndFormat(WalletSystemList.totalAmount) }}
                   </h3>
                 </div>
                 <div class="col col-auto">
@@ -58,7 +58,7 @@
                 <div class="col-xl-8">
                   <h6 class="">Tổng lợi nhuận</h6>
                   <h3 class="number-font">
-                    {{ WalletSystemList.totalProfits }}
+                    {{ vndFormat(WalletSystemList.totalProfits) }}
                   </h3>
                 </div>
                 <div class="col col-auto">
