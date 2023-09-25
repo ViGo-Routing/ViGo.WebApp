@@ -14,6 +14,7 @@ import { WalletComponent } from './wallet/wallet.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingComponent } from './setting/setting.component';
 import { FareComponent } from './fare/fare.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
   {
@@ -39,10 +40,11 @@ const routes: Routes = [
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
   { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },
   { path: 'fare', component: FareComponent, canActivate: [AuthGuard] },
+  { path: 'wallet-transaction', component: TransactionComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }

@@ -1,32 +1,26 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-import { SelectionModel } from '@angular/cdk/collections';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { EditWalletComponent } from './edit-wallet/edit-wallet.component';
-import { WalletService } from 'src/app/services/wallet.service';
 import { Meta, Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
+import { WalletService } from 'src/app/services/wallet.service';
 import { vndFormat } from 'src/app/shared/numberUtils';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
-  selector: 'app-wallet',
-  templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.scss'],
+  selector: 'app-transaction',
+  templateUrl: './transaction.component.html',
+  styleUrls: ['./transaction.component.scss']
 })
-export class WalletComponent implements OnInit {
+export class TransactionComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
     'createdTime',
-    'name',
+    //'name',
     'phone',
     'balance',
     'type',
@@ -35,6 +29,7 @@ export class WalletComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   WalletList: any;
+  WalletSystemList: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -58,24 +53,32 @@ export class WalletComponent implements OnInit {
     private meta: Meta
   ) {
     this.getWalletList();
+    this.getWalletSystemList();
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Danh sách ví | ' + environment.siteName);
+    this.title.setTitle('Danh sách ví giao dịch | ' + environment.siteName);
     this.meta.addTag({
       name: 'description',
-      content: 'Danh sách ví - ' + environment.siteName,
+      content: 'Danh sách ví giao dịch - ' + environment.siteName,
     });
   }
 
   getWalletList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service
-      .getListWallets(apiPageNumber, this.pageSize)
+      .getListWalletTransactions(apiPageNumber, this.pageSize)
       .subscribe((list) => {
         this.WalletList = list.data;
         this.dataSource = new MatTableDataSource(list.data);
         this.totalItems = list.totalCount;
+      });
+  }
+  getWalletSystemList() {
+    this.service
+      .getListWalletsSystem()
+      .subscribe((list: any) => {
+        this.WalletSystemList = list;
       });
   }
   onPageChange(event: PageEvent) {
@@ -111,21 +114,7 @@ export class WalletComponent implements OnInit {
     //     this.getWalletList();
     //   });
   }
-  editWallet(Wallet: any) {
-    this.matdialog
-      .open(EditWalletComponent, {
-        disableClose: true,
-        data: Wallet,
-        maxHeight: 'calc(100vh - 50px)',
-        height: 'auto',
-        width: '500px',
-        position: { top: '3%' },
-      })
-      .afterClosed()
-      .subscribe(() => {
-        this.getWalletList();
-      });
-  }
+
 
   updatWallet(id: string, status: string) {
     this.statusUpdate = status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
@@ -143,21 +132,31 @@ export class WalletComponent implements OnInit {
     });
   }
 
-  getWalletType(type: 'PERSONAL' | 'SYSTEM') {
+  getWalletType(type: 'CANCEL_FEE' | 'BOOKING_PAID' | 'TRIP_PAID' | 'BOOKING_REFUND' | 'CANCEL_REFUND' | 'TRIP_PICK' | 'TRIP_PICK_REFUND') {
     switch (type) {
-      case 'PERSONAL':
-        return 'Ví cá nhân';
-      case 'SYSTEM':
-        return 'Ví hệ thống';
+      case 'CANCEL_FEE':
+        return 'Phí hủy chuyến';
+      case 'BOOKING_PAID':
+        return 'Phí trả trước';
+      case 'TRIP_PAID':
+        return 'Thanh toán chuyến đi cho tài xế';
+      case 'BOOKING_REFUND':
+        return 'Hoàn phí hành trình';
+      case 'CANCEL_REFUND':
+        return 'Hoàn phí hủy chuyến';
+      case 'TRIP_PICK':
+        return 'Phí chọn chuyến đi';
+      case 'TRIP_PICK_REFUND':
+        return 'Hoàn phí chọn chuyến đi';
     }
   }
 
-  getWalletStatus(status: 'ACTIVE' | 'INACTIVE') {
+  getWalletStatus(status: 'SUCCESSFULL' | 'FAILED') {
     switch (status) {
-      case 'ACTIVE':
-        return 'Đang hoạt động';
-      case 'INACTIVE':
-        return 'Không hoạt động';
+      case 'SUCCESSFULL':
+        return 'Thành công';
+      case 'FAILED':
+        return 'Không thành công';
     }
   }
 }

@@ -63,6 +63,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BookingSchedulesComponent } from './booking/booking-schedules/booking-schedules.component';
 import { BookingScheduleDetailComponent } from './booking/booking-schedules/booking-schedule-detail/booking-schedule-detail.component';
 import { AssignDriverComponent } from './booking/booking-schedules/booking-schedule-detail/assign-driver/assign-driver.component';
+import { TransactionComponent } from './transaction/transaction.component';
 @NgModule({
   declarations: [
     RouteComponent,
@@ -95,6 +96,7 @@ import { AssignDriverComponent } from './booking/booking-schedules/booking-sched
     BookingSchedulesComponent,
     BookingScheduleDetailComponent,
     AssignDriverComponent,
+    TransactionComponent,
   ],
   imports: [
     CommonModule,

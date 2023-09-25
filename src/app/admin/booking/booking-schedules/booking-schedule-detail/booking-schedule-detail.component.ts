@@ -69,10 +69,11 @@ export class BookingScheduleDetailComponent implements OnInit {
     }
   }
   openAssignDriver(bookingDetailId: string) {
-    this.diverService.getListDriverToAssign(1, -1).subscribe((details) => {
+    this.diverService.getListDriverToAssign(bookingDetailId).subscribe((details) => {
+      console.log(details)
       const data = {
         bookingDetailId: bookingDetailId,
-        driver: details.data
+        driver: details
       }
       this.matdialog
         .open(AssignDriverComponent, {

@@ -1,0 +1,168 @@
+<div class="row-sm">
+  <div class="page-header">
+    <div class="title-header">
+      <h2 class="page-title">Danh sách ví giao dịch</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Quản lý ví giao dịch</li>
+        <li class="breadcrumb-item">Danh sách ví giao dịch</li>
+      </ol>
+    </div>
+    <div class="col-xl-8">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xl-4">
+          <div class="card overflow-hidden">
+            <div class="card-body" style="padding: 20px !important">
+              <div class="row">
+                <div class="col-xl-8">
+                  <h6 class="">Tổng cộng số lượng</h6>
+                  <h3 class="number-font">
+                    {{ WalletSystemList.totalAmount }}
+                  </h3>
+                </div>
+                <div class="col col-auto">
+                  <div
+                    class="counter-icon bg-primary-gradient box-shadow-primary brround ms-auto"
+                  >
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xl-4">
+          <div class="card overflow-hidden">
+            <div class="card-body" style="padding: 20px !important">
+              <div class="row">
+                <div class="col-xl-10">
+                  <h6 class="">Tổng số giao dịch</h6>
+                  <h3 class="number-font">
+                    {{ WalletSystemList.totalTransactions }}
+                  </h3>
+                </div>
+                <div class="col col-auto">
+                  <div
+                    class="counter-icon bg-danger-gradient box-shadow-danger brround ms-auto"
+                  >
+                    <i class="fas fa-money-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xl-4">
+          <div class="card overflow-hidden">
+            <div class="card-body" style="padding: 20px !important">
+              <div class="row">
+                <div class="col-xl-8">
+                  <h6 class="">Tổng lợi nhuận</h6>
+                  <h3 class="number-font">
+                    {{ WalletSystemList.totalProfits }}
+                  </h3>
+                </div>
+                <div class="col col-auto">
+                  <div
+                    class="counter-icon bg-secondary-gradient box-shadow-secondary brround ms-auto"
+                  >
+                    <i class="fas fa-clipboard-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="table-table example-container">
+      <div
+        class="table-container"
+        style="flex: 1 1 1e-9px; box-sizing: border-box"
+      >
+        <table
+          id="tblWalletList"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          [ngClass]="{ 'h-100': !dataSource.data.length }"
+        >
+          <!-- <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox
+                      (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    ></mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox
+                      (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                    ></mat-checkbox>
+                  </td>
+                </ng-container> -->
+          <ng-container matColumnDef="createdTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày tạo</th>
+            <td mat-cell *matCellDef="let row" data-label="Created Time">
+              {{ row.createdTime | date : "dd/MM/yyyy, HH:mm" }}
+            </td>
+          </ng-container>
+          <!-- <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Mã chuyến đi
+              </th>
+              <td mat-cell *matCellDef="let row" data-label="Mã chuyến đi">
+                {{ row.bookingId}}
+              </td>
+            </ng-container> -->
+          <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Số lượng</th>
+            <td mat-cell *matCellDef="let row" data-label="Số dư">
+              {{ vndFormat(row.amount) }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Phương thức thanh toán
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let row"
+              data-label="Phương thức thanh toán"
+            >
+              {{ row.paymentMethod == "WALLET" ? "Ví điện tử" : "" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại</th>
+            <td mat-cell *matCellDef="let row" data-label="Loại">
+              {{ getWalletType(row.type) }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row mat-row-nodata" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <!-- <app-empty-table></app-empty-table> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="totalItems"
+        [pageIndex]="pageNumber"
+        [pageSize]="pageSize"
+        [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="onPageChange($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

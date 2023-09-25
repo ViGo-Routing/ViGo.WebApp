@@ -14,6 +14,8 @@ export class AssignDriverComponent {
   submitted = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  phoneNumber = "";
   constructor(
     public dialogRef: MatDialogRef<AssignDriverComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,6 +33,15 @@ export class AssignDriverComponent {
 
     if (this.editForm.invalid) {
       return;
+    }
+  }
+  getSelectedDriverPhone(): string {
+    const selectedDriverId = this.editForm.get('driver')?.value;
+    const selectedDriver = this.data.driver.find((driver: { id: any; }) => driver.id === selectedDriverId);
+    if (selectedDriver) {
+      return selectedDriver.phone;
+    } else {
+      return ''; // Handle the case where no driver is selected
     }
   }
   assignDriver() {

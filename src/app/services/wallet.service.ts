@@ -10,10 +10,19 @@ import { Observable, catchError } from 'rxjs';
 export class WalletService {
   host: string = environment.apiUrl;
   apiUrlWallets = `${this.host}api/Wallet`
+  apiUrlWalletTransactions = `${this.host}api/WalletTransaction`
   constructor(private http: HttpClient, private errorSvc: ErrorService) {
   }
+
+  //wallet
   getListWallets(pageNumber: number, pageSize: number): Observable<any> {
     let url = `${this.apiUrlWallets}/?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
+      catchError((error) => this.errorSvc.handleError(error))
+    );
+  }
+  getListWalletsSystem(): Observable<any> {
+    let url = `${this.apiUrlWallets}/SystemAnalysis`
     return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
@@ -39,6 +48,13 @@ export class WalletService {
   deleteWalletById(id: string): Observable<any> {
     let url = `${this.apiUrlWallets}/` + id
     return this.http.delete<any>(url).pipe(
+      catchError((error) => this.errorSvc.handleError(error))
+    );
+  }
+
+  getListWalletTransactions(pageNumber: number, pageSize: number): Observable<any> {
+    let url = `${this.apiUrlWalletTransactions}/System?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    return this.http.get<any>(url).pipe(
       catchError((error) => this.errorSvc.handleError(error))
     );
   }

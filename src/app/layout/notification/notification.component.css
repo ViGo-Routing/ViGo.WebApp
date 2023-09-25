@@ -39,7 +39,9 @@
     border-radius: 50%;
     color: #FFFFFF;
     margin: 0px 10px;
-    background: linear-gradient(to bottom right, rgb(228 95 39) 0%, rgb(106 42 93) 100%) !important;
+    background: linear-gradient(to bottom right,
+            #f8eaf5 0%,
+            #00A1A1) !important;
     box-shadow: 0 5px 10px rgb(98 89 202 / 30%);
     padding: 6px;
 

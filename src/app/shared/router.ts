@@ -109,6 +109,16 @@ export const menuV1: MenuNav = {
       display: false,
     },
     {
+      url: 'wallet-transaction',
+      title: 'Quản lý giao dịch',
+      icon: 'fas fa-people-arrows',
+      img: '../assets/img/device_page.png',
+      active: false,
+      type: 'link',
+      name: 'wallet-transaction',
+      display: false,
+    },
+    {
       url: 'user-license',
       title: 'Quản lý giấy tờ',
       icon: 'fas fa-id-badge',
