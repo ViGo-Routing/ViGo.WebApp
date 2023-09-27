@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'createdTime',
     'name',
@@ -60,6 +60,9 @@ export class UserComponent implements OnInit {
       name: 'description',
       content: 'Danh sách người dùng - ' + environment.siteName,
     });
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   getUserList() {
@@ -121,7 +124,7 @@ export class UserComponent implements OnInit {
       });
   }
 
-  deleteUser(dev: any) {}
+  deleteUser(dev: any) { }
 
   getUserStatus(
     status: 'PENDING' | 'ACTIVE' | 'INACTIVE' | 'BANNED' | 'REJECTED'

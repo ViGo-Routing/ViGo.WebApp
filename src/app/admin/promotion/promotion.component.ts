@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './promotion.component.html',
   styleUrls: ['./promotion.component.scss'],
 })
-export class PromotionComponent implements OnInit {
+export class PromotionComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'select',
@@ -67,7 +67,9 @@ export class PromotionComponent implements OnInit {
       content: 'Danh sách khuyến mãi - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getPromotionList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service
@@ -159,9 +161,8 @@ export class PromotionComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.name + 1
-    }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
+      }`;
   }
   deleteAll() {
     const listname: any[] = this.selection.selected.map((x) => x.device);

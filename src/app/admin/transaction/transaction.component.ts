@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
@@ -63,7 +63,9 @@ export class TransactionComponent implements OnInit {
       content: 'Danh sách ví giao dịch - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getWalletList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service

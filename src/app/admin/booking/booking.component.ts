@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   MatPaginator,
@@ -20,7 +20,7 @@ import { BookingSchedulesComponent } from './booking-schedules/booking-schedules
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss'],
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'createdTime',
@@ -72,7 +72,9 @@ export class BookingComponent implements OnInit {
       content: 'Danh sách đặt trước - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getBookingList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './user-license.component.html',
   styleUrls: ['./user-license.component.scss'],
 })
-export class UserLicenseComponent implements OnInit {
+export class UserLicenseComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
@@ -67,6 +67,9 @@ export class UserLicenseComponent implements OnInit {
       name: 'description',
       content: 'Danh sách giấy tờ - ' + environment.siteName,
     });
+  }
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort;
   }
 
   getUserLicenseList() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
@@ -18,7 +18,7 @@ import { UpdateFareComponent } from './update-fare/update-fare.component';
   templateUrl: './fare.component.html',
   styleUrls: ['./fare.component.scss'],
 })
-export class FareComponent implements OnInit {
+export class FareComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['createdTime', 'vehicleType', 'action'];
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -51,7 +51,9 @@ export class FareComponent implements OnInit {
       content: 'Danh sách biểu phí - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getFareList() {
     this.fareService.getFares().subscribe((list) => {
       this.dataSource = new MatTableDataSource(list);

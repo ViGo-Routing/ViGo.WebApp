@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { vndFormat } from 'src/app/shared/numberUtils';
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.scss'],
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     // 'select',
@@ -67,7 +67,9 @@ export class WalletComponent implements OnInit {
       content: 'Danh sách ví - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getWalletList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service

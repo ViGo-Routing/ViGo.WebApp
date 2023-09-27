@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,7 +21,7 @@ interface counterCards {
   templateUrl: './route.component.html',
   styleUrls: ['./route.component.scss'],
 })
-export class RouteComponent implements OnInit {
+export class RouteComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [
     'select',
@@ -64,7 +64,9 @@ export class RouteComponent implements OnInit {
       content: 'Danh sách tuyến đường - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getRouteList() {
     let apiPageNumber = this.pageNumber + 1;
     this.service
@@ -94,7 +96,7 @@ export class RouteComponent implements OnInit {
     // });
     // return this.route;
   }
-  addRoute() {}
+  addRoute() { }
   openRoutine(routeId: any) {
     this.matdialog
       .open(RoutineComponent, {
@@ -144,9 +146,8 @@ export class RouteComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.name + 1
-    }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1
+      }`;
   }
   deleteAll() {
     const listId: string[] = this.selection.selected.map((x) => x.id);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
 })
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'setting-description',
     'value',
@@ -58,7 +58,9 @@ export class SettingComponent implements OnInit {
       content: 'Danh sách cấu hình - ' + environment.siteName,
     });
   }
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   getSettingList() {
     this.settingService.getSettings().subscribe((list) => {
       this.dataSource = new MatTableDataSource(list);
